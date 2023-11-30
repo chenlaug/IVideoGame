@@ -93,8 +93,8 @@ export default function DeleteFavorisGames({
                   Confirmation de suppression
                 </Dialog.Title>
                 <FormDelete
-                  yes={setIsOpenDeleteFavoris}
-                  no={deleteFromFavorites}
+                  no={() => setIsOpenDeleteFavoris(false)}
+                  yes={deleteFromFavorites}
                 />
               </div>
             </Transition.Child>

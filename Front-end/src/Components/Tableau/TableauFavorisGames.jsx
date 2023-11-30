@@ -188,7 +188,7 @@ export default function TableauFavorisGames() {
     <>
       <div className="flex flex-col items-center min-h-screen overflow-x-auto">
         <Searchbar query={searchQuery} handleSearch={handleSearch} />
-        <div className="min-w-screen mt-5">
+        <div className="min-w-screen mt-5 p-10">
           <table className="w-full min-w-full table-auto border-collapse text-sm text-center">
             <thead>
               <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
