@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import BtnMain from "../Btn/BtnMain";
 import InputMain from "../Input/InputMain";
 

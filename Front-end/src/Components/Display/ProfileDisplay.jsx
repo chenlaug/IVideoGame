@@ -127,7 +127,7 @@ export default function ProfileDisplay() {
         </p>
       </div>
       {!editMode ? (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mb-2">
           <div className="mr-2">
             <BtnMain
               label="Modifier les informations"

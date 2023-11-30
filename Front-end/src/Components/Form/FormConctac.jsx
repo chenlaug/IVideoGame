@@ -38,7 +38,7 @@ export default function FormConctac() {
         toast.success("Votre message a bien été envoyé !");
 
         setTimeout(() => {
-          navigate("/reception"); // l'itinéraire de votre choix
+          navigate("/profil"); // l'itinéraire de votre choix
         }, 2000); // 2000ms = 2s
       } else {
         throw new Error("Une erreur est survenue lors de l'envoi du message.");
@@ -52,7 +52,7 @@ export default function FormConctac() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-xs mx-auto bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl px-6 pt-6 pb-8 mb-4"
+      className="w-full  max-w-lg mx-auto bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl px-6 pt-6 pb-8 mb-4"
     >
       <div className="mb-4">
         <TextareaMain
@@ -68,7 +68,7 @@ export default function FormConctac() {
         <div className="mr-2">
           <BtnMain type="submit" label="Envoyer" />
         </div>
-        <BtnNavLink link="/reception" label="Retour" />
+        <BtnNavLink link="/profil" label="Retour" />
       </div>
       <Toaster />
     </form>

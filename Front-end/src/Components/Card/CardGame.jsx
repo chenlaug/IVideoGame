@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
@@ -7,7 +6,7 @@ import api from "../../Utils/api";
 import AddCommentaire from "../Modal/AddCommentaire";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
-// eslint-disable-next-line react/prop-types
+
 export default function CardGame({ game }) {
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);
   const [gameId, setGameId] = useState("");
@@ -37,7 +36,7 @@ export default function CardGame({ game }) {
 
   return (
     <>
-      <div className="bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl max-w-sm overflow-hidden border-dark-BlackGray dark:border-light-LightGray border m-4 sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl ">
+      <div className="bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl max-w-sm overflow-hidden border-dark-BlackGray dark:border-light-LightGray border m-4 sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl p-2">
         <div className="w-full h-64 flex items-center justify-center">
           <img
             className="max-h-full max-w-full"

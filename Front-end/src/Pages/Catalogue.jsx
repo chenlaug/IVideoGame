@@ -1,6 +1,4 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-underscore-dangle */
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
 import api from "../Utils/api";
@@ -29,10 +27,10 @@ export default function Catalogue() {
           },
         }
       )
-      .then(response => {
+      .then((response) => {
         setGames(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         toast.error("Il y a eu une erreur !", error);
       });
   }, [query]);
@@ -41,9 +39,9 @@ export default function Catalogue() {
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
 
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setQuery(e.target.value);
   };
@@ -54,17 +52,17 @@ export default function Catalogue() {
         <Searchbar query={query} handleSearch={handleSearch} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 md:px-0 mx-auto w-full md:w-3/4 lg:w-1/2 justify-items-center">
-        {currentGames.map(game => (
+        {currentGames.map((game) => (
           <CardGame key={game._id} game={game} className="w-full md:max-w-sm" />
         ))}
       </div>
-      <Toaster />
       <Pagination
         gamesPerPage={gamesPerPage}
         totalGames={games.length}
         paginate={paginate}
         currentPage={currentPage}
       />
+      <Toaster />
     </div>
   );
 }

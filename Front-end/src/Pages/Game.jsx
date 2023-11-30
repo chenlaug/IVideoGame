@@ -167,7 +167,6 @@ export default function Game() {
           </div>
         </div>
         <CardCommentaire comments={comments} />
-
         <Toaster />
         <AddCommentaire
           isOpenCommentaire={isOpenCommentaire}

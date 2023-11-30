@@ -1,6 +1,5 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import  { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
 import api from "../../Utils/api";
