@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
 
@@ -18,7 +17,7 @@ export default function FormProfile({
   handleUpdate,
 }) {
   return (
-    <form onSubmit={handleUpdate}>
+    <form onSubmit={handleUpdate} className="px-6 pt-6 pb-8">
       <InputMain
         value={firstName}
         onChange={e => setFirstName(e.target.value)}
@@ -64,10 +63,8 @@ export default function FormProfile({
         id="birthday"
       />
 
-      <div className="flex items-center justify-center">
-        <div className="mr-2">
+      <div className="flex items-center justify-center gap-2 mt-2">
           <BtnMain label="Sauvegarder les modifications" type="submit" />
-        </div>
         <BtnMain label="Annuler" type="submit" onClick={handleEditMode} />
       </div>
     </form>

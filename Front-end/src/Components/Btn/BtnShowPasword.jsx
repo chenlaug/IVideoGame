@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 
 export default function BtnShowPasword({ action, showPassword }) {
   return (
     <button
       type="button"
       onClick={action}
-      className="px-4 py-2 text-center font-medium text-light-Yellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+      className="px-4 py-2 text-center bg-light-White dark:bg-dark-Black font-medium text-light-Yellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
     >
       {showPassword ? (
         <svg

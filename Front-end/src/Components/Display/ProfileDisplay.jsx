@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
 import calculateAge from "../../Utils/CalculateAge";
@@ -19,7 +19,7 @@ export default function ProfileDisplay() {
 
   const authHeader = useAuthHeader();
   const handleEditMode = () => {
-    setEditMode(!editMode);
+    setEditMode(prev => !prev);
   };
 
   const fetchData = useCallback(async () => {
@@ -48,13 +48,12 @@ export default function ProfileDisplay() {
     }
   }, [user, editMode]);
 
-  const handleUpdate = async e => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Mise à jour en cours...");
 
     try {
       const response = await api.put(
-        // eslint-disable-next-line no-underscore-dangle
         `user/updateUser/${user._id}`,
         {
           firstName,
@@ -92,12 +91,12 @@ export default function ProfileDisplay() {
   }, [authHeader, fetchData]);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>Chargement...</div>;
   }
 
   return (
     <div
-      className="w-full max-w-md mx-auto overflow-hidden bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl"
+      className="w-full max-w-md mx-auto overflow-hidden bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl "
       key={updateKey}
     >
       <div className="px-5 py-3">

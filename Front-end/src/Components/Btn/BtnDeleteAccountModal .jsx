@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
@@ -77,7 +76,7 @@ export default function BtnDeleteAccountModal() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
             </Transition.Child>
 
             <span
@@ -114,15 +113,15 @@ export default function BtnDeleteAccountModal() {
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
                     onClick={handleDeleteAccount}
                   >
                     Supprimer mon compte
                   </button>
                   <button
                     type="button"
-                    className="ml-4 inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
-                    onClick={() => setIsOpen(false)}
+                    className="ml-4 inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+                    onClick={() => setIsOpen(prev => !prev)}
                   >
                     Annuler
                   </button>

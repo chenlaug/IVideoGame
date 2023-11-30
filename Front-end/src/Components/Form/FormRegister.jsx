@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../../Utils/api";
@@ -18,7 +18,7 @@ export default function FormRegister() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmpassword) {
@@ -61,7 +61,7 @@ export default function FormRegister() {
       <div className="mb-4">
         <InputMain
           value={lastName}
-          onChange={e => setLastName(e.target.value)}
+          onChange={(e) => setLastName(e.target.value)}
           type="text"
           label="Nom"
           placeholder="Nom"
@@ -71,7 +71,7 @@ export default function FormRegister() {
       <div className="mb-4">
         <InputMain
           value={firstName}
-          onChange={e => setFirstName(e.target.value)}
+          onChange={(e) => setFirstName(e.target.value)}
           type="text"
           label="Prénom"
           placeholder="Prénom"
@@ -81,7 +81,7 @@ export default function FormRegister() {
       <div className="mb-4">
         <InputMain
           value={phone}
-          onChange={e => setPhone(e.target.value)}
+          onChange={(e) => setPhone(e.target.value)}
           type="tel"
           label="Téléphone"
           placeholder="Téléphone"
@@ -91,7 +91,7 @@ export default function FormRegister() {
       <div className="mb-4">
         <InputMain
           value={birthday}
-          onChange={e => setBirthday(e.target.value)}
+          onChange={(e) => setBirthday(e.target.value)}
           type="date"
           label="Date de naissance"
           placeholder="Date de naissance"
@@ -101,7 +101,7 @@ export default function FormRegister() {
       <div className="mb-4">
         <InputMain
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           label="Email"
           placeholder="Email"
@@ -111,28 +111,28 @@ export default function FormRegister() {
       <div className="mb-4">
         <InputMain
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           type={showPassword ? "text" : "password"}
           label="Mot de passe"
           placeholder="**********"
           id="password"
         />
       </div>
-      <div className="flex mb-6">
-        <div className="mr-4">
-          <InputMain
-            value={confirmpassword}
-            onChange={e => setConfirmpassword(e.target.value)}
-            type={showPassword ? "text" : "password"}
-            label="Confirme mot de passe"
-            placeholder="**********"
-            id="confirmpassword"
-          />
+      <div className=" mb-6">
+        <InputMain
+          value={confirmpassword}
+          onChange={(e) => setConfirmpassword(e.target.value)}
+          type={showPassword ? "text" : "password"}
+          label="Confirme mot de passe"
+          placeholder="**********"
+          id="confirmpassword"
+        />
+        <div className=" flex items-center justify-center mt-2">
+          <BtnShowPasword showPassword={showPassword} action={handlePassword} />
         </div>
-        <BtnShowPasword showPassword={showPassword} action={handlePassword} />
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center">
         <BtnMain type="submit" label="Sinscrire" />
       </div>
       <Toaster />
