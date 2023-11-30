@@ -15,7 +15,7 @@ export default function DeleteFavorisGames({
   idGameFavori,
 }) {
   const authHeader = useAuthHeader();
-  const deleteFromFavorites = async e => {
+  const deleteFromFavorites = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
 
@@ -29,7 +29,7 @@ export default function DeleteFavorisGames({
       toast.success("Jeu retiré des favoris");
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeFavorisGames(
-        listeFavorisGames.filter(game => game._id !== idGameFavori)
+        listeFavorisGames.filter((game) => game._id !== idGameFavori)
       );
     } catch (error) {
       toast.dismiss(loadingToast);
@@ -70,7 +70,7 @@ export default function DeleteFavorisGames({
                 <button
                   type="button"
                   className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                  onClick={() => setIsOpenDeleteFavoris(false)}
+                  onClick={() => setIsOpenDeleteFavoris((prev) => !prev)}
                 >
                   <svg
                     className="h-6 w-6"
@@ -93,7 +93,7 @@ export default function DeleteFavorisGames({
                   Confirmation de suppression
                 </Dialog.Title>
                 <FormDelete
-                  no={() => setIsOpenDeleteFavoris(false)}
+                  no={() => setIsOpenDeleteFavoris((prev) => !prev)}
                   yes={deleteFromFavorites}
                 />
               </div>

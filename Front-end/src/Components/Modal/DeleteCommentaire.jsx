@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import  { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
@@ -15,7 +15,7 @@ export default function DeleteCommentaire({
   idCommentaire,
 }) {
   const authHeader = useAuthHeader();
-  const deleteFromFavorites = async e => {
+  const deleteFromFavorites = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
 
@@ -30,7 +30,7 @@ export default function DeleteCommentaire({
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeCommentaire(
         listeCommentaire.filter(
-          commentaire => commentaire._id !== idCommentaire
+          (commentaire) => commentaire._id !== idCommentaire
         )
       );
       setIsOpenDeleteCommentaire(false);
@@ -73,7 +73,7 @@ export default function DeleteCommentaire({
                 <button
                   type="button"
                   className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                  onClick={() => setIsOpenDeleteCommentaire(false)}
+                  onClick={() => setIsOpenDeleteCommentaire((prev) => !prev)}
                 >
                   <svg
                     className="h-6 w-6"
@@ -96,7 +96,7 @@ export default function DeleteCommentaire({
                   Confirmation de suppression
                 </Dialog.Title>
                 <FormDelete
-                  no={setIsOpenDeleteCommentaire}
+                  no={() => setIsOpenDeleteCommentaire((prev) => !prev)}
                   yes={deleteFromFavorites}
                 />
               </div>

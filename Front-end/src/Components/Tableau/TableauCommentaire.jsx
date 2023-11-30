@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import  { useEffect, Fragment, useState } from "react";
+import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ export default function TableauCommentaire() {
     indexOfFirstGame,
     indexOfLastGame
   );
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const authHeader = useAuthHeader();
   const navigate = useNavigate();
@@ -49,22 +49,22 @@ export default function TableauCommentaire() {
     fetchCommentaire();
   }, [authHeader, listeCommentaire, searchQuery]);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
   };
 
-  const openModalDeleteCommentaire = id => {
+  const openModalDeleteCommentaire = (id) => {
     setIsOpenDeleteCommentaire(true);
     setIdCommentaire(id);
   };
 
-  const openModalUpdate = commentaire => {
+  const openModalUpdate = (commentaire) => {
     setIsOpenCommentaire(true);
     setCurrentCommentaire(commentaire);
   };
 
-  const table = currentCommentaires.map(commentaire => (
+  const table = currentCommentaires.map((commentaire) => (
     <tr key={commentaire._id}>
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {commentaire.VideoGame.titre}
@@ -202,7 +202,7 @@ export default function TableauCommentaire() {
     <>
       <div className="flex flex-col items-center min-h-screen overflow-x-auto">
         <Searchbar query={searchQuery} handleSearch={handleSearch} />
-        <div className="min-w-screen mt-5">
+        <div className="min-w-screen mt-5 p-10">
           <table className="w-full min-w-full table-auto border-collapse text-sm text-center">
             <thead>
               <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
