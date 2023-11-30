@@ -174,10 +174,10 @@ export const optionModeMultijoueur = [
 ];
 
 export const pegiRatings = [
-  { value: "/uploads/ImagePegi/PEGI_7.png", label: "PEGI 7" },
-  { value: "/uploads/ImagePegi/PEGI_12.png", label: "PEGI 12" },
-  { value: "/uploads/ImagePegi/PEGI_16.png", label: "PEGI 16" },
-  { value: "/uploads/ImagePegi/PEGI_18.png", label: "PEGI 18" },
+  { id: 1, value: "/uploads/ImagePegi/PEGI_7.png", name: "PEGI 7" },
+  { id: 2, value: "/uploads/ImagePegi/PEGI_12.png", name: "PEGI 12" },
+  { id: 3, value: "/uploads/ImagePegi/PEGI_16.png", name: "PEGI 16" },
+  { id: 4, value: "/uploads/ImagePegi/PEGI_18.png", name: "PEGI 18" },
 ];
 
 export const links = [

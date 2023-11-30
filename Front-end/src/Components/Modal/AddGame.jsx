@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { Fragment } from "react";
+import  { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import FormAddGame from "../Form/FormAddGame";
 
