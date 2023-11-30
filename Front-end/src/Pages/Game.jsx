@@ -58,7 +58,7 @@ export default function Game() {
   if (!game) {
     return <div>Chargement du jeu...</div>;
   }
-
+  console.log(game);
   const openModalAddCommentaire = (id) => {
     setIsOpenCommentaire(true);
     setGameId(id);
@@ -99,10 +99,10 @@ export default function Game() {
               <span className="font-normal">{game.plateformes}</span>
             </p>
             <p className="font-bold">
-              Développeur: <span className="font-normal">{game.developer}</span>
+              Développeur: <span className="font-normal">{game.developpeur.nom}</span>
             </p>
             <p className="font-bold">
-              Éditeur: <span className="font-normal">{game.publisher}</span>
+              Éditeur: <span className="font-normal">{game.editeur.nom}</span>
             </p>
             <p className="font-bold">
               Type de jeu: <span className="font-normal">{game.typeDeJeu}</span>
