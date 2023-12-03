@@ -19,6 +19,7 @@ import AdminDevelppeur from "./Pages/Admin/AdminDevelppeur";
 import AdminEditeur from "./Pages/Admin/AdminEditeur";
 import ReceptionAdmin from "./Pages/Admin/ReceptionAdmin";
 import TopNavBar from "./Components/NavBar/TopNavBar";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 function RoleBasedRoute({ children, role }) {
@@ -35,6 +36,7 @@ function RoleBasedRoute({ children, role }) {
   );
 }
 export default function App() {
+  const [theme, setTheme] = useState(true);
   const isAuthenticated = useIsAuthenticated();
   const authState = useAuthUser();
   const location = useLocation();
@@ -57,9 +59,9 @@ export default function App() {
   };
 
   return (
-    <div className="dark">
+    <div className={theme ? "dark" : "light"}>
       <div className="bg-light-White dark:bg-dark-Black">
-        {showNavBar() && <TopNavBar />}
+        {showNavBar() && <TopNavBar theme={theme} setTheme={setTheme} />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/connect" element={<LogIng />} />

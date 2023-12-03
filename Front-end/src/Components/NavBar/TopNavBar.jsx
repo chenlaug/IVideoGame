@@ -7,8 +7,11 @@ import megaman from "../../Image/megaman.gif";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
 
-export default function TopNavBar() {
+// eslint-disable-next-line react/prop-types
+export default function TopNavBar({ theme, setTheme }) {
   const signOut = useSignOut();
+  console.log("Thème actuel :", theme);
+
   return (
     <nav className="flex items-center justify-between p-4 bg-light-LightGray dark:bg-dark-BlackGray shadow-inner">
       <div className="flex items-center space-x-2">
@@ -39,6 +42,16 @@ export default function TopNavBar() {
           <BtnNavLink link="/favourites" label="Jeux favoris" />
           <BtnNavLink link="/comment" label="Liste commentaire" />
         </div>
+
+        <BtnMain
+          label={theme ? " Lumineur" : "Sombre"}
+          type="button"
+          onClick={() => {
+            console.log("Changement de thème");
+            setTheme((prev) => !prev);
+          }}
+        />
+
         <BtnMain label="Deconnection" type="button" onClick={() => signOut()} />
         <img
           src={marioLuigi}
