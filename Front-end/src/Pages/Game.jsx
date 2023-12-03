@@ -42,7 +42,7 @@ export default function Game() {
         });
         setComments(response.data);
       } catch (error) {
-        toast.error("An error occurred while fetching the comments.");
+        toast.error("il y a pas de new commmentaire ");
       }
     };
     fetchComments();
