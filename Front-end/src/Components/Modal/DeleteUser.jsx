@@ -91,7 +91,7 @@ export default function DeleteUser({
                   Confirmation de suppression
                 </Dialog.Title>
                 <FormDelete
-                  no={setIsOpenDeleteUser}
+                  no={() => setIsOpenDeleteUser(false)}
                   yes={deleteFromFavorites}
                 />
               </div>
