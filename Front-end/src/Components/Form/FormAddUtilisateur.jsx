@@ -54,6 +54,8 @@ export default function FormAddUtilisateur({
             Authorization: authHeader(),
           },
         });
+        // Réinitialiser les champs du formulaire après la création réussie de l'utilisateur
+
         setLastName("");
         setFirstName("");
         setPhone("");
