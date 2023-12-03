@@ -1,12 +1,9 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-/* import { useAuthHeader } from "react-auth-kit"; */
+import { useAuthHeader } from "react-auth-kit";
 import {
   optionPlatformes,
-  optionDeveloppeur,
-  optionEditeur,
   optionTypeDeJeu,
   pegiRatings,
   optionModeMultijoueur,
@@ -16,6 +13,8 @@ import InputMain from "../Input/InputMain";
 import InputFile from "../Input/InputFile";
 import BtnMain from "../Btn/BtnMain";
 import SelectMain from "../Select/SelectMain";
+import SelectEditeur from "../Select/SelectEditeur";
+import SelectDeveloppeur from "../Select/SelectDeveloppeur";
 
 export default function FormAddGame({
   setIsOpen,
@@ -59,12 +58,12 @@ export default function FormAddGame({
   );
   const [image, setImage] = useState(currentGame ? currentGame.image : "");
 
-  const handleFileChange = e => {
+  const handleFileChange = (e) => {
     setImage(e.target.files[0]);
   };
+  const authHeader = useAuthHeader();
 
-  // eslint-disable-next-line no-underscore-dangle
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
 
@@ -85,7 +84,21 @@ export default function FormAddGame({
     if (image !== null) {
       formData.append("image", image);
     }
-
+    console.log("Données envoyées au formulaire :", {
+      titre,
+      plateformes,
+      description,
+      dateSortie,
+      developpeur,
+      editeur,
+      typeDeJeu,
+      note,
+      siteOfficial,
+      linkTrailer,
+      modeMultijoueur,
+      pegiImage,
+      // image: image ? "Image sélectionnée" : "Aucune image", // Décommentez si nécessaire
+    });
     try {
       let response;
       if (currentGame) {
@@ -107,36 +120,50 @@ export default function FormAddGame({
         // modification
         response = await api.put(
           `/videoGame/updateGame/${currentGame._id}`,
-          newGame
+          newGame,
+          {
+            headers: {
+              Authorization: authHeader(),
+            },
+          }
         );
         toast.dismiss(loadingToast);
         toast.success("Jeu modifié avec succès !");
         setListeGame(
-          listeGame.map(game =>
+          listeGame.map((game) =>
             game.id === currentGame.id ? response.data : game
           )
         );
         if (image !== null) {
           const newFormData = new FormData();
           newFormData.append("image", image);
+
           const imageResponse = await api.put(
             `/videoGame/updateImageGame/${currentGame._id}`,
-            newFormData
+            newFormData,
+            {
+              headers: {
+                Authorization: authHeader(),
+              },
+            }
           );
 
           // modifier le jeux dans la liste jeu avec la nouvelle image
           setListeGame(
-            listeGame.map(game =>
+            listeGame.map((game) =>
               game.id === currentGame.id ? imageResponse.data : game
             )
           );
         }
       } else {
         // Envoie les données du formulaire avec une requête POST
-        response = await api.post("/videoGame/createGame", formData);
+        response = await api.post("/videoGame/createGame", formData, {
+          headers: {
+            Authorization: authHeader(),
+          },
+        });
         toast.dismiss(loadingToast);
         toast.success("Jeu ajouté avec succès !");
-
         setListeGame([...listeGame, response.data]);
       }
       // Reset les champs du formulaire
@@ -165,7 +192,7 @@ export default function FormAddGame({
     <form className="mt-2" onSubmit={handleSubmit}>
       <InputMain
         value={titre}
-        onChange={e => setTitre(e.target.value)}
+        onChange={(e) => setTitre(e.target.value)}
         type="text"
         label="titre"
         placeholder="Titre"
@@ -175,7 +202,7 @@ export default function FormAddGame({
       <SelectMain
         label="Plateformes"
         id="plateformes"
-        onChange={e => setPlateformes(e.target.value)}
+        onChange={(e) => setPlateformes(e.target.value)}
         value={plateformes}
         options={optionPlatformes}
         placeholder="---Sélectionnez une plateforme.---"
@@ -183,7 +210,7 @@ export default function FormAddGame({
 
       <InputMain
         value={description}
-        onChange={e => setDescription(e.target.value)}
+        onChange={(e) => setDescription(e.target.value)}
         type="text"
         label="Description"
         placeholder="Titre"
@@ -194,7 +221,7 @@ export default function FormAddGame({
         <div className="mr-2 w-1/2">
           <InputMain
             value={note}
-            onChange={e => setNote(e.target.value)}
+            onChange={(e) => setNote(e.target.value)}
             type="number"
             label="Min: 1 - Max: 5"
             max={5}
@@ -206,7 +233,7 @@ export default function FormAddGame({
         <div className="ml-2 w-1/2">
           <InputMain
             value={dateSortie}
-            onChange={e => setDateSortie(e.target.value)}
+            onChange={(e) => setDateSortie(e.target.value)}
             type="date"
             label="Date de sortie"
             placeholder="Date de sortie"
@@ -215,28 +242,20 @@ export default function FormAddGame({
         </div>
       </div>
 
-      <SelectMain
-        label="Developpeur"
-        id="developpeur"
-        onChange={e => setDeveloppeur(e.target.value)}
+      <SelectDeveloppeur
+        onChange={(e) => setDeveloppeur(e.target.value)}
         value={developpeur}
-        options={optionDeveloppeur}
-        placeholder="---Sélectionnez un studio de développement.---"
       />
 
-      <SelectMain
-        label="Editeur"
-        id="editeur"
-        onChange={e => setEditeur(e.target.value)}
+      <SelectEditeur
+        onChange={(e) => setEditeur(e.target.value)}
         value={editeur}
-        options={optionEditeur}
-        placeholder="---Sélectionnez un éditeur.---"
       />
 
       <SelectMain
         label="Type de jeu"
         id="typeDeJeu"
-        onChange={e => setTypeDeJeu(e.target.value)}
+        onChange={(e) => setTypeDeJeu(e.target.value)}
         value={typeDeJeu}
         options={optionTypeDeJeu}
         placeholder="---Sélectionnez un type de jeu.---"
@@ -244,7 +263,7 @@ export default function FormAddGame({
 
       <InputMain
         value={siteOfficial}
-        onChange={e => setSiteOfficial(e.target.value)}
+        onChange={(e) => setSiteOfficial(e.target.value)}
         type="text"
         label="Site official"
         placeholder="Site official"
@@ -253,7 +272,7 @@ export default function FormAddGame({
 
       <InputMain
         value={linkTrailer}
-        onChange={e => setLinkTrailer(e.target.value)}
+        onChange={(e) => setLinkTrailer(e.target.value)}
         type="text"
         label="Link Trailer"
         placeholder="lien vers le trailer"
@@ -270,7 +289,7 @@ export default function FormAddGame({
       <SelectMain
         label="Mode multi-joueur"
         id="modeMultijoueur"
-        onChange={e => setModeMultijoueur(e.target.value)}
+        onChange={(e) => setModeMultijoueur(e.target.value)}
         value={modeMultijoueur}
         options={optionModeMultijoueur}
         placeholder="---Sélectionnez un mode de jeux.---"
@@ -279,7 +298,7 @@ export default function FormAddGame({
       <SelectMain
         label="PEGI"
         id="pegiImage"
-        onChange={e => setPegiImage(e.target.value)}
+        onChange={(e) => setPegiImage(e.target.value)}
         value={pegiImage}
         options={pegiRatings}
         placeholder="---Sélectionnez un PEGI.---"

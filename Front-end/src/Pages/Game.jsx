@@ -71,12 +71,13 @@ export default function Game() {
             <div>
               <img
                 className="inline-block mr-2"
-                src={`http://localhost:5000/${
-                  game.pegiImage ? game.pegiImage : ""
+                src={`http://localhost:5000/imagePegi/${
+                  game.pegiImage ? game.pegiImage : "default.png"
                 }`}
                 alt="PEGI Rating"
                 style={{ width: "50px", height: "50px" }}
               />
+
               <img
                 className="inline-block"
                 src={`http://localhost:5000/${game.image}`}

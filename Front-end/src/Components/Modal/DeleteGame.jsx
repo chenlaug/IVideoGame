@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import  { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuthHeader } from "react-auth-kit";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
 
@@ -12,16 +13,21 @@ export default function DeleteGame({
   listeGame,
   setListeGame,
 }) {
+  const authHeader = useAuthHeader();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
     try {
-      await api.delete(`/videoGame/deleteGame/${idGame}`);
+      await api.delete(`/videoGame/deleteGame/${idGame}`, {
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
       toast.dismiss(loadingToast);
       toast.success("Jeu supprimé avec succès");
       setListeGame(
-        listeGame.filter(listeVideoGame => listeVideoGame._id !== idGame)
+        listeGame.filter((listeVideoGame) => listeVideoGame._id !== idGame)
       );
       setIsOpenDelete(false);
     } catch (error) {
@@ -30,7 +36,7 @@ export default function DeleteGame({
       console.log(error);
     }
   };
-  
+
   return (
     <>
       <Transition appear show={isOpenDelete} as={Fragment}>
@@ -84,7 +90,10 @@ export default function DeleteGame({
                 >
                   Confirmation de suppression
                 </Dialog.Title>
-                <FormDelete no={() => setIsOpenDelete(false)} yes={handleSubmit} />
+                <FormDelete
+                  no={() => setIsOpenDelete(false)}
+                  yes={handleSubmit}
+                />
               </div>
             </Transition.Child>
           </div>
