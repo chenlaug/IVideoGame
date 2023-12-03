@@ -5,7 +5,7 @@ export default function BtnShowPasword({ action, showPassword }) {
     <button
       type="button"
       onClick={action}
-      className="px-4 py-2 text-center bg-light-White dark:bg-dark-Black font-medium text-light-Yellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+      className="px-4 py-2 text-center bg-dark-Black dark:bg-dark-Black font-medium text-light-Yellow border border-black rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
     >
       {showPassword ? (
         <svg

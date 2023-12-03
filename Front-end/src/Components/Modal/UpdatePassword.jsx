@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { Fragment } from "react";
+import  { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import FormUpdatePwd from "../Form/FormUpdatePwd";
 
@@ -38,7 +38,7 @@ export default function UpdatePassword({
               <button
                 type="button"
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                onClick={() => setIsOpenUpdatePwd(false)}
+                onClick={() => setIsOpenUpdatePwd(prev => !prev)}
               >
                 <svg
                   className="h-6 w-6"
