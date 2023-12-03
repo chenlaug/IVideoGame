@@ -163,7 +163,7 @@ export default function TableauDeveloppeur({
 
   return (
     <>
-      <div className="flex flex-col items-center min-h-screen overflow-x-auto">
+      <div className="flex flex-col items-center min-h-screen overflow-x-auto p-10">
         <Searchbar query={searchQuery} handleSearch={handleSearch} />
         <table className="w-full table-auto border-collapse text-sm text-center">
           <thead>
