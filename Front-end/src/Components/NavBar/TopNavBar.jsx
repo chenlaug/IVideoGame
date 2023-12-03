@@ -47,7 +47,6 @@ export default function TopNavBar({ theme, setTheme }) {
           label={theme ? " Lumineur" : "Sombre"}
           type="button"
           onClick={() => {
-            console.log("Changement de thème");
             setTheme((prev) => !prev);
           }}
         />
