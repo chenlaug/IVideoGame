@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-import  { useEffect, Fragment, useState } from "react";
+import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
@@ -23,7 +23,7 @@ export default function TableauUtilisateur({
   const indexOfLastUser = currentPage * userPerPage;
   const indexOfFirstUser = indexOfLastUser - userPerPage;
   const currentUser = listeUser.slice(indexOfFirstUser, indexOfLastUser);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const authHeader = useAuthHeader();
   useEffect(() => {
@@ -45,27 +45,27 @@ export default function TableauUtilisateur({
     fetchCommentaire();
   }, [authHeader, listeUser, searchQuery]);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
   };
 
-  const openModalUpdate = user => {
+  const openModalUpdate = (user) => {
     setIsOpenAddUser(true);
     setCurrentUser(user);
   };
 
-  const openModalUpdatePwd = user => {
+  const openModalUpdatePwd = (user) => {
     setIsOpenUpdatePwd(true);
     setCurrentUser(user);
   };
 
-  const openModalDelete = id => {
+  const openModalDelete = (id) => {
     setIsOpenDeleteUser(true);
     setIdUser(id);
   };
 
-  const table = currentUser.map(user => (
+  const table = currentUser.map((user) => (
     <tr key={user._id}>
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {user.lastName} {user.firstName}
@@ -191,7 +191,7 @@ export default function TableauUtilisateur({
   ));
 
   return (
-    <>
+    <div className="p-10">
       <div className="flex flex-col items-center min-h-screen overflow-x-auto">
         <Searchbar query={searchQuery} handleSearch={handleSearch} />
         <table className="w-full table-auto border-collapse text-sm text-center">
@@ -221,6 +221,6 @@ export default function TableauUtilisateur({
         setIsOpenDeleteUser={setIsOpenDeleteUser}
         idUser={idUser}
       />
-    </>
+    </div>
   );
 }
