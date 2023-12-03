@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
 import api from "../../Utils/api";
@@ -24,7 +24,7 @@ export default function FormAddUtilisateur({
   const [email, setEmail] = useState(CurrentUser ? CurrentUser.email : "");
 
   const authHeader = useAuthHeader();
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
 
@@ -35,7 +35,6 @@ export default function FormAddUtilisateur({
       birthday,
       email,
     };
-
     try {
       if (CurrentUser) {
         // If CurrentUser is defined, update the user
@@ -45,8 +44,8 @@ export default function FormAddUtilisateur({
           },
         });
       } else {
-        // If CurrentUser is undefined, create a new user
-        await api.post("/user/signIn", data, {
+        // si CurrentUser est undefined, créer un nouveau user
+        await api.post("/user/createUserAdmin", data, {
           headers: {
             Authorization: authHeader(),
           },
@@ -66,7 +65,7 @@ export default function FormAddUtilisateur({
     <form className="mt-2" onSubmit={handleSubmit}>
       <InputMain
         value={lastName}
-        onChange={e => setLastName(e.target.value)}
+        onChange={(e) => setLastName(e.target.value)}
         type="text"
         label="Nom de famille"
         placeholder="Nom de famille"
@@ -75,7 +74,7 @@ export default function FormAddUtilisateur({
 
       <InputMain
         value={firstName}
-        onChange={e => setFirstName(e.target.value)}
+        onChange={(e) => setFirstName(e.target.value)}
         type="text"
         label="Prénom"
         placeholder="Prénom"
@@ -84,7 +83,7 @@ export default function FormAddUtilisateur({
 
       <InputMain
         value={phone}
-        onChange={e => setPhone(e.target.value)}
+        onChange={(e) => setPhone(e.target.value)}
         type="number"
         label="Téléphone"
         placeholder="Téléphone"
@@ -97,7 +96,7 @@ export default function FormAddUtilisateur({
               ? new Date(CurrentUser.birthday).toISOString().split("T")[0]
               : birthday
           }
-          onChange={e => setBirthday(e.target.value)}
+          onChange={(e) => setBirthday(e.target.value)}
           type="date"
           label="Date de naissance"
           placeholder="Date de naissance"
@@ -108,7 +107,7 @@ export default function FormAddUtilisateur({
       <div>
         <InputMain
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           label="Email"
           placeholder="Email"

@@ -3,6 +3,7 @@ const transporter = require('../Configs/nodemailerConfig');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const generatePassword = require('../Utils/GeneratePassword');
 const { baseURL } = require('../Configs/Url');
 
 exports.signIn = async (req, res) => {
@@ -10,7 +11,7 @@ exports.signIn = async (req, res) => {
         const user = new User(req.body);
         const confirmationToken = crypto.randomBytes(20).toString('hex');
         user.confirmationToken = confirmationToken;
-        user.confirmationTokenExpires = Date.now() + 48 * 60 * 60 * 1000; // 48 hour
+        user.confirmationTokenExpires = Date.now() + 48 * 60 * 60 * 1000; // 48 heure
 
         await user.save();
         const info = await transporter.sendMail({
@@ -27,6 +28,36 @@ exports.signIn = async (req, res) => {
         res.status(500).json({ message: error });
     }
 };
+
+exports.createUserAdmin = async (req, res) => {
+    try {
+        console.log(req.body);
+        const user = new User(req.body);
+        const newPassword = generatePassword();
+        user.password = newPassword;
+
+        // Définir le champ 'confirmed' sur true
+        user.confirmed = true;
+
+        console.log(user.password);
+        await user.save();
+
+        const info = await transporter.sendMail({
+            from: '"IVIDEOGAME" <votre_email@gmail.com>',
+            to: user.email,
+            subject: "Confirmation d'inscription par un administrateur",
+            text: `Bonjour ${user.firstName},\n\nVotre compte a été créé avec succès. Voici vos informations de connexion :\n\nIdentifiant : ${user.email}\nMot de passe : ${newPassword}\n\nNous vous recommandons de changer votre mot de passe après votre première connexion pour des raisons de sécurité.\n\nCordialement,\nL'équipe IVIDEOGAME`,
+            html: `<p>Bonjour ${user.firstName},</p><p>Votre compte a été créé avec succès. Voici vos informations de connexion :</p><p>Identifiant : ${user.email}<br>Mot de passe : <b>${newPassword}</b></p><p>Nous vous recommandons de changer votre mot de passe après votre première connexion pour des raisons de sécurité.</p><p>Cordialement,<br>L'équipe IVIDEOGAME</p>`,
+        });
+
+        console.log('Message envoyé: %s', info.messageId);
+        res.status(200).json({ message: 'Utilisateur enregistré avec succès et email de confirmation envoyé' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+};
+
 
 exports.confirmAccount = async (req, res) => {
     try {

@@ -7,6 +7,7 @@ const authenticateRole = require('../Middlewares/Auth');
 router.post('/signIn', UserController.signIn);
 router.post('/login', UserController.login);
 router.get('/confirmAccount/:token', UserController.confirmAccount);
+router.post('/createUserAdmin', authenticateRole('user'), UserController.createUserAdmin);
 router.get('/getUserFromToken', authenticateRole('user'), UserController.getUserFromToken);
 router.get('/getAllUsers', authenticateRole('user'), UserController.getAllUsers);
 router.get('/getUser/:id', UserController.getUser);

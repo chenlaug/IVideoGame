@@ -124,7 +124,7 @@ export default function FormAddGame({
             newFormData
           );
 
-          // Update the game in listeGame with the new image
+          // modifier le jeux dans la liste jeu avec la nouvelle image
           setListeGame(
             listeGame.map(game =>
               game.id === currentGame.id ? imageResponse.data : game
@@ -157,6 +157,7 @@ export default function FormAddGame({
     } catch (error) {
       toast.dismiss(loadingToast);
       toast.error("Une erreur est survenue");
+      console.log(error);
     }
   };
 

@@ -209,7 +209,7 @@ export default function TableauJeux({
   ));
 
   return (
-    <div>
+    <div className="p-10">
       <div className="flex flex-col items-center overflow-x-auto">
         <Searchbar query={searchQuery} handleSearch={handleSearch} />
       </div>

@@ -27,6 +27,7 @@ export default function DeleteGame({
     } catch (error) {
       toast.dismiss(loadingToast);
       toast.error("Une erreur est survenue");
+      console.log(error);
     }
   };
   return (
@@ -82,7 +83,7 @@ export default function DeleteGame({
                 >
                   Confirmation de suppression
                 </Dialog.Title>
-                <FormDelete yes={setIsOpenDelete} no={handleSubmit} />
+                <FormDelete no={() => setIsOpenDelete(false)} yes={handleSubmit} />
               </div>
             </Transition.Child>
           </div>

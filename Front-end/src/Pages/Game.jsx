@@ -71,7 +71,7 @@ export default function Game() {
             <div>
               <img
                 className="inline-block mr-2"
-                src={`http://localhost:5000${
+                src={`http://localhost:5000/${
                   game.pegiImage ? game.pegiImage : ""
                 }`}
                 alt="PEGI Rating"
@@ -98,11 +98,30 @@ export default function Game() {
               <span className="font-normal">{game.plateformes}</span>
             </p>
             <p className="font-bold">
-              Développeur:{" "}
-              <span className="font-normal">{game.developpeur.nom}</span>
+              Développeur:
+              <span className="font-normal">
+                <a
+                  href={game.developpeur.siteWeb}
+                  target="_blank"
+                  className="hover:text-light-Yellow"
+                  rel="noreferrer"
+                >
+                  {game.developpeur.nom}
+                </a>
+              </span>
             </p>
             <p className="font-bold">
-              Éditeur: <span className="font-normal">{game.editeur.nom}</span>
+              Éditeur:
+              <span className="font-normal">
+                <a
+                  href={game.editeur.siteWeb}
+                  target="_blank"
+                  className="hover:text-light-Yellow"
+                  rel="noreferrer"
+                >
+                  {game.editeur.nom}
+                </a>
+              </span>
             </p>
             <p className="font-bold">
               Type de jeu: <span className="font-normal">{game.typeDeJeu}</span>
