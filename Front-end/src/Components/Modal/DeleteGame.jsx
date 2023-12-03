@@ -12,6 +12,7 @@ export default function DeleteGame({
   listeGame,
   setListeGame,
 }) {
+
   const handleSubmit = async e => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
@@ -20,7 +21,6 @@ export default function DeleteGame({
       toast.dismiss(loadingToast);
       toast.success("Jeu supprimé avec succès");
       setListeGame(
-        // eslint-disable-next-line no-underscore-dangle
         listeGame.filter(listeVideoGame => listeVideoGame._id !== idGame)
       );
       setIsOpenDelete(false);
@@ -30,6 +30,7 @@ export default function DeleteGame({
       console.log(error);
     }
   };
+  
   return (
     <>
       <Transition appear show={isOpenDelete} as={Fragment}>

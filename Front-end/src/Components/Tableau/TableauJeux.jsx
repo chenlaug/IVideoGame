@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import  { useEffect, Fragment, useState } from "react";
+import { useEffect, Fragment, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Menu, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
@@ -22,12 +22,12 @@ export default function TableauJeux({
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
-  const openModalDelete = id => {
+  const openModalDelete = (id) => {
     setIsOpenDelete(true);
     setIdGame(id);
   };
 
-  const openModalUpdate = game => {
+  const openModalUpdate = (game) => {
     setIsOpen(true);
     setCurrentGame(game);
   };
@@ -49,14 +49,14 @@ export default function TableauJeux({
       }
     };
     fetchGames(searchQuery);
-  }, [setListeGame, searchQuery, authHeader]);
+  }, [setListeGame, searchQuery]);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
   };
 
-  const table = listeGame.map(game => (
+  const table = listeGame.map((game) => (
     <tr key={game.id}>
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {game.titre}
@@ -67,9 +67,7 @@ export default function TableauJeux({
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {game.description}
       </td>
-      <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
-        {game.editeur}
-      </td>
+
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {game.typeDeJeu}
       </td>
@@ -144,7 +142,6 @@ export default function TableauJeux({
                       className={`${
                         active ? "bg-light-Yellow text-light-TBleu" : ""
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      // eslint-disable-next-line no-underscore-dangle
                       onClick={() => openModalDelete(game._id)}
                     >
                       <svg
@@ -174,7 +171,6 @@ export default function TableauJeux({
                       className={`${
                         active ? "bg-light-Yellow text-light-TBleu" : ""
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      // eslint-disable-next-line no-underscore-dangle
                       onClick={() => navigate(`/game/${game._id}`)}
                     >
                       <svg
@@ -219,7 +215,6 @@ export default function TableauJeux({
             <th className="p-2">Titre</th>
             <th className="p-2">plateformes</th>
             <th className="p-2">description</th>
-            <th className="p-2">editeur</th>
             <th className="p-2">typeDeJeu</th>
             <th className="p-2">note</th>
             <th className="p-2">image</th>

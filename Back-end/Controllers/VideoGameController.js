@@ -49,7 +49,7 @@ exports.getGame = async (req, res) => {
 
 exports.deleteGame = async (req, res) => {
     const idGame = req.params.id;
-
+    console.log(idGame);
     try {
         const game = await VideoGame.findByIdAndDelete(idGame);
         if (!game) {
@@ -66,6 +66,7 @@ exports.deleteGame = async (req, res) => {
 
         res.status(200).json(game);
     } catch (error) {
+        console.log(error);
         res.status(400).json({ message: error.message });
     }
 };
