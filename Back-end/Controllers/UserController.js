@@ -31,7 +31,6 @@ exports.signIn = async (req, res) => {
 
 exports.createUserAdmin = async (req, res) => {
     try {
-        console.log(req.body);
         const user = new User(req.body);
         const newPassword = generatePassword();
         user.password = newPassword;
@@ -39,7 +38,6 @@ exports.createUserAdmin = async (req, res) => {
         // Définir le champ 'confirmed' sur true
         user.confirmed = true;
 
-        console.log(user.password);
         await user.save();
 
         const info = await transporter.sendMail({
@@ -53,7 +51,6 @@ exports.createUserAdmin = async (req, res) => {
         console.log('Message envoyé: %s', info.messageId);
         res.status(200).json({ message: 'Utilisateur enregistré avec succès et email de confirmation envoyé' });
     } catch (error) {
-        console.log(error);
         res.status(500).json(error);
     }
 };

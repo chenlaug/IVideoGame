@@ -180,6 +180,11 @@ export const pegiRatings = [
   { id: 4, value: "/uploads/ImagePegi/PEGI_18.png", name: "PEGI 18" },
 ];
 
+export const optionRole = [
+  { id: 1, name: "Admin", value: "admin" },
+  { id: 2, name: "User", value: "user" },
+]
+
 export const links = [
   {
     to: "/admin/utilisateur",

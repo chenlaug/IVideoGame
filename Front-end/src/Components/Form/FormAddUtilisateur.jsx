@@ -6,6 +6,8 @@ import { useAuthHeader } from "react-auth-kit";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
+import SelectMain from "../Select/SelectMain";
+import { optionRole } from "../../Utils/tableauOptionSelect";
 
 export default function FormAddUtilisateur({
   setIsOpenDeleteCommentaire,
@@ -18,6 +20,8 @@ export default function FormAddUtilisateur({
     CurrentUser ? CurrentUser.firstName : ""
   );
   const [phone, setPhone] = useState(CurrentUser ? CurrentUser.phone : "");
+  const [role, setRole] = useState(CurrentUser ? CurrentUser.role : "");
+
   const [birthday, setBirthday] = useState(
     CurrentUser ? CurrentUser.birthday : ""
   );
@@ -27,11 +31,11 @@ export default function FormAddUtilisateur({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
-
     const data = {
       lastName,
       firstName,
       phone,
+      role,
       birthday,
       email,
     };
@@ -50,6 +54,12 @@ export default function FormAddUtilisateur({
             Authorization: authHeader(),
           },
         });
+        setLastName("");
+        setFirstName("");
+        setPhone("");
+        setRole("");
+        setBirthday("");
+        setEmail("");
       }
 
       toast.dismiss(loadingToast);
@@ -89,6 +99,16 @@ export default function FormAddUtilisateur({
         placeholder="Téléphone"
         id="phone"
       />
+
+      <SelectMain
+        label="rôle"
+        id="plateformes"
+        onChange={(e) => setRole(e.target.value)}
+        value={role}
+        options={optionRole}
+        placeholder="---Sélectionnez un role.---"
+      />
+
       <div>
         <InputMain
           value={
