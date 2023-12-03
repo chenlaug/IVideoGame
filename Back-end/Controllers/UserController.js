@@ -147,12 +147,23 @@ exports.getUserFromToken = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const lastNameToSearchFor = req.query.lastName;
-        const users = lastNameToSearchFor ? await User.find({ lastName: lastNameToSearchFor }) : await User.find();
+
+        let query;
+        if (lastNameToSearchFor) {
+            // Utiliser une expression régulière pour une recherche insensible à la casse
+            // et qui ne nécessite pas le nom complet
+            query = { lastName: new RegExp(lastNameToSearchFor, 'i') };
+        } else {
+            query = {};
+        }
+
+        const users = await User.find(query);
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 exports.getUser = async (req, res) => {
     try {
