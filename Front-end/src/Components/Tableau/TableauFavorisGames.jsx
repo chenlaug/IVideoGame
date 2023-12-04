@@ -24,7 +24,7 @@ export default function TableauFavorisGames() {
     indexOfFirstGame,
     indexOfLastGame
   );
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     const fetchGames = async (query = "") => {
@@ -51,17 +51,17 @@ export default function TableauFavorisGames() {
     fetchGames(searchQuery);
   }, [setListeFavorisGames, searchQuery, authHeader]);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
   };
 
-  const openModalDeleteFavori = id => {
+  const openModalDeleteFavori = (id) => {
     setIsOpenDeleteFavoris(true);
     setIsGameFavori(id);
   };
 
-  const table = currentGames.map(game => (
+  const table = currentGames.map((game) => (
     <tr key={game._id}>
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {game.titre}
@@ -71,9 +71,6 @@ export default function TableauFavorisGames() {
       </td>
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {game.description}
-      </td>
-      <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
-        {game.editeur}
       </td>
       <td className="p-2 text-light-TBlack dark:text-dark-TWhite">
         {game.typeDeJeu}
@@ -195,7 +192,6 @@ export default function TableauFavorisGames() {
                 <th className="p-2 ">Titre</th>
                 <th className="p-2 ">Plateformes</th>
                 <th className="p-2 ">Description</th>
-                <th className="p-2 ">Editeur</th>
                 <th className="p-2 ">Type de jeu</th>
                 <th className="p-2 ">Note</th>
                 <th className="p-2 ">Image</th>

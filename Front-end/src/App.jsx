@@ -97,7 +97,7 @@ export default function App() {
           <Route
             path="/admin/game"
             element={
-              <RoleBasedRoute>
+              <RoleBasedRoute role={"admin"}>
                 <ReceptionAdmin />
               </RoleBasedRoute>
             }
@@ -105,7 +105,7 @@ export default function App() {
           <Route
             path="/admin/comment"
             element={
-              <RoleBasedRoute>
+              <RoleBasedRoute role={"admin"}>
                 <AdminCommentaire />
               </RoleBasedRoute>
             }
@@ -113,7 +113,7 @@ export default function App() {
           <Route
             path="/admin/utilisateur"
             element={
-              <RoleBasedRoute>
+              <RoleBasedRoute role={"admin"}>
                 <AdminUtilisateur />
               </RoleBasedRoute>
             }
@@ -121,7 +121,7 @@ export default function App() {
           <Route
             path="/admin/editeur"
             element={
-              <RoleBasedRoute>
+              <RoleBasedRoute role={"admin"}>
                 <AdminEditeur />
               </RoleBasedRoute>
             }
@@ -129,7 +129,7 @@ export default function App() {
           <Route
             path="/admin/develppeur"
             element={
-              <RoleBasedRoute>
+              <RoleBasedRoute role={"admin"}>
                 <AdminDevelppeur />
               </RoleBasedRoute>
             }
