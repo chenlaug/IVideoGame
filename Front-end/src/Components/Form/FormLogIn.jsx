@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export default function FormLogIn() {
   const signIn = useSignIn();
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Chargement en cours...");
 
@@ -27,7 +27,7 @@ export default function FormLogIn() {
         toast.dismiss(loadingToast);
         signIn({
           token,
-          expiresIn: 10800,
+          expiresIn: 3600,
           tokenType: "Bearer",
           authState: { email, role }, // ajoute le rôle à l'état d'authentification
         });
@@ -54,7 +54,7 @@ export default function FormLogIn() {
       <div className="mb-4">
         <InputMain
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           label="Email"
           placeholder="Email"
@@ -65,7 +65,7 @@ export default function FormLogIn() {
         <div className="mr-4">
           <InputMain
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
             label="Mot de passe"
             placeholder="**********"

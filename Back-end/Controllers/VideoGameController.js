@@ -9,7 +9,7 @@ exports.createGame = async (req, res) => {
         const videoGame = await VideoGame.create(req.body);
         res.status(201).json(videoGame);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };
 
