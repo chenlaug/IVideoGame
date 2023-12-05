@@ -55,19 +55,18 @@ exports.createUserAdmin = async (req, res) => {
     }
 };
 
-
 exports.confirmAccount = async (req, res) => {
     try {
         const user = await User.findOne({ confirmationToken: req.params.token });
 
         if (!user) {
-            return res.status(400).json({ message: 'Invalid confirmation token.' });
+            return res.status(400).json({ message: 'Jeton de confirmation invalide.' });
         }
 
         if (user.confirmationTokenExpires < Date.now()) {
-            // delete user if the token has expired
+            // supprimer l'utilisateur si le jeton a expiré
             await User.deleteOne({ _id: user._id });
-            return res.status(400).json({ message: 'Confirmation token expired. Please register again.' });
+            return res.status(400).json({ message: 'Le jeton de confirmation a expiré. Veuillez vous réenregistrer.' });
         }
 
         await User.findOneAndUpdate(
@@ -82,9 +81,9 @@ exports.confirmAccount = async (req, res) => {
             { runValidators: false },
         );
 
-        res.status(200).json({ message: 'Account confirmed successfully!' });
+        res.status(200).json({ message: 'Compte confirmé avec succès !' });
     } catch (error) {
-        res.status(500).json({ message: error.message }); // Changed to error.message to get the string error message
+        res.status(500).json({ message: error.message }); // Changed to error.message pour obtenir le message d'erreur sous forme de chaîne de caractères
     }
 };
 
@@ -127,7 +126,7 @@ exports.getUserFromToken = async (req, res) => {
     try {
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {
-            return res.status(403).json({ message: 'No token provided.' });
+            return res.status(403).json({ message: "Aucun jeton n'a été fourni." });
         }
 
         const decoded = jwt.verify(token, process.env.PRIVATE_KEY);
@@ -135,7 +134,7 @@ exports.getUserFromToken = async (req, res) => {
         const user = await User.findById(decoded.id);
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found.' });
+            return res.status(404).json({ message: "L'utilisateur n'a pas été trouvé." });
         }
 
         res.status(200).json(user);
@@ -169,7 +168,7 @@ exports.getUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: "L'utilisateur n'a pas été trouvé." });
         }
         res.status(200).json(user);
     } catch (error) {
@@ -181,7 +180,7 @@ exports.updateUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: "L'utilisateur n'a pas été trouvé." });
         }
 
         // Update fields here. req.body should only contain fields that exist in the User model.
@@ -201,9 +200,9 @@ exports.deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: "L'utilisateur n'a pas été trouvé." });
         }
-        res.status(200).json({ message: 'User deleted successfully' });
+        res.status(200).json({ message: "L'utilisateur n'a pas été trouvé." });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -213,14 +212,14 @@ exports.deleteUserFromToken = async (req, res) => {
     try {
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {
-            return res.status(403).json({ message: 'No token provided.' });
+            return res.status(403).json({ message: 'Pas de jeton fourni.' });
         }
 
         const decoded = jwt.verify(token, process.env.PRIVATE_KEY);
         const user = await User.findById(decoded.id);
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: "L'utilisateur n'a pas été trouvé." });
         }
 
         // Now we can send an email to the user
@@ -237,10 +236,10 @@ exports.deleteUserFromToken = async (req, res) => {
         // After sending email we delete the user
         const deletedUser = await User.findByIdAndDelete(decoded.id);
         if (!deletedUser) {
-            return res.status(404).json({ message: 'User deletion failed' });
+            return res.status(404).json({ message: "Échec de la suppression de l'utilisateur" });
         }
 
-        res.status(200).json({ message: 'User deleted successfully' });
+        res.status(200).json({ message: 'Utilisateur supprimé avec succès' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -262,7 +261,7 @@ exports.requestPasswordReset = async (req, res) => {
         });
 
         console.log('Message envoyé: %s', info.messageId);
-        res.status(200).json({ message: 'Reset password email sent.', messageId: info.messageId });
+        res.status(200).json({ message: 'Courriel de réinitialisation du mot de passe envoyé.', messageId: info.messageId });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -273,14 +272,14 @@ exports.resetPassword = async (req, res) => {
         const { token, newPassword } = req.body;
         const user = await User.findOne({ confirmationToken: token });
         if (!user) {
-            return res.status(400).json({ message: 'Token is invalid or has expired.' });
+            return res.status(400).json({ message: "Le jeton n'est pas valide ou a expiré." });
         }
         user.password = newPassword;
         await user.save();
 
-        res.status(200).json({ message: 'Password reset successful.' });
+        res.status(200).json({ message: 'Réinitialisation du mot de passe réussie.' });
     } catch (error) {
-        res.status(500).json("c'est pas bon", { message: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
 
@@ -288,12 +287,12 @@ exports.addToFavorites = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
         // vérifie si le jeu est déjà dans la liste des favoris
         if (user.favorisGames.includes(req.params.id)) {
-            return res.status(400).json({ message: 'Game already in favorites' });
+            return res.status(400).json({ message: 'Jeu déjà dans les favoris' });
         }
 
         user.favorisGames.push(req.params.id);
@@ -302,7 +301,7 @@ exports.addToFavorites = async (req, res) => {
         // Charger les documents associés
         await user.populate('favorisGames');
 
-        res.status(200).json({ message: 'Game added to favorites successfully', user });
+        res.status(200).json({ message: 'Jeu ajouté aux favoris avec succès', user });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -312,7 +311,7 @@ exports.getUserFavorites = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).populate('favorisGames');
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
         let favorisGames = user.favorisGames;
@@ -333,7 +332,7 @@ exports.removeGameFromFavorites = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
         // Convert the array of ObjectId to string array
@@ -344,9 +343,9 @@ exports.removeGameFromFavorites = async (req, res) => {
         if (gameIndex !== -1) {
             user.favorisGames.splice(gameIndex, 1);
             await user.save();
-            return res.status(200).json({ message: 'Game removed from favorites' });
+            return res.status(200).json({ message: 'Jeu supprimé des favoris' });
         } else {
-            return res.status(404).json({ message: 'Game not found in favorites' });
+            return res.status(404).json({ message: 'Jeu non trouvé dans les favoris' });
         }
     } catch (error) {
         return res.status(500).json({ message: error.message });

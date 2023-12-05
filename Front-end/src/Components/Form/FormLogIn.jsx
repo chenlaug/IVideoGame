@@ -32,7 +32,13 @@ export default function FormLogIn() {
           authState: { email, role }, // ajoute le rôle à l'état d'authentification
         });
         toast.success("Successfully toasted!");
-        navigate("/profil");
+
+        // Redirige en fonction du rôle
+        if (role === "admin") {
+          navigate("/admin/game");
+        } else {
+          navigate("/profil");
+        }
       } else {
         throw new Error("Invalid token");
       }

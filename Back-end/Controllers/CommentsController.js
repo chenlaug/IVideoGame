@@ -5,14 +5,10 @@ exports.addComments = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
-        console.log('User:', user);
-
         const gameId = req.params.id;
-        console.log('Game ID:', gameId);
-
         const existingComment = user.comments.find(
             (comment) => comment.VideoGame && comment.VideoGame.toString() === gameId,
         );
@@ -32,10 +28,8 @@ exports.addComments = async (req, res) => {
         user.comments.push(comment);
 
         await user.save();
-        console.log('User after saving:', user);
 
         const result = await comment.save();
-        console.log('Comment saved:', result);
 
         res.status(200).send(result);
     } catch (error) {
@@ -56,7 +50,7 @@ exports.getAllUserComments = async (req, res) => {
         });
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
         // Filtrer les commentaires pour exclure ceux sans jeux correspondants
@@ -136,7 +130,7 @@ exports.getGameComments = async (req, res) => {
         const comments = await Comments.find({ VideoGame: gameId });
 
         if (comments.length === 0) {
-            return res.status(404).json({ message: 'Comments not found for the specified game' });
+            return res.status(404).json({ message: 'Commentaires non trouvés pour le jeu spécifié' });
         }
 
         return res.status(200).json(comments);
@@ -147,12 +141,12 @@ exports.getGameComments = async (req, res) => {
 
 exports.getComments = async (req, res) => {
     try {
-        const gameTitleToSearchFor = req.query.title; // Get the game title from the request query parameters
+        const gameTitleToSearchFor = req.query.title; // Obtenir le titre du jeu à partir des paramètres de la requête
         const users = await User.find().populate({
             path: 'comments',
             populate: {
                 path: 'VideoGame',
-                match: gameTitleToSearchFor ? { title: gameTitleToSearchFor } : undefined, // Only populate games with the specified title if it's not empty
+                match: gameTitleToSearchFor ? { title: gameTitleToSearchFor } : undefined, // Ne remplir les jeux qu'avec le titre spécifié s'il n'est pas vide
             },
         });
         const comments = users.flatMap((user) =>
@@ -162,7 +156,7 @@ exports.getComments = async (req, res) => {
                 author: `${user.firstName} ${user.lastName}`,
             })),
         );
-        // Filter out comments where game didn't match only if a title was specified
+        // Filtrer les commentaires où le jeu ne correspond pas uniquement si un titre est spécifié
         const filteredComments = gameTitleToSearchFor ? comments.filter((comment) => comment.VideoGame) : comments;
         res.json(filteredComments);
     } catch (err) {

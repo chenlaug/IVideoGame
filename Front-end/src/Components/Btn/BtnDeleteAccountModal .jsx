@@ -1,6 +1,8 @@
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Dialog, Transition } from "@headlessui/react";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useSignOut } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../../Utils/api";
 
@@ -14,6 +16,8 @@ export default function BtnDeleteAccountModal() {
     setIsOpen(false);
   };
 
+  const navigate = useNavigate();
+  const signOut = useSignOut();
   const authHeader = useAuthHeader();
   const handleDeleteAccount = async () => {
     // Vous pouvez également afficher une notification de chargement
@@ -33,9 +37,9 @@ export default function BtnDeleteAccountModal() {
 
         // Fermer la modal
         closeModal();
-
+        signOut();
         // Rediriger l'utilisateur vers la page de connexion ou de bienvenue
-        // history.push("/welcome");
+        navigate("/");
       } else {
         throw new Error(
           "Une erreur est survenue lors de la suppression du compte."
@@ -121,7 +125,7 @@ export default function BtnDeleteAccountModal() {
                   <button
                     type="button"
                     className="ml-4 inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
-                    onClick={() => setIsOpen(prev => !prev)}
+                    onClick={() => setIsOpen((prev) => !prev)}
                   >
                     Annuler
                   </button>

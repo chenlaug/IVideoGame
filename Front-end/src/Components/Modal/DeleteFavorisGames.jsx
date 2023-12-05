@@ -31,6 +31,7 @@ export default function DeleteFavorisGames({
       setListeFavorisGames(
         listeFavorisGames.filter((game) => game._id !== idGameFavori)
       );
+      setIsOpenDeleteFavoris((prev) => !prev);
     } catch (error) {
       toast.dismiss(loadingToast);
       toast.error(

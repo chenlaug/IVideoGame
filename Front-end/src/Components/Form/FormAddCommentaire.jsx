@@ -6,7 +6,7 @@ import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
 
-export default function FormAddCommentaire({
+export default function   FormAddCommentaire({
   gameId,
   setIsOpenCommentaire,
   currentCommentaire,

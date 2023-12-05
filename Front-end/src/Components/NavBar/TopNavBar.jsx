@@ -10,7 +10,6 @@ import BtnNavLink from "../Btn/BtnNavLink";
 // eslint-disable-next-line react/prop-types
 export default function TopNavBar({ theme, setTheme }) {
   const signOut = useSignOut();
-  console.log("Thème actuel :", theme);
 
   return (
     <nav className="flex flex-col md:flex-row items-center justify-between p-4 bg-light-LightGray dark:bg-dark-BlackGray shadow-inner">

@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
+import { useState } from "react";
 import LogIng from "./Pages/LogIng";
 import Home from "./Pages/Home";
 import ForgotPassword from "./Pages/ForgotPassword";
@@ -19,7 +20,6 @@ import AdminDevelppeur from "./Pages/Admin/AdminDevelppeur";
 import AdminEditeur from "./Pages/Admin/AdminEditeur";
 import ReceptionAdmin from "./Pages/Admin/ReceptionAdmin";
 import TopNavBar from "./Components/NavBar/TopNavBar";
-import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 function RoleBasedRoute({ children, role }) {
@@ -27,19 +27,18 @@ function RoleBasedRoute({ children, role }) {
   const location = useLocation();
   // Obtenir l'état d'authentification (qui contient le rôle)
   const authState = useAuthUser();
-
   // Vérifie si l'utilisateur est authentifié et a le bon rôle
-  return isAuthenticated() && authState && authState.role === role ? (
+  return isAuthenticated() && authState && authState().role === role ? (
     children
-  ) : (
-    <Navigate to="/connect" replace state={{ from: location }} />
-  );
-}
-export default function App() {
-  const [theme, setTheme] = useState(true);
-  const isAuthenticated = useIsAuthenticated();
-  const authState = useAuthUser();
-  const location = useLocation();
+    ) : (
+      <Navigate to="/" replace state={{ from: location }} />
+      );
+    }
+    export default function App() {
+      const [theme, setTheme] = useState(true);
+      const isAuthenticated = useIsAuthenticated();
+      const authState = useAuthUser();
+      const location = useLocation();
 
   const noNavBarPaths = [
     "/",
@@ -51,9 +50,12 @@ export default function App() {
   ];
 
   const showNavBar = () => {
+    const authStateData = authState();
+    const userRole = authStateData ? authStateData.role : null;
+
     return (
       isAuthenticated() &&
-      authState().role === "user" &&
+      (userRole === "user" || userRole === "admin") &&
       !noNavBarPaths.includes(location.pathname)
     );
   };

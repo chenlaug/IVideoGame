@@ -87,7 +87,9 @@ export default function TableauFavorisGames() {
       </td>
       <td className="p-2">
         <img
-          src={`http://localhost:5000${game.pegiImage ? game.pegiImage : ""}`}
+          src={`http://localhost:5000/imagePegi/${
+            game.pegiImage ? game.pegiImage : "default.png"
+          }`}
           alt={game.titre}
           style={{ width: "50px", height: "50px" }}
         />
