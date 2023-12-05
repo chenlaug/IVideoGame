@@ -25,20 +25,27 @@ import TopNavBar from "./Components/NavBar/TopNavBar";
 function RoleBasedRoute({ children, role }) {
   const isAuthenticated = useIsAuthenticated();
   const location = useLocation();
-  // Obtenir l'état d'authentification (qui contient le rôle)
   const authState = useAuthUser();
-  // Vérifie si l'utilisateur est authentifié et a le bon rôle
-  return isAuthenticated() && authState && authState().role === role ? (
+
+  // Vérifie si l'utilisateur est authentifié
+  const isAuthorized = isAuthenticated() && authState;
+
+  // Si un rôle est spécifié, vérifie si l'utilisateur a ce rôle
+  const hasRequiredRole = role ? authState().role === role : true;
+
+  // Autorise l'accès si l'utilisateur est authentifié et, si un rôle est spécifié, a le rôle requis
+  return isAuthorized && hasRequiredRole ? (
     children
-    ) : (
-      <Navigate to="/" replace state={{ from: location }} />
-      );
-    }
-    export default function App() {
-      const [theme, setTheme] = useState(true);
-      const isAuthenticated = useIsAuthenticated();
-      const authState = useAuthUser();
-      const location = useLocation();
+  ) : (
+    <Navigate to="/" replace state={{ from: location }} />
+  );
+}
+
+export default function App() {
+  const [theme, setTheme] = useState(true);
+  const isAuthenticated = useIsAuthenticated();
+  const authState = useAuthUser();
+  const location = useLocation();
 
   const noNavBarPaths = [
     "/",
@@ -91,7 +98,7 @@ function RoleBasedRoute({ children, role }) {
           <Route
             path="/game/:idGame"
             element={
-              <RoleBasedRoute>
+              <RoleBasedRoute role={"admin"}>
                 <Game />
               </RoleBasedRoute>
             }

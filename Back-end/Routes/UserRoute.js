@@ -9,7 +9,7 @@ router.post('/login', UserController.login);
 router.get('/confirmAccount/:token', UserController.confirmAccount);
 router.post('/createUserAdmin', authenticateRole('user'), UserController.createUserAdmin);
 router.get('/getUserFromToken', authenticateRole(['user', 'admin']), UserController.getUserFromToken);
-router.get('/getAllUsers', authenticateRole('user'), UserController.getAllUsers);
+router.get('/getAllUsers', authenticateRole('admin'), UserController.getAllUsers);
 router.get('/getUser/:id', UserController.getUser);
 router.put('/updateUser/:id', authenticateRole(['user', 'admin']), UserController.updateUser);
 router.delete('/deleteUser/:id', authenticateRole('admin'), UserController.deleteUser);
