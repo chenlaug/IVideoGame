@@ -199,11 +199,11 @@ export default function TableauUtilisateur({
         <table className="w-full table-auto border-collapse text-sm text-center">
           <thead>
             <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
-              <th className="p-2"> {t("Button.Name")}</th>
-              <th className="p-2"> {t("Button.Email")}</th>
-              <th className="p-2"> {t("Button.Role")}</th>
-              <th className="p-2"> {t("Button.activeAccount")}</th>
-              <th className="p-2"> {t("Button.Option")}</th>
+              <th className="p-2"> {t("table.Name")}</th>
+              <th className="p-2"> {t("table.Email")}</th>
+              <th className="p-2"> {t("table.Role")}</th>
+              <th className="p-2"> {t("table.activeAccount")}</th>
+              <th className="p-2"> {t("table.Option")}</th>
             </tr>
           </thead>
           <tbody className="bg-light-LightGray dark:bg-dark-BlackGray divide-y divide-gray-300">

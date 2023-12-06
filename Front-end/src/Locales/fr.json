@@ -121,7 +121,8 @@
       "developerTeamName": "Nom de l'equipe de developpeur",
       "PublisherWebsite": "Site web de l'éditeur",
       "developerPublishe": "Nom de l'equipe de developpeur",
-      "searchGame": "Rechercher un jeu...",
+      "searchGame": "Rechercher ...",
+      "searchUser": "Rechercher ...",
       "writing": "Votre message"
     }
   },

@@ -22,7 +22,7 @@ export default function AdminUtilisateur() {
         }`}
       >
         <BtnMain
-          label={t("toast.addUser")}
+          label={t("Button.addUser")}
           type="button"
           onClick={() => setIsOpenAddUser(true)}
         />

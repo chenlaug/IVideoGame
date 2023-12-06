@@ -25,8 +25,8 @@ export default function FormNewPassword({
           <InputMain
             onChange={(e) => setNewPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            label={t("label.newPassword")}
-            placeholder={t("placeholder.newPassword")}
+            label={t("input.label.newPassword")}
+            placeholder={t("input.placeholder.newPassword")}
             id="password"
           />
         </div>
@@ -34,8 +34,8 @@ export default function FormNewPassword({
           <InputMain
             onChange={(e) => setConfirmPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            label={t("label.confirmPassword")}
-            placeholder={t("placeholder.confirmPassword")}
+            label={t("input.label.confirmPassword")}
+            placeholder={t("input.placeholder.confirmPassword")}
             id="confirm-password"
           />
         </div>

@@ -121,7 +121,8 @@
       "developerTeamName": "Developer team's name",
       "PublisherWebsite": "Publisher's website",
       "developerPublishe": "Developer team's name",
-      "searchGame": "Search a game...",
+      "searchGame": "Search ...",
+      "searchUser": "Search ...",
       "writing": "Your message"
     }
   },

@@ -13,7 +13,7 @@ export default function Searchbar({ query, handleSearch }) {
           value={query}
           onChange={handleSearch}
           type="text"
-          placeholder={t("placeholder.searchGame")}
+          placeholder={t("input.placeholder.searchUser")}
           className="flex-grow"
         />
 

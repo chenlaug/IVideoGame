@@ -15,7 +15,7 @@ i18n
             },
             // Ajoutez d'autres langues et traductions selon vos besoins
         },
-        lng: 'en', // Langue par défaut
+        lng: 'fr', // Langue par défaut
         fallbackLng: 'en', // Langue de secours en cas de traduction manquante
         debug: true, // Activez le mode débogage ici
         interpolation: {

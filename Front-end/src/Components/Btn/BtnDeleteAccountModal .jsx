@@ -106,7 +106,10 @@ export default function BtnDeleteAccountModal() {
                   {t("Modal.textDeleteAccount")}
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">{t("Button.Cancel")}</p>
+                  <p className="text-sm text-light-TBleu">
+                    {" "}
+                    {t("Modal.paraDeleteAccount")}
+                  </p>
                 </div>
 
                 <div className="mt-4">
@@ -115,7 +118,7 @@ export default function BtnDeleteAccountModal() {
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
                     onClick={handleDeleteAccount}
                   >
-                    {t("Modal.paraDeleteAccount")}{" "}
+                    {t("Button.confirm")}
                   </button>
                   <button
                     type="button"

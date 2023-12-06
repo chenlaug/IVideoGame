@@ -98,7 +98,7 @@ export default function App() {
           <Route
             path="/game/:idGame"
             element={
-              <RoleBasedRoute role={"admin"}>
+              <RoleBasedRoute>
                 <Game />
               </RoleBasedRoute>
             }

@@ -30,10 +30,10 @@ export default function ConfirmAccount() {
     <div className="flex flex-col items-center justify-center min-h-screen ">
       <div className="bg-light-LightGray dark:bg-dark-BlackGray shadow-inner rounded-xl">
         {message && (
-          <h1 className="text-green-500">{t("confirmAccont.goodText")}</h1>
+          <h1 className="text-green-500">{t("confirmAccount.goodText")}</h1>
         )}
         {error && (
-          <h1 className="text-red-500">{t("confirmAccont.badText")}</h1>
+          <h1 className="text-red-500">{t("confirmAccount.badText")}</h1>
         )}
         <div className=" text-center">
           {error && (

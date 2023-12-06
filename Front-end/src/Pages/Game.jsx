@@ -131,7 +131,7 @@ export default function Game() {
               </span>
             </p>
             <p className="font-bold">
-              {t("game.Éditeur")}
+              {t("game.Publisher")}
               <span className="font-normal">
                 <a
                   href={game.editeur.siteWeb}
