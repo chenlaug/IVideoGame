@@ -21,7 +21,7 @@ import AdminEditeur from "./Pages/Admin/AdminEditeur";
 import ReceptionAdmin from "./Pages/Admin/ReceptionAdmin";
 import TopNavBar from "./Components/NavBar/TopNavBar";
 
-// eslint-disable-next-line react/prop-types
+
 function RoleBasedRoute({ children, role }) {
   const isAuthenticated = useIsAuthenticated();
   const location = useLocation();

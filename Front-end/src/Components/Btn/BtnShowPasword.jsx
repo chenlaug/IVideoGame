@@ -1,4 +1,9 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
+BtnShowPasword.propTypes = {
+  action: PropTypes.func.isRequired,
+  showPassword: PropTypes.bool.isRequired,
+};
 
 export default function BtnShowPasword({ action, showPassword }) {
   return (

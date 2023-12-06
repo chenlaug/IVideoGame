@@ -1,6 +1,12 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+
+Pagination.propTypes = {
+  gamesPerPage: PropTypes.number.isRequired,
+  totalGames: PropTypes.number.isRequired,
+  paginate: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+};
 
 export default function Pagination({
   gamesPerPage,

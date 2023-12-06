@@ -1,6 +1,11 @@
-/* eslint-disable react/prop-types */
 import BtnMain from "../Btn/BtnMain";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+
+FormDelete.propTypes = {
+  no: PropTypes.func.isRequired,
+  yes: PropTypes.func.isRequired,
+};
 
 export default function FormDelete({ no, yes }) {
   const { t } = useTranslation();

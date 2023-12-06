@@ -1,9 +1,14 @@
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-
 import FormAddDeveloppeur from "../Form/FormAddDeveloppeur";
+import PropTypes from "prop-types";
+
+AddDeveloppeur.propTypes = {
+  isOpenAddDeveloppeur: PropTypes.bool.isRequired,
+  setIsOpenAddDeveloppeur: PropTypes.func,
+  CurrentDeveloppeur: PropTypes.object,
+};
 
 export default function AddDeveloppeur({
   isOpenAddDeveloppeur,

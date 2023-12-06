@@ -1,5 +1,10 @@
-/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+
+BtnNavLink.propTypes = {
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  link: PropTypes.string.isRequired,
+};
 
 export default function BtnNavLink({ link, label }) {
   return (

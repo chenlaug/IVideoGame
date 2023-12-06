@@ -1,4 +1,17 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
+InputMain.propTypes = {
+  value: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  id: PropTypes.string,
+  currentCommentaire: PropTypes.object,
+  required: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  max: PropTypes.number,
+  min: PropTypes.number,
+};
 
 export default function InputMain({
   value,

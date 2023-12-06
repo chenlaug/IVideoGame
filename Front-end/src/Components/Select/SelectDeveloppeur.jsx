@@ -3,7 +3,7 @@ import { useAuthHeader } from "react-auth-kit";
 import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 
-// eslint-disable-next-line react/prop-types
+
 export default function SelectDeveloppeur({ onChange, value }) {
   const authHeader = useAuthHeader();
   const [developpeur, setDeveloppeur] = useState([]);

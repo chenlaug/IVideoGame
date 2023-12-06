@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";

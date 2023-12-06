@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
 import Selectlanguage from "../../Components/Select/Selectlanguage";
-// eslint-disable-next-line react/prop-types
+
 export default function TopNavBar({ theme, setTheme }) {
   const { t } = useTranslation();
   const signOut = useSignOut();

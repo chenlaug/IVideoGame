@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect, Fragment, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Menu, Transition } from "@headlessui/react";
@@ -8,6 +7,18 @@ import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import DeleteGame from "../Modal/DeleteGame";
 import Searchbar from "../SeachBar/Searchbar";
+import PropTypes from "prop-types";
+
+TableauJeux.propTypes = {
+  listeGame: PropTypes.array.isRequired,
+  setListeGame: PropTypes.func.isRequired,
+  isOpenDelete: PropTypes.bool.isRequired,
+  setIsOpenDelete: PropTypes.func.isRequired,
+  idGame: PropTypes.string.isRequired,
+  setIdGame: PropTypes.func.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  setCurrentGame: PropTypes.func.isRequired,
+};
 
 export default function TableauJeux({
   listeGame,

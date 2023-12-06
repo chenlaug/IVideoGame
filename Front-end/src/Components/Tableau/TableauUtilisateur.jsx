@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
@@ -8,6 +7,13 @@ import api from "../../Utils/api";
 import Searchbar from "../SeachBar/Searchbar";
 import Pagination from "../Pagination/Pagination";
 import DeleteUser from "../Modal/DeleteUser";
+import PropTypes from "prop-types";
+
+TableauUtilisateur.propTypes = {
+  setIsOpenAddUser: PropTypes.func.isRequired,
+  setIsOpenUpdatePwd: PropTypes.func.isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
+};
 
 export default function TableauUtilisateur({
   setIsOpenAddUser,

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
@@ -6,6 +5,13 @@ import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
+import PropTypes from "prop-types";
+
+FormAddCommentaire.propTypes = {
+  gameId: PropTypes.string,
+  setIsOpenCommentaire: PropTypes.func.isRequired,
+  currentCommentaire: PropTypes.object
+};
 
 export default function FormAddCommentaire({
   gameId,

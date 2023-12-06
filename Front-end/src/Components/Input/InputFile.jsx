@@ -1,5 +1,12 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+import PropTypes from "prop-types";
+
+InputFile.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  currentCommentaire: PropTypes.object,
+  required: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default function InputFile({ label, id, required, onChange }) {
   return (

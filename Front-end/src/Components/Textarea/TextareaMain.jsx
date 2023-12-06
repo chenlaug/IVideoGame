@@ -1,4 +1,13 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
+TextareaMain.propTypes = {
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+};
+
 export default function TextareaMain({
   label,
   id,

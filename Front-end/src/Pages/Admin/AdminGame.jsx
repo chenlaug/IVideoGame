@@ -4,8 +4,12 @@ import AddGame from "../../Components/Modal/AddGame";
 import TableauJeux from "../../Components/Tableau/TableauJeux";
 import Pagination from "../../Components/Pagination/Pagination";
 import BtnMain from "../../Components/Btn/BtnMain";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+AdminGame.propTypes = {
+  hovered: PropTypes.bool.isRequired,
+};
+
 export default function AdminGame({ hovered }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState(false);

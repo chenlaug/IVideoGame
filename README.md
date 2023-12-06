@@ -9,6 +9,7 @@ IVideoGame permet aux utilisateurs de consulter et de gérer une variété de je
 ## Fonctionnalités
 
 ### Admin
+
 - Gérer les jeux (ajouter, modifier, supprimer).
 - Gérer les utilisateurs (ajouter, modifier, supprimer).
 - Gérer les commentaires (modérer, supprimer).
@@ -16,6 +17,7 @@ IVideoGame permet aux utilisateurs de consulter et de gérer une variété de je
 - Gérer les développeurs de jeux.
 
 ### User
+
 - Consulter les jeux.
 - Consulter les informations sur les développeurs.
 - Consulter les informations sur les éditeurs.
@@ -34,12 +36,17 @@ Avant de commencer, assurez-vous d'avoir Node.js et npm installés sur votre PC.
 
 Étapes pour installer et configurer le projet :
 
-git clone git@github.com:chenlaug/IVideoGame.git
-cd IVideoGame
-cd front-end
-npm install
-cd ../back-end
-npm install
+- git clone git@github.com:chenlaug/IVideoGame.git
+
+- cd IVideoGame
+
+- cd front-end
+
+- npm install
+
+- cd ../back-end
+
+- npm install
 
 Modifier le fichier `.env` dans le dossier back-end avec vos informations personnelles. Voici une explication de chaque variable d'environnement :
 
@@ -55,7 +62,7 @@ MONGO_URI=votre_mongo_uri
 EMAIL_USER=votre_email
 EMAIL_PASSWORD=votre_mot_de_passe_email
 PRIVATE_KEY=votre_private_key
-  
+
 ## Utilisation
 
 Pour lancer l'application en mode développement, exécutez les commandes suivantes dans les dossiers front-end et back-end :

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
@@ -6,6 +5,15 @@ import { useAuthHeader } from "react-auth-kit";
 import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
+import PropTypes from "prop-types";
+
+DeleteDeveloppeur.propTypes = {
+  isOpenDeleteDeveloppeur: PropTypes.bool.isRequired,
+  setIsOpenDeleteDeveloppeur: PropTypes.func,
+  idDeveloppeur: PropTypes.string,
+  listeDeveloppeur: PropTypes.object,
+  setListeDeveloppeur: PropTypes.func,
+};
 
 export default function DeleteDeveloppeur({
   isOpenDeleteDeveloppeur,

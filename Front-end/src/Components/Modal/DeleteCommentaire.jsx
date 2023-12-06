@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
@@ -7,6 +5,15 @@ import { useAuthHeader } from "react-auth-kit";
 import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
+import PropTypes from "prop-types";
+
+DeleteCommentaire.propTypes = {
+  isOpenDeleteCommentaire: PropTypes.bool.isRequired,
+  setIsOpenDeleteCommentaire: PropTypes.func,
+  listeCommentaire: PropTypes.array,
+  setListeCommentaire: PropTypes.func,
+  idCommentaire: PropTypes.string,
+};
 
 export default function DeleteCommentaire({
   isOpenDeleteCommentaire,

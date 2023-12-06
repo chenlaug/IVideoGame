@@ -1,7 +1,13 @@
-/* eslint-disable react/prop-types */
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import FormAddEditeur from "../Form/FormAddEditeur";
+import PropTypes from "prop-types";
+
+AddEditeur.propTypes = {
+  isOpenAddEditeur: PropTypes.bool.isRequired,
+  setIsOpenAddEditeur: PropTypes.func,
+  CurrentEditeur: PropTypes.object,
+};
 
 export default function AddEditeur({
   isOpenAddEditeur,

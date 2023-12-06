@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
@@ -6,6 +5,12 @@ import api from "../../Utils/api";
 import { useTranslation } from "react-i18next";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
+import PropTypes from "prop-types";
+
+FormAddEditeur.propTypes = {
+  setIsOpenAddEditeur: PropTypes.func.isRequired,
+  CurrentEditeur: PropTypes.object,
+};
 
 export default function FormAddEditeur({
   setIsOpenAddEditeur,

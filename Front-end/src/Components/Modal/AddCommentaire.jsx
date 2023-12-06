@@ -1,8 +1,15 @@
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import FormAddCommentaire from "../Form/FormAddCommentaire";
+import PropTypes from "prop-types";
+
+AddCommentaire.propTypes = {
+  isOpenCommentaire: PropTypes.bool.isRequired,
+  gameId: PropTypes.string,
+  setIsOpenCommentaire: PropTypes.func,
+  currentCommentaire: PropTypes.object,
+};
 
 export default function AddCommentaire({
   isOpenCommentaire,
