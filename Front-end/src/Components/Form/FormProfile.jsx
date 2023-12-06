@@ -1,7 +1,23 @@
-/* eslint-disable react/prop-types */
+
 import { useTranslation } from "react-i18next";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
+import PropTypes from "prop-types";
+
+FormProfile.propTypes = {
+  firstName: PropTypes.string.isRequired,
+  setFirstName: PropTypes.func.isRequired,
+  lastName: PropTypes.string.isRequired,
+  setLastName: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  phone: PropTypes.string.isRequired,
+  setPhone: PropTypes.func.isRequired,
+  birthday: PropTypes.string.isRequired,
+  setBirthday: PropTypes.func.isRequired,
+  handleEditMode: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+};
 
 export default function FormProfile({
   firstName,

@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
@@ -8,6 +6,12 @@ import BtnMain from "../Btn/BtnMain";
 import InputMain from "../Input/InputMain";
 import api from "../../Utils/api";
 import BtnShowPasword from "../Btn/BtnShowPasword";
+import PropTypes from "prop-types";
+
+FormUpdatePwd.propTypes = {
+  setIsOpenUpdatePwd: PropTypes.func.isRequired,
+  CurrentUser: PropTypes.array,
+};
 
 export default function FormUpdatePwd({ setIsOpenUpdatePwd, CurrentUser }) {
   const [password, setPassword] = useState("");
@@ -28,7 +32,6 @@ export default function FormUpdatePwd({ setIsOpenUpdatePwd, CurrentUser }) {
     };
 
     try {
-      // eslint-disable-next-line react/prop-types
       await api.put(`/user/updateUser/${CurrentUser._id}`, data, {
         headers: {
           Authorization: authHeader(),

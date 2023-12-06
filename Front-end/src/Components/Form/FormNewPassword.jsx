@@ -1,10 +1,17 @@
-/* eslint-disable react/prop-types */
+
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
 import InputMain from "../Input/InputMain";
 import BtnShowPasword from "../Btn/BtnShowPasword";
+import PropTypes from "prop-types";
+
+FormNewPassword.propTypes = {
+  setNewPassword: PropTypes.func.isRequired,
+  setConfirmPassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default function FormNewPassword({
   setNewPassword,

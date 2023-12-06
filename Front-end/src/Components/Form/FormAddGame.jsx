@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
@@ -16,6 +15,14 @@ import BtnMain from "../Btn/BtnMain";
 import SelectMain from "../Select/SelectMain";
 import SelectEditeur from "../Select/SelectEditeur";
 import SelectDeveloppeur from "../Select/SelectDeveloppeur";
+import PropTypes from "prop-types";
+
+FormAddGame.propTypes = {
+  setIsOpen: PropTypes.func.isRequired,
+  listeGame: PropTypes.array.isRequired,
+  setListeGame: PropTypes.func.isRequired,
+  currentGame: PropTypes.object,
+};
 
 export default function FormAddGame({
   setIsOpen,

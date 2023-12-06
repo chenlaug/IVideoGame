@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+SelectEditeur.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+};
+
 export default function SelectEditeur({ onChange, value }) {
   const authHeader = useAuthHeader();
   const [editeurs, setEditeurs] = useState([]);

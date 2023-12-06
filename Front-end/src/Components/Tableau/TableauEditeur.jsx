@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-underscore-dangle */
 import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
@@ -9,6 +7,12 @@ import api from "../../Utils/api";
 import Searchbar from "../SeachBar/Searchbar";
 import Pagination from "../Pagination/Pagination";
 import DeleteEditeur from "../Modal/DeleteEditeur";
+import PropTypes from "prop-types";
+
+TableauEditeur.propTypes = {
+  setIsOpenAddEditeur: PropTypes.func.isRequired,
+  setCurrentEditeur: PropTypes.func.isRequired,
+};
 
 export default function TableauEditeur({
   setIsOpenAddEditeur,

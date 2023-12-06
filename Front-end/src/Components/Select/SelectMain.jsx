@@ -1,4 +1,13 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
+SelectMain.propTypes = {
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  options: PropTypes.array.isRequired,
+  placeholder: PropTypes.string.isRequired,
+};
 
 export default function SelectMain({
   label,
@@ -24,7 +33,7 @@ export default function SelectMain({
         required
       >
         <option value="">{placeholder}</option>
-        {options.map(option => (
+        {options.map((option) => (
           <option key={option.id} value={option.value}>
             {option.name}
           </option>

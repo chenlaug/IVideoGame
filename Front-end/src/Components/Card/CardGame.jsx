@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
@@ -7,6 +6,11 @@ import api from "../../Utils/api";
 import AddCommentaire from "../Modal/AddCommentaire";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
+import PropTypes from "prop-types";
+
+CardGame.propTypes = {
+  game: PropTypes.object.isRequired,
+};
 
 export default function CardGame({ game }) {
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);

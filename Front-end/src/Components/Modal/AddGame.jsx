@@ -1,10 +1,17 @@
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import FormAddGame from "../Form/FormAddGame";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+AddGame.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func,
+  listeGame: PropTypes.array.isRequired,
+  setListeGame: PropTypes.func.isRequired,
+  currentGame: PropTypes.array,
+};
+
 export default function AddGame({
   isOpen,
   setIsOpen,

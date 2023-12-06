@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
+
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
@@ -9,6 +8,12 @@ import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
 import SelectMain from "../Select/SelectMain";
 import { optionRole } from "../../Utils/tableauOptionSelect";
+import PropTypes from "prop-types";
+
+FormAddUtilisateur.propTypes = {
+  setIsOpenDeleteCommentaire: PropTypes.func.isRequired,
+  CurrentUser: PropTypes.object,
+};
 
 export default function FormAddUtilisateur({
   setIsOpenDeleteCommentaire,

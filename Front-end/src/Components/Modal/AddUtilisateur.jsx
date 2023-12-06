@@ -1,8 +1,14 @@
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import FormAddUtilisateur from "../Form/FormAddUtilisateur";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+
+AddUtilisateur.propTypes = {
+  isOpenAddUser: PropTypes.bool.isRequired,
+  setIsOpenAddUser: PropTypes.func,
+  CurrentUser: PropTypes.object,
+};
 
 export default function AddUtilisateur({
   isOpenAddUser,

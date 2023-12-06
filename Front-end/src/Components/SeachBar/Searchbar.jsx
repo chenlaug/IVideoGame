@@ -1,7 +1,12 @@
-/* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
 import BtnMain from "../Btn/BtnMain";
 import InputMain from "../Input/InputMain";
+import PropTypes from "prop-types";
+
+Searchbar.propTypes = {
+  query: PropTypes.string.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+};
 
 export default function Searchbar({ query, handleSearch }) {
   const { t } = useTranslation();

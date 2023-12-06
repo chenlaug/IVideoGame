@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
@@ -8,6 +7,12 @@ import api from "../../Utils/api";
 import Searchbar from "../SeachBar/Searchbar";
 import Pagination from "../Pagination/Pagination";
 import DeleteDeveloppeur from "../Modal/DeleteDeveloppeur";
+import PropTypes from "prop-types";
+
+TableauDeveloppeur.propTypes = {
+  setIsOpenAddDeveloppeur: PropTypes.func.isRequired,
+  setCurrentDeveloppeur: PropTypes.func.isRequired,
+};
 
 export default function TableauDeveloppeur({
   setIsOpenAddDeveloppeur,

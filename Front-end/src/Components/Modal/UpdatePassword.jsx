@@ -1,8 +1,14 @@
-/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import FormUpdatePwd from "../Form/FormUpdatePwd";
+import PropTypes from "prop-types";
+
+UpdatePassword.propTypes = {
+  isOpenUpdatePwd: PropTypes.bool.isRequired,
+  setIsOpenUpdatePwd: PropTypes.func.isRequired,
+  CurrentUser: PropTypes.object
+};
 
 export default function UpdatePassword({
   isOpenUpdatePwd,

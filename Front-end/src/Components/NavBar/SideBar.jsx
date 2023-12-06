@@ -1,8 +1,13 @@
-/* eslint-disable react/prop-types */
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Kirky from "../../Image/kirby-deaf.gif";
 import { links } from "../../Utils/tableauOptionSelect";
+import PropTypes from "prop-types";
+
+SideBar.propTypes = {
+  hovered: PropTypes.bool.isRequired,
+  setHovered: PropTypes.func.isRequired,
+};
 
 export default function SideBar({ hovered, setHovered }) {
   const { t } = useTranslation();

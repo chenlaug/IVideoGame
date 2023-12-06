@@ -1,4 +1,10 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
+BtnMain.propTypes = {
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  type: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+};
 
 export default function BtnMain({ label, type, onClick }) {
   return (

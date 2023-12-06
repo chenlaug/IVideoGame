@@ -1,4 +1,9 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
+CardCommentaire.propTypes = {
+  comments: PropTypes.array.isRequired,
+};
+
 export default function CardCommentaire({ comments }) {
   return (
     <div className="grid grid-cols-3 gap-4 bg-light-LightGray text-center dark:bg-dark-BlackGray  rounded-xl mt-5">

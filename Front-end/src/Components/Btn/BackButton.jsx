@@ -1,5 +1,9 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
+
+BackButton.propTypes = {
+  label: PropTypes.string.isRequired,
+};
 
 export default function BackButton({ label }) {
   const navigate = useNavigate();
