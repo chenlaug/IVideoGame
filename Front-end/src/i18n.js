@@ -17,7 +17,7 @@ i18n
         },
         lng: 'fr', // Langue par défaut
         fallbackLng: 'en', // Langue de secours en cas de traduction manquante
-        debug: true, // Activez le mode débogage ici
+        // debug: true, // Activez le mode débogage ici
         interpolation: {
             escapeValue: false, // Ne pas échapper les valeurs
         },
