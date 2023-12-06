@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
 import InputMain from "../Input/InputMain";
@@ -11,10 +12,12 @@ export default function FormNewPassword({
   handleSubmit,
 }) {
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
 
   const handlePassword = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <form className="mt-8 space-y-6 px-6 pt-6 pb-8" onSubmit={handleSubmit}>
       <div className="rounded-md">
@@ -22,18 +25,18 @@ export default function FormNewPassword({
           <InputMain
             onChange={(e) => setNewPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            label="Nouveau mot de passe"
+            label={t("label.newPassword")}
+            placeholder={t("placeholder.newPassword")}
             id="password"
-            placeholder="Nouveau mot de passe"
           />
         </div>
         <div>
           <InputMain
             onChange={(e) => setConfirmPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            label="Confirmer le mot de passe"
+            label={t("label.confirmPassword")}
+            placeholder={t("placeholder.confirmPassword")}
             id="confirm-password"
-            placeholder="Confirmer le mot de passe"
           />
         </div>
         <div className="text-center mt-2">
@@ -43,9 +46,9 @@ export default function FormNewPassword({
 
       <div className="flex items-center justify-center">
         <div className="mr-2">
-          <BtnMain label="Réinitialiser le mot de passe" type="submit" />
+          <BtnMain label={t("Button.resetPassword")} type="submit" />
         </div>
-        <BtnNavLink link="/" label="Retour" />
+        <BtnNavLink link="/" label={t("Button.comeback")} />
       </div>
     </form>
   );

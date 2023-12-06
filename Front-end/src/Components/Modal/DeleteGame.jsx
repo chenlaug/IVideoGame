@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
 
@@ -14,10 +15,11 @@ export default function DeleteGame({
   setListeGame,
 }) {
   const authHeader = useAuthHeader();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
     try {
       await api.delete(`/videoGame/deleteGame/${idGame}`, {
         headers: {
@@ -25,15 +27,14 @@ export default function DeleteGame({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Jeu supprimé avec succès");
+      toast.success(t("toast.success"));
       setListeGame(
         listeGame.filter((listeVideoGame) => listeVideoGame._id !== idGame)
       );
       setIsOpenDelete(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("Une erreur est survenue");
-      console.log(error);
+      toast.error(t("toast.error"));
     }
   };
 
@@ -88,7 +89,7 @@ export default function DeleteGame({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Confirmation de suppression
+                  {t("Modal.DeletionConfirmation")}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDelete(false)}

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-underscore-dangle */
-import  { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
+
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
 
@@ -15,9 +16,11 @@ export default function DeleteUser({
   setListeUser,
 }) {
   const authHeader = useAuthHeader();
-  const deleteFromFavorites = async e => {
+  const { t } = useTranslation();
+
+  const deleteFromFavorites = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       await api.delete(`/user/deleteUser/${idUser}`, {
@@ -26,15 +29,13 @@ export default function DeleteUser({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Le commentaire a bien été retiré.");
+      toast.success(t("toast.success"));
       // Mettre à jour la liste des favoris dans l'état après suppression
-      setListeUser(listeUser.filter(user => user._id !== idUser));
+      setListeUser(listeUser.filter((user) => user._id !== idUser));
       isOpenDeleteUser(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        "Une erreur est survenue lors de la suppression du commentaire !"
-      );
+      toast.error(t("toast.error"));
     }
   };
   return (
@@ -88,7 +89,7 @@ export default function DeleteUser({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Confirmation de suppression
+                  {t("Modal.DeletionConfirmation")}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDeleteUser(false)}

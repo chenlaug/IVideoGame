@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SideBar from "../../Components/NavBar/SideBar";
 import TableauUtilisateur from "../../Components/Tableau/TableauUtilisateur";
 import AddUtilisateur from "../../Components/Modal/AddUtilisateur";
@@ -10,6 +11,7 @@ export default function AdminUtilisateur() {
   const [isOpenAddUser, setIsOpenAddUser] = useState(false);
   const [isOpenUpdatePwd, setIsOpenUpdatePwd] = useState(false);
   const [CurrentUser, setCurrentUser] = useState(null);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -20,7 +22,7 @@ export default function AdminUtilisateur() {
         }`}
       >
         <BtnMain
-          label="+ Ajouter un utilisateur"
+          label={t("toast.addUser")}
           type="button"
           onClick={() => setIsOpenAddUser(true)}
         />

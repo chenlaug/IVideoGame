@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "react-auth-kit";
 import App from "./App.jsx";
 import "./index.css";
+import './i18n'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider

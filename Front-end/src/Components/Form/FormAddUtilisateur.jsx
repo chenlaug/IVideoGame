@@ -3,6 +3,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
@@ -27,10 +28,11 @@ export default function FormAddUtilisateur({
   );
   const [email, setEmail] = useState(CurrentUser ? CurrentUser.email : "");
 
+  const { t } = useTranslation();
   const authHeader = useAuthHeader();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.error"));
     const data = {
       lastName,
       firstName,
@@ -65,11 +67,11 @@ export default function FormAddUtilisateur({
       }
 
       toast.dismiss(loadingToast);
-      toast.success("L'opération a réussi!");
+      toast.success(t("toast.success"));
       setIsOpenDeleteCommentaire(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("L'opération a échoué.");
+      toast.error(t("toast.error"));
     }
   };
 
@@ -79,8 +81,8 @@ export default function FormAddUtilisateur({
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
         type="text"
-        label="Nom de famille"
-        placeholder="Nom de famille"
+        label={t("input.label.nom")}
+        placeholder={t("input.placeholder.nom")}
         id="lastName"
       />
 
@@ -88,8 +90,8 @@ export default function FormAddUtilisateur({
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
         type="text"
-        label="Prénom"
-        placeholder="Prénom"
+        label={t("input.label.firstName")}
+        placeholder={t("input.placeholder.firstName")}
         id="firstName"
       />
 
@@ -97,18 +99,18 @@ export default function FormAddUtilisateur({
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         type="number"
-        label="Téléphone"
-        placeholder="Téléphone"
+        label={t("input.label.phone")}
+        placeholder={t("input.placeholder.phone")}
         id="phone"
       />
 
       <SelectMain
-        label="rôle"
+        label={t("input.label.role")}
+        placeholder={t("input.placeholder.role")}
         id="plateformes"
         onChange={(e) => setRole(e.target.value)}
         value={role}
         options={optionRole}
-        placeholder="---Sélectionnez un role.---"
       />
 
       <div>
@@ -120,8 +122,8 @@ export default function FormAddUtilisateur({
           }
           onChange={(e) => setBirthday(e.target.value)}
           type="date"
-          label="Date de naissance"
-          placeholder="Date de naissance"
+          label={t("input.label.birthday")}
+          placeholder={t("input.placeholder.birthday")}
           id="birthday"
         />
       </div>
@@ -131,16 +133,14 @@ export default function FormAddUtilisateur({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          label="Email"
-          placeholder="Email"
+          label={t("input.label.email")}
+          placeholder={t("input.placeholder.email")}
           id="email"
         />
       </div>
 
       <BtnMain
-        label={
-          CurrentUser ? "Modifier un utilisateur" : "Creation d'un utilisateur"
-        }
+        label={CurrentUser ? t("Modal.editingUser") : t("Modal.addUser")}
         type="submit"
       />
       <Toaster />

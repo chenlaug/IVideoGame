@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import AddCommentaire from "../Modal/AddCommentaire";
 import BtnMain from "../Btn/BtnMain";
@@ -10,6 +11,8 @@ import BtnNavLink from "../Btn/BtnNavLink";
 export default function CardGame({ game }) {
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);
   const [gameId, setGameId] = useState("");
+  const { t } = useTranslation();
+
   const authHeader = useAuthHeader();
   const addToFavorites = async (id) => {
     try {
@@ -22,11 +25,9 @@ export default function CardGame({ game }) {
           },
         }
       );
-      toast.success("le jeu a bien ete ajouter a votre liste de jeux favoris");
+      toast.success(t("toast.success"));
     } catch (error) {
-      toast.error(
-        "Une erreur est survenue pendant l'ajout du jeu à votre liste de jeux favoris ou le jeu est déjà dans votre liste de favoris"
-      );
+      toast.error(t("toast.error"));
     }
   };
   const openModalAddCommentaire = (id) => {

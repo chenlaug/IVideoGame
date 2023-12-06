@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import  { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 import FormUpdatePwd from "../Form/FormUpdatePwd";
 
 export default function UpdatePassword({
@@ -8,6 +9,8 @@ export default function UpdatePassword({
   setIsOpenUpdatePwd,
   CurrentUser,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Transition appear show={isOpenUpdatePwd} as={Fragment}>
       <Dialog
@@ -38,7 +41,7 @@ export default function UpdatePassword({
               <button
                 type="button"
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                onClick={() => setIsOpenUpdatePwd(prev => !prev)}
+                onClick={() => setIsOpenUpdatePwd((prev) => !prev)}
               >
                 <svg
                   className="h-6 w-6"
@@ -58,7 +61,7 @@ export default function UpdatePassword({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Modifie le mot de passe.
+                {t("Modal.changePassword")}
               </Dialog.Title>
               <FormUpdatePwd
                 setIsOpenUpdatePwd={setIsOpenUpdatePwd}

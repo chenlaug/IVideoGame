@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import  { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import BtnMain from "../Btn/BtnMain";
 import InputMain from "../Input/InputMain";
 import api from "../../Utils/api";
@@ -13,13 +14,14 @@ export default function FormUpdatePwd({ setIsOpenUpdatePwd, CurrentUser }) {
   const [confirmpassword, setConfirmpassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const { t } = useTranslation();
   const authHeader = useAuthHeader();
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!(password === confirmpassword)) {
-      toast.error("L'opération a échoué.");
+      toast.error(t("toast.error"));
     }
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.error"));
 
     const data = {
       password,
@@ -34,11 +36,11 @@ export default function FormUpdatePwd({ setIsOpenUpdatePwd, CurrentUser }) {
       });
 
       toast.dismiss(loadingToast);
-      toast.success("L'opération a réussi!");
+      toast.success(t("toast.success"));
       setIsOpenUpdatePwd(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("L'opération a échoué.");
+      toast.error(t("toast.error"));
     }
   };
 
@@ -51,10 +53,10 @@ export default function FormUpdatePwd({ setIsOpenUpdatePwd, CurrentUser }) {
       <div className=" mb-2">
         <InputMain
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           type={showPassword ? "text" : "password"}
-          label="Mot de passe"
-          placeholder="**********"
+          label={t("input.label.password")}
+          placeholder={t("input.placeholder.password")}
           id="password"
         />
       </div>
@@ -63,16 +65,16 @@ export default function FormUpdatePwd({ setIsOpenUpdatePwd, CurrentUser }) {
         <div className="mr-2">
           <InputMain
             value={confirmpassword}
-            onChange={e => setConfirmpassword(e.target.value)}
+            onChange={(e) => setConfirmpassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            label="Confirme mot de passe"
-            placeholder="**********"
+            label={t("input.label.confirmPassword")}
+            placeholder={t("input.placeholder.confirmPassword")}
             id="confirmpassword"
           />
         </div>
         <BtnShowPasword showPassword={showPassword} action={handlePassword} />
       </div>
-      <BtnMain label="Change le mot de passe." type="submit" />
+      <BtnMain label={t("Button.changePassword")} type="submit" />
       <Toaster />
     </form>
   );

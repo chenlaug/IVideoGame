@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import calculateAge from "../../Utils/CalculateAge";
 import api from "../../Utils/api";
 import BtnDeleteAccountModal from "../Btn/BtnDeleteAccountModal ";
@@ -16,10 +17,11 @@ export default function ProfileDisplay() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [birthday, setBirthday] = useState("");
+  const { t } = useTranslation();
 
   const authHeader = useAuthHeader();
   const handleEditMode = () => {
-    setEditMode(prev => !prev);
+    setEditMode((prev) => !prev);
   };
 
   const fetchData = useCallback(async () => {
@@ -32,7 +34,7 @@ export default function ProfileDisplay() {
 
       setUser(response.data);
     } catch (error) {
-      toast.error(error.message || "Une erreur est survenue");
+      toast.error(t("toast.error"));
     }
   }, [authHeader, setUser]);
 
@@ -50,7 +52,7 @@ export default function ProfileDisplay() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Mise à jour en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       const response = await api.put(
@@ -71,7 +73,7 @@ export default function ProfileDisplay() {
       const result = response.data;
       if (result) {
         toast.dismiss(loadingToast);
-        toast.success("Vos informations ont été mises à jour !");
+        toast.success(t("toast.success"));
         setUser(result);
         fetchData();
         setUpdateKey(updateKey + 1);
@@ -82,7 +84,7 @@ export default function ProfileDisplay() {
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(error.message || "Une erreur est survenue");
+      toast.error(t("toast.error"));
     }
   };
 
@@ -91,7 +93,7 @@ export default function ProfileDisplay() {
   }, [authHeader, fetchData]);
 
   if (!user) {
-    return <div>Chargement...</div>;
+    return <div>{t("toast.loading")}</div>;
   }
 
   return (
@@ -104,33 +106,37 @@ export default function ProfileDisplay() {
           {user.firstName} {user.lastName}
         </h2>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Email :</strong> {user.email}
+          <strong>{t("input.label.email")}</strong> {user.email}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Téléphone :</strong> {user.phone}
+          <strong>{t("input.label.phone")}</strong> {user.phone}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Date de naissance :</strong>
+          <strong>{t("input.label.birthday")}</strong>
           {new Date(user.birthday).toLocaleDateString()}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Age :</strong> {calculateAge(user.birthday)}
+          <strong>{t("input.label.old")}</strong>
+          {calculateAge(user.birthday)}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Nombre de jeux favoris :</strong> {user.favorisGames.length}
+          <strong>{t("input.label.NumberFavoriteGames")}</strong>
+          {user.favorisGames.length}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Nombre de commentaires :</strong> {user.comments.length}
+          <strong>{t("input.label.NumberComments")}</strong>
+          {user.comments.length}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>Compte confirmé :</strong> {user.confirmed ? "Oui" : "Non"}
+          <strong>{t("input.label.AccountConfirmed")}</strong>
+          {user.confirmed ? t("text.yes") : t("text.no")}
         </p>
       </div>
       {!editMode ? (
         <div className="flex items-center justify-center mb-2">
           <div className="mr-2">
             <BtnMain
-              label="Modifier les informations"
+              label={t("Button.ModifyInformation")}
               type="button"
               onClick={handleEditMode}
             />

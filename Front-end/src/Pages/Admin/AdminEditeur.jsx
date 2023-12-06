@@ -1,4 +1,5 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SideBar from "../../Components/NavBar/SideBar";
 import BtnMain from "../../Components/Btn/BtnMain";
 import TableauEditeur from "../../Components/Tableau/TableauEditeur";
@@ -8,6 +9,7 @@ export default function AdminEditeur() {
   const [hovered, setHovered] = useState(false);
   const [isOpenAddEditeur, setIsOpenAddEditeur] = useState(false);
   const [CurrentEditeur, setCurrentEditeur] = useState(null);
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -18,7 +20,7 @@ export default function AdminEditeur() {
         }`}
       >
         <BtnMain
-          label="+ Ajouter un Éditeur"
+          label={t("Button.addEditor")}
           type="button"
           onClick={() => setIsOpenAddEditeur(true)}
         />

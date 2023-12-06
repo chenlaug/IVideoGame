@@ -1,4 +1,5 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SideBar from "../../Components/NavBar/SideBar";
 import BtnMain from "../../Components/Btn/BtnMain";
 import TableauDeveloppeur from "../../Components/Tableau/TableauDeveloppeur";
@@ -8,6 +9,7 @@ export default function AdminDevelppeur() {
   const [hovered, setHovered] = useState(false);
   const [isOpenAddDeveloppeur, setIsOpenAddDeveloppeur] = useState(false);
   const [CurrentDeveloppeur, setCurrentDeveloppeur] = useState(null);
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -18,7 +20,7 @@ export default function AdminDevelppeur() {
         }`}
       >
         <BtnMain
-          label="+ Ajouter un Developpeur"
+          label={t("Button.addDeveloper")}
           type="button"
           onClick={() => setIsOpenAddDeveloppeur(true)}
         />

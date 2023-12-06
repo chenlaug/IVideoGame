@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAuthHeader, useSignOut } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,6 +8,8 @@ import api from "../../Utils/api";
 
 export default function BtnDeleteAccountModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -21,7 +23,7 @@ export default function BtnDeleteAccountModal() {
   const authHeader = useAuthHeader();
   const handleDeleteAccount = async () => {
     // Vous pouvez également afficher une notification de chargement
-    const loadingToast = toast.loading("Suppression en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       const response = await api.delete("/user/deleteUserFromToken", {
@@ -33,7 +35,7 @@ export default function BtnDeleteAccountModal() {
       // Vérifier si la suppression a été réussie
       if (response.status === 200) {
         toast.dismiss(loadingToast);
-        toast.success("Votre compte a été supprimé avec succès.");
+        toast.success(t("toast.success"));
 
         // Fermer la modal
         closeModal();
@@ -47,10 +49,7 @@ export default function BtnDeleteAccountModal() {
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        error.message ||
-          "Une erreur est survenue lors de la suppression du compte."
-      );
+      toast.error(t("toast.error"));
     }
   };
 
@@ -61,7 +60,7 @@ export default function BtnDeleteAccountModal() {
         className="px-4 py-2 text-center font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
         onClick={openModal}
       >
-        Supprimer mon compte
+        {t("Modal.deleteAccount")}
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -104,14 +103,10 @@ export default function BtnDeleteAccountModal() {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Suppression du compte
+                  {t("Modal.textDeleteAccount")}
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Êtes-vous sûr de vouloir supprimer votre compte ? Toutes les
-                    données associées seront définitivement supprimées. Cette
-                    action ne peut pas être annulée.
-                  </p>
+                  <p className="text-sm text-gray-500">{t("Button.Cancel")}</p>
                 </div>
 
                 <div className="mt-4">
@@ -120,14 +115,14 @@ export default function BtnDeleteAccountModal() {
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
                     onClick={handleDeleteAccount}
                   >
-                    Supprimer mon compte
+                    {t("Modal.paraDeleteAccount")}{" "}
                   </button>
                   <button
                     type="button"
                     className="ml-4 inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
                     onClick={() => setIsOpen((prev) => !prev)}
                   >
-                    Annuler
+                    {t("Button.Cancel")}
                   </button>
                 </div>
               </div>

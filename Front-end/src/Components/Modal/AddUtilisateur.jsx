@@ -2,12 +2,14 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import FormAddUtilisateur from "../Form/FormAddUtilisateur";
+import { useTranslation } from "react-i18next";
 
 export default function AddUtilisateur({
   isOpenAddUser,
   setIsOpenAddUser,
   CurrentUser,
 }) {
+  const { t } = useTranslation();
   return (
     <Transition appear show={isOpenAddUser} as={Fragment}>
       <Dialog
@@ -58,9 +60,7 @@ export default function AddUtilisateur({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                {CurrentUser
-                  ? "Modifiaction d'un utilisateur."
-                  : "Ajoute un utilisateur."}
+                {CurrentUser ? t("Modal.editingUser") : t("Modal.addUser")}
               </Dialog.Title>
               <FormAddUtilisateur
                 setIsOpenDeleteCommentaire={setIsOpenAddUser}

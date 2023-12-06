@@ -12,10 +12,12 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "axios": "^1.6.2",
+    "i18next": "^23.7.7",
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.2",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-i18next": "^13.5.0",
     "react-router-dom": "^6.20.0"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 import FormAddCommentaire from "../Form/FormAddCommentaire";
 
 export default function AddCommentaire({
@@ -9,6 +10,8 @@ export default function AddCommentaire({
   gameId,
   currentCommentaire,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Transition appear show={isOpenCommentaire} as={Fragment}>
       <Dialog
@@ -39,7 +42,7 @@ export default function AddCommentaire({
               <button
                 type="button"
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                onClick={() => setIsOpenCommentaire(prev => !prev)}
+                onClick={() => setIsOpenCommentaire((prev) => !prev)}
               >
                 <svg
                   className="h-6 w-6"
@@ -59,7 +62,7 @@ export default function AddCommentaire({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Ajoute un commentaire a un jeux
+                {t("Modal.addCommentaire")}
               </Dialog.Title>
               <FormAddCommentaire
                 gameId={gameId}

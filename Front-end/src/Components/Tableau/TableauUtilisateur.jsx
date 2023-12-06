@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-underscore-dangle */
 import { useEffect, Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuthHeader } from "react-auth-kit";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import Searchbar from "../SeachBar/Searchbar";
 import Pagination from "../Pagination/Pagination";
@@ -19,6 +19,8 @@ export default function TableauUtilisateur({
   const [currentPage, setCurrentPage] = useState(1);
   const [isOpenDeleteUser, setIsOpenDeleteUser] = useState(false);
   const [idUser, setIdUser] = useState("");
+  const { t } = useTranslation();
+
   const userPerPage = 6;
   const indexOfLastUser = currentPage * userPerPage;
   const indexOfFirstUser = indexOfLastUser - userPerPage;
@@ -39,7 +41,7 @@ export default function TableauUtilisateur({
         );
         setListeUser(response.data);
       } catch (error) {
-        toast.error("une erreur est survenue");
+        toast.error(t("toast.error"));
       }
     };
     fetchCommentaire();
@@ -149,7 +151,7 @@ export default function TableauUtilisateur({
                           d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
                         />
                       </svg>
-                      Mot de passe
+                      {t("Button.password")}
                     </button>
                   )}
                 </Menu.Item>
@@ -178,7 +180,7 @@ export default function TableauUtilisateur({
                           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                         />
                       </svg>
-                      Supprimer
+                      {t("Button.delete")}
                     </button>
                   )}
                 </Menu.Item>
@@ -197,11 +199,11 @@ export default function TableauUtilisateur({
         <table className="w-full table-auto border-collapse text-sm text-center">
           <thead>
             <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
-              <th className="p-2">Nom</th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Rôle</th>
-              <th className="p-2">Compte active</th>
-              <th className="p-2">Option</th>
+              <th className="p-2"> {t("Button.Name")}</th>
+              <th className="p-2"> {t("Button.Email")}</th>
+              <th className="p-2"> {t("Button.Role")}</th>
+              <th className="p-2"> {t("Button.activeAccount")}</th>
+              <th className="p-2"> {t("Button.Option")}</th>
             </tr>
           </thead>
           <tbody className="bg-light-LightGray dark:bg-dark-BlackGray divide-y divide-gray-300">
