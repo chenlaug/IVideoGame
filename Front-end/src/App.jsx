@@ -28,12 +28,15 @@ function RoleBasedRoute({ children, role }) {
   const authState = useAuthUser();
 
   // Vérifie si l'utilisateur est authentifié
-  const isAuthorized = isAuthenticated() && authState;
+  const isAuthorized = isAuthenticated() && authState();
 
   // Si un rôle est spécifié, vérifie si l'utilisateur a ce rôle
-  const hasRequiredRole = role ? authState().role === role : true;
+  // Notez l'ajout de la vérification authState pour éviter les erreurs
+  const hasRequiredRole =
+    role && authState() ? authState().role === role : true;
 
   // Autorise l'accès si l'utilisateur est authentifié et, si un rôle est spécifié, a le rôle requis
+  // Sinon, redirige vers la page d'accueil
   return isAuthorized && hasRequiredRole ? (
     children
   ) : (
