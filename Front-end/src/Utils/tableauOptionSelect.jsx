@@ -189,7 +189,7 @@ export const optionRole = [
 export const links = [
   {
     to: "/admin/utilisateur",
-    name: "Utilisateur",
+    name: "sidBar.user",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +209,7 @@ export const links = [
   },
   {
     to: "/admin/comment",
-    name: "Commentaire",
+    name: "sidBar.Comment",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +229,7 @@ export const links = [
   },
   {
     to: "/admin/game",
-    name: "Game",
+    name: "sidBar.Game",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +249,7 @@ export const links = [
   },
   {
     to: "/admin/editeur",
-    name: "Editeur",
+    name: "sidBar.Publisher",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -269,7 +269,7 @@ export const links = [
   },
   {
     to: "/admin/develppeur",
-    name: "Developpeur",
+    name: "sidBar.Developer",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

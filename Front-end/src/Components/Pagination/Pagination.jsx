@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-plusplus */
 /* eslint-disable react/prop-types */
-import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Pagination({
   gamesPerPage,
@@ -9,6 +8,8 @@ export default function Pagination({
   paginate,
   currentPage,
 }) {
+  const { t } = useTranslation();
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalGames / gamesPerPage); i++) {
     pageNumbers.push(i);
@@ -22,9 +23,9 @@ export default function Pagination({
         }`}
         onClick={() => currentPage > 1 && paginate(currentPage - 1)}
       >
-        Précédent
+        {t("pagination.Previous")}
       </button>
-      {pageNumbers.map(number => (
+      {pageNumbers.map((number) => (
         <button
           type="button"
           key={number}
@@ -46,7 +47,7 @@ export default function Pagination({
           currentPage < pageNumbers.length && paginate(currentPage + 1)
         }
       >
-        Suivant
+        {t("pagination.next")}
       </button>
     </div>
   );

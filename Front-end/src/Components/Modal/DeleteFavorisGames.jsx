@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
 
@@ -15,9 +16,10 @@ export default function DeleteFavorisGames({
   idGameFavori,
 }) {
   const authHeader = useAuthHeader();
+  const { t } = useTranslation();
   const deleteFromFavorites = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.error"));
 
     try {
       await api.delete(`/user/removeGameFromFavorites/${idGameFavori}`, {
@@ -26,7 +28,7 @@ export default function DeleteFavorisGames({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Jeu retiré des favoris");
+      toast.success(t("toast.success"));
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeFavorisGames(
         listeFavorisGames.filter((game) => game._id !== idGameFavori)
@@ -34,9 +36,7 @@ export default function DeleteFavorisGames({
       setIsOpenDeleteFavoris((prev) => !prev);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        "Une erreur est survenue lors de la suppression du jeu des favoris"
-      );
+      toast.error(t("toast.error"));
     }
   };
 
@@ -91,7 +91,7 @@ export default function DeleteFavorisGames({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Confirmation de suppression
+                  {t("Modal.deleteGamefavoris")}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDeleteFavoris((prev) => !prev)}

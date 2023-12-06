@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import  { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 import FormAddGame from "../Form/FormAddGame";
 
 // eslint-disable-next-line react/prop-types
@@ -11,6 +12,8 @@ export default function AddGame({
   setListeGame,
   currentGame,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -41,7 +44,7 @@ export default function AddGame({
               <button
                 type="button"
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                onClick={() => setIsOpen(prev => !prev)}
+                onClick={() => setIsOpen((prev) => !prev)}
               >
                 <svg
                   className="h-6 w-6"
@@ -61,7 +64,7 @@ export default function AddGame({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Ajoute d&apos;un jeu vidéo
+                {t("Modal.addGame")}
               </Dialog.Title>
               <FormAddGame
                 setIsOpen={setIsOpen}

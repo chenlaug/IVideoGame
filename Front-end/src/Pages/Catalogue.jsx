@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../Utils/api";
 import CardGame from "../Components/Card/CardGame";
 import Pagination from "../Components/Pagination/Pagination";
@@ -10,6 +11,8 @@ export default function Catalogue() {
   const [games, setGames] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
+  const { t } = useTranslation();
+
   const gamesPerPage = 6;
   const authHeader = useAuthHeader();
   useEffect(() => {
@@ -30,8 +33,8 @@ export default function Catalogue() {
       .then((response) => {
         setGames(response.data);
       })
-      .catch((error) => {
-        toast.error("Il y a eu une erreur !", error);
+      .catch(() => {
+        toast.error(t("toast.error"));
       });
   }, [query]);
 

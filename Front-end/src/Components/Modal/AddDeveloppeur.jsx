@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
+
 import FormAddDeveloppeur from "../Form/FormAddDeveloppeur";
 
 export default function AddDeveloppeur({
@@ -9,6 +10,8 @@ export default function AddDeveloppeur({
   setIsOpenAddDeveloppeur,
   CurrentDeveloppeur,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Transition appear show={isOpenAddDeveloppeur} as={Fragment}>
       <Dialog
@@ -60,8 +63,8 @@ export default function AddDeveloppeur({
                 className="text-lg font-medium leading-6 text-gray-900"
               >
                 {CurrentDeveloppeur
-                  ? "Modifiaction d'un developpeur."
-                  : "Ajoute un developpeur."}
+                  ? t("Modal.editingDeveloper")
+                  : t("Modal.addDeveloper")}
               </Dialog.Title>
               <FormAddDeveloppeur
                 setIsOpenAddDeveloppeur={setIsOpenAddDeveloppeur}

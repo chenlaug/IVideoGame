@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
-import AddCommentaire from "../Components/Modal/AddCommentaire";
 import api from "../Utils/api";
+import { useTranslation } from "react-i18next";
+import AddCommentaire from "../Components/Modal/AddCommentaire";
 import { formatDate } from "../Utils/changeDate";
 import BtnMain from "../Components/Btn/BtnMain";
 import CardCommentaire from "../Components/Card/CardCommentaire";
@@ -15,6 +16,7 @@ export default function Game() {
   const [comments, setComments] = useState([]);
   const { idGame } = useParams();
   const authHeader = useAuthHeader();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -26,7 +28,7 @@ export default function Game() {
         });
         setGame(response.data);
       } catch (error) {
-        toast.error("An error occurred while fetching the game.");
+        toast.error(t("toast.error"));
       }
     };
     fetchGame();
@@ -42,7 +44,7 @@ export default function Game() {
         });
         setComments(response.data);
       } catch (error) {
-        toast.error("il y a pas de new commmentaire ");
+        toast.error(t("toast.error"));
       }
     };
     fetchComments();
@@ -56,7 +58,7 @@ export default function Game() {
   }
 
   if (!game) {
-    return <div>Chargement du jeu...</div>;
+    return <div>{t("toast.loading")}</div>;
   }
   const openModalAddCommentaire = (id) => {
     setIsOpenCommentaire(true);
@@ -74,11 +76,9 @@ export default function Game() {
           },
         }
       );
-      toast.success("le jeu a bien ete ajouter a votre liste de jeux favoris");
+      toast.success(t("toast.success"));
     } catch (error) {
-      toast.error(
-        "Une erreur est survenue pendant l'ajout du jeu à votre liste de jeux favoris ou le jeu est déjà dans votre liste de favoris"
-      );
+      toast.error(t("toast.error"));
     }
   };
   return (
@@ -114,11 +114,11 @@ export default function Game() {
 
           <div className="mt-4">
             <p className="font-bold">
-              Plateformes:
+              {t("game.Platforms")}
               <span className="font-normal">{game.plateformes}</span>
             </p>
             <p className="font-bold">
-              Développeur:
+              {t("game.Developer")}
               <span className="font-normal">
                 <a
                   href={game.developpeur.siteWeb}
@@ -131,7 +131,7 @@ export default function Game() {
               </span>
             </p>
             <p className="font-bold">
-              Éditeur:
+              {t("game.Publisher")}
               <span className="font-normal">
                 <a
                   href={game.editeur.siteWeb}
@@ -144,19 +144,21 @@ export default function Game() {
               </span>
             </p>
             <p className="font-bold">
-              Type de jeu: <span className="font-normal">{game.typeDeJeu}</span>
+              {t("game.TypeGame")}
+              <span className="font-normal">{game.typeDeJeu}</span>
             </p>
             <p className="font-bold">
-              Note: <span className="font-normal">{game.note}</span>
+              {t("game.Note")}
+              <span className="font-normal">{game.note}</span>
             </p>
             <p className="font-bold">
-              Mode multijoueur:
+              {t("game.Multiplayer")}
               <span className="font-normal">
                 {game.multiplayerMode ? "Oui" : "Non"}
               </span>
             </p>
             <p className="font-bold">
-              Date de sortie:
+              {t("game.Release")}
               <span className="font-normal">{formatDate(game.dateSortie)}</span>
             </p>
           </div>
@@ -180,7 +182,7 @@ export default function Game() {
               rel="noopener noreferrer"
               className="inline-block bg-light-Yellow text-light-TBleu hover:bg-light-VCYellow text-center font-medium py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
             >
-              Visitez le site officiel
+              {t("game.VisitWebsite")}
             </a>
             <BtnMain
               label={

@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import TextareaMain from "../Textarea/TextareaMain";
 import BtnMain from "../Btn/BtnMain";
@@ -11,9 +12,11 @@ export default function FormConctac() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
+  const { t } = useTranslation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       const response = await api.post(
@@ -35,7 +38,7 @@ export default function FormConctac() {
         result.message.trim().length > 0
       ) {
         toast.dismiss(loadingToast);
-        toast.success("Votre message a bien été envoyé !");
+        toast.success(t("toast.success"));
 
         setTimeout(() => {
           navigate("/profil"); // l'itinéraire de votre choix
@@ -45,7 +48,7 @@ export default function FormConctac() {
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(error.message || "Une erreur est survenue");
+      toast.error(t("toast.error"));
     }
   };
 
@@ -56,19 +59,19 @@ export default function FormConctac() {
     >
       <div className="mb-4">
         <TextareaMain
-          label="Message"
+          label={t("input.label.writing")}
+          placeholder={t("input.placeholder.writing")}
           id="message"
           onChange={(e) => setMessage(e.target.value)}
           value={message}
-          placeholder="Votre message"
         />
       </div>
 
       <div className="flex items-center justify-center">
         <div className="mr-2">
-          <BtnMain type="submit" label="Envoyer" />
+          <BtnMain type="submit" label={t("Button.send")} />
         </div>
-        <BtnNavLink link="/profil" label="Retour" />
+        <BtnNavLink link="/profil" label={t("Button.comeback")} />
       </div>
       <Toaster />
     </form>

@@ -1,9 +1,9 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
 
@@ -14,10 +14,11 @@ export default function DeleteEditeur({
   listeEditeur,
   idEditeur,
 }) {
+  const { t } = useTranslation();
   const authHeader = useAuthHeader();
-  const deleteFromFavorites = async e => {
+  const deleteFromFavorites = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       await api.delete(`/developpeur/deleteDeveloppeur/${idEditeur}`, {
@@ -26,17 +27,15 @@ export default function DeleteEditeur({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Le commentaire a bien été retiré.");
+      toast.success(t("toast.success"));
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeEditeur(
-        listeEditeur.filter(editeur => editeur._id !== idEditeur)
+        listeEditeur.filter((editeur) => editeur._id !== idEditeur)
       );
       setIsOpenDeleteEditeur(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        "Une erreur est survenue lors de la suppression du commentaire !"
-      );
+      toast.error(t("toast.error"));
     }
   };
   return (
@@ -90,7 +89,7 @@ export default function DeleteEditeur({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Confirmation de suppression
+                  {t("Modal.DeletionConfirmation")}
                 </Dialog.Title>
                 <FormDelete
                   no={setIsOpenDeleteEditeur}

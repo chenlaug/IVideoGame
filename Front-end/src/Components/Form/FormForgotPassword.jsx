@@ -1,5 +1,6 @@
 import  { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
@@ -7,22 +8,19 @@ import BtnNavLink from "../Btn/BtnNavLink";
 
 export default function FormForgotPassword() {
   const [email, setEmail] = useState("");
+  const { t } = useTranslation();
+
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const loadingToast = toast.loading("Sending reset password request...");
+    const loadingToast = toast.loading(t("toast.loading"));
     try {
       await api.post("/user/requestPasswordReset", { email });
       toast.dismiss(loadingToast);
-      toast.success(
-        "Un courriel a été envoyé à votre email pour réinitialiser votre mot de passe."
-      );
+      toast.success(t("toast.success"));
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        error.message ||
-          "Une erreur s'est produite lors de la demande de réinitialisation du mot de passe. Veuillez réessayer plus tard."
-      );
+      toast.error(t("toast.error"));
     }
   };
 
@@ -36,17 +34,17 @@ export default function FormForgotPassword() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           type="email"
-          label="Email"
-          placeholder="Email"
+          label={t("input.label.email")}
+          placeholder={t("input.placeholder.email")}
           id="email"
         />
       </div>
 
       <div className="flex items-center justify-between">
         <div className="mr-2">
-          <BtnMain label="Se connecter" type="submit" />
+          <BtnMain label={t("Button.confirm")} type="submit" />
         </div>
-        <BtnNavLink link="/connect" label="Revenir en arrière ?" />
+        <BtnNavLink link="/connect" label={t("Button.comeback")} />
       </div>
       <Toaster />
     </form>

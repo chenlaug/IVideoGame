@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
@@ -12,12 +13,13 @@ export default function FormLogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
   const signIn = useSignIn();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       const response = await api.post("/user/login", { email, password });
@@ -31,7 +33,7 @@ export default function FormLogIn() {
           tokenType: "Bearer",
           authState: { email, role }, // ajoute le rôle à l'état d'authentification
         });
-        toast.success("Successfully toasted!");
+        toast.success(t("toast.success"));
 
         // Redirige en fonction du rôle
         if (role === "admin") {
@@ -44,7 +46,7 @@ export default function FormLogIn() {
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(error.message || "An error occurred");
+      toast.error(t("toast.error"));
     }
   };
 
@@ -62,8 +64,8 @@ export default function FormLogIn() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          label="Email"
-          placeholder="Email"
+          label={t("input.label.email")}
+          placeholder={t("input.placeholder.email")}
           id="email"
         />
       </div>
@@ -73,8 +75,8 @@ export default function FormLogIn() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            label="Mot de passe"
-            placeholder="**********"
+            label={t("input.label.password")}
+            placeholder={t("input.placeholder.password")}
             id="password"
           />
         </div>
@@ -82,9 +84,12 @@ export default function FormLogIn() {
       </div>
       <div className="flex items-center justify-between">
         <div className="mr-2">
-          <BtnMain type="submit" label="Se connecter" />
+          <BtnMain type="submit" label={t("Button.connect")} />
         </div>
-        <BtnNavLink link="/password-forgotten" label="Mot de passe oublié ?" />
+        <BtnNavLink
+          link="/password-forgotten"
+          label={t("Button.forgotPassword")}
+        />
       </div>
       <Toaster />
     </form>

@@ -3,12 +3,13 @@ import sonicandTails from "../../Image/SonicandTails.gif";
 import marioLuigi from "../../Image/mario-luigi.gif";
 import mortalKombat from "../../Image/mortal-kombat.gif";
 import megaman from "../../Image/megaman.gif";
-
+import { useTranslation } from "react-i18next";
 import BtnMain from "../Btn/BtnMain";
 import BtnNavLink from "../Btn/BtnNavLink";
-
+import Selectlanguage from "../../Components/Select/Selectlanguage";
 // eslint-disable-next-line react/prop-types
 export default function TopNavBar({ theme, setTheme }) {
+  const { t } = useTranslation();
   const signOut = useSignOut();
 
   return (
@@ -35,20 +36,26 @@ export default function TopNavBar({ theme, setTheme }) {
             alt="mortalKombat"
             className="flex-shrink-0 object-cover h-12 hidden md:block"
           />
-          <BtnNavLink link="/profil" label="Profile" />
-          <BtnNavLink link="/catalogue" label="Catalogue" />
-          <BtnNavLink link="/contact" label="Contact" />
-          <BtnNavLink link="/favourites" label="Jeux favoris" />
-          <BtnNavLink link="/comment" label="Liste commentaire" />
+          <BtnNavLink link="/profil" label={t("TopNavBar.profile")} />
+          <BtnNavLink link="/catalogue" label={t("TopNavBar.Catalogue")} />
+          <BtnNavLink link="/contact" label={t("TopNavBar.Contact")} />
+          <BtnNavLink
+            link="/favourites"
+            label={t("TopNavBar.FavouriteGames")}
+          />
+          <BtnNavLink link="/comment" label={t("TopNavBar.CommentList")} />
         </div>
-
         <BtnMain
-          label={theme ? " Lumineur" : "Sombre"}
+          label={theme ? t("TopNavBar.Light") : t("TopNavBar.Dark")}
           type="button"
           onClick={() => setTheme((prev) => !prev)}
         />
-
-        <BtnMain label="Deconnection" type="button" onClick={() => signOut()} />
+        <Selectlanguage />
+        <BtnMain
+          label={t("TopNavBar.Disconnect")}
+          type="button"
+          onClick={() => signOut()}
+        />
         <img
           src={marioLuigi}
           alt="marioLuigi"

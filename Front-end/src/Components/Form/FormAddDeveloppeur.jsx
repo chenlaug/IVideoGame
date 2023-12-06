@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import  { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
@@ -20,10 +21,12 @@ export default function FormAddDeveloppeur({
   const [siteWeb, setSiteWeb] = useState(
     CurrentDeveloppeur ? CurrentDeveloppeur.siteWeb : ""
   );
+  const { t } = useTranslation();
+
   const authHeader = useAuthHeader();
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     const data = {
       nom,
@@ -33,7 +36,7 @@ export default function FormAddDeveloppeur({
 
     try {
       if (CurrentDeveloppeur) {
-        // If CurrentDeveloppeur is defined, update the user
+        // Si CurrentDeveloper est défini, met à jour l'utilisateur
         await api.put(
           `/developpeur/updateDeveloppeur/${CurrentDeveloppeur._id}`,
           data,
@@ -44,7 +47,7 @@ export default function FormAddDeveloppeur({
           }
         );
       } else {
-        // If CurrentDeveloppeur is undefined, create a new user
+        // Si CurrentDeveloppeur n'est pas défini, créez un nouvel utilisateur
         await api.post("/developpeur/createDeveloppeur", data, {
           headers: {
             Authorization: authHeader(),
@@ -53,47 +56,47 @@ export default function FormAddDeveloppeur({
       }
 
       toast.dismiss(loadingToast);
-      toast.success("L'opération a réussi!");
+      toast.success(t("toast.success"));
       setIsOpenAddDeveloppeur(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("L'opération a échoué.");
+      toast.error(t("toast.error"));
     }
   };
   return (
     <form className="mt-2" onSubmit={handleSubmit}>
       <InputMain
         value={nom}
-        onChange={e => setNom(e.target.value)}
+        onChange={(e) => setNom(e.target.value)}
         type="text"
-        label="Nom de l'equipe de developpeur"
-        placeholder="Nom"
+        label={t("input.label.developerTeamName")}
+        placeholder={t("input.placeholder.developerTeamName")}
         id="nom"
       />
 
       <InputMain
         value={pays}
-        onChange={e => setPays(e.target.value)}
+        onChange={(e) => setPays(e.target.value)}
         type="text"
-        label="Pays"
-        placeholder="Pays"
+        label={t("input.label.country")}
+        placeholder={t("input.placeholder.country")}
         id="pays"
       />
 
       <InputMain
         value={siteWeb}
-        onChange={e => setSiteWeb(e.target.value)}
+        onChange={(e) => setSiteWeb(e.target.value)}
         type="text"
-        label="Site web de l'equipe de developpeur"
-        placeholder="Site web de l'equipe de developpeur"
+        label={t("input.label.developmentWebsite")}
+        placeholder={t("input.placeholder.developmentWebsite")}
         id="siteWeb"
       />
 
       <BtnMain
         label={
           CurrentDeveloppeur
-            ? "Modifiaction d'un developpeur"
-            : "Creation d'un developpeur"
+            ? t("Button.editingDeveloper")
+            : t("Button.creatingDeveloper")
         }
         type="submit"
       />

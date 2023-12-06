@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
-import  { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
 
-export default function   FormAddCommentaire({
+export default function FormAddCommentaire({
   gameId,
   setIsOpenCommentaire,
   currentCommentaire,
 }) {
+  const { t } = useTranslation();
   const [note, setNote] = useState(
     currentCommentaire ? currentCommentaire.note : ""
   );
@@ -19,9 +21,9 @@ export default function   FormAddCommentaire({
   );
 
   const authHeader = useAuthHeader();
-  const handleCreate = async e => {
+  const handleCreate = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.error"));
     try {
       const data = {
         note,
@@ -33,17 +35,17 @@ export default function   FormAddCommentaire({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Successfully toasted!");
+      toast.success(t("toast.success"));
       setIsOpenCommentaire(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("This didn't work.");
+      toast.error(t("toast.error"));
     }
   };
 
-  const handleUpdate = async e => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Mise à jour en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
     try {
       const data = {
         note,
@@ -55,15 +57,15 @@ export default function   FormAddCommentaire({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Commentaire mis à jour avec succès !");
+      toast.success(t("toast.success"));
       setIsOpenCommentaire(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("La mise à jour a échoué.");
+      toast.error(t("toast.error"));
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     if (currentCommentaire) {
       handleUpdate(e);
     } else {
@@ -76,25 +78,25 @@ export default function   FormAddCommentaire({
       <form onSubmit={handleSubmit}>
         <InputMain
           value={contenu}
-          onChange={e => setContenu(e.target.value)}
+          onChange={(e) => setContenu(e.target.value)}
           type="text"
-          label="Contenu"
-          placeholder="Titre"
+          label={t("input.label.Content")}
+          placeholder={t("input.placeholder.Content")}
           id="description"
         />
 
         <InputMain
           value={note}
-          onChange={e => setNote(e.target.value)}
+          onChange={(e) => setNote(e.target.value)}
           type="number"
-          label="Note"
+          label={t("input.label.score")}
+          placeholder={t("input.placeholder.score")}
           max={10}
           min={0}
-          placeholder="Titre"
           id="note"
         />
         <div className="mt-5">
-          <BtnMain label="Création commentaire" type="submit" />
+          <BtnMain label={t("Modal.createCommentaire")} type="submit" />
         </div>
       </form>
       <Toaster />

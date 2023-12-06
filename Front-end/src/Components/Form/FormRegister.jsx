@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import InputMain from "../Input/InputMain";
 import BtnMain from "../Btn/BtnMain";
@@ -15,18 +16,18 @@ export default function FormRegister() {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmpassword) {
-      toast.error("This didn't work.");
+      toast.error(t("toast.error"));
       return;
     }
 
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
     try {
       const data = {
         lastName,
@@ -39,13 +40,13 @@ export default function FormRegister() {
 
       await api.post("/user/signIn", data);
       toast.dismiss(loadingToast);
-      toast.success("Successfully toasted!");
+      toast.success(t("toast.success"));
       setTimeout(() => {
         navigate("/connect");
       }, 2000);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("This didn't work.");
+      toast.error(t("toast.error"));
     }
   };
 
@@ -63,8 +64,8 @@ export default function FormRegister() {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           type="text"
-          label="Nom"
-          placeholder="Nom"
+          label={t("input.label.nom")}
+          placeholder={t("input.placeholder.nom")}
           id="lastName"
         />
       </div>
@@ -73,8 +74,8 @@ export default function FormRegister() {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           type="text"
-          label="Prénom"
-          placeholder="Prénom"
+          label={t("input.label.firstName")}
+          placeholder={t("input.placeholder.firstName")}
           id="firstName"
         />
       </div>
@@ -83,8 +84,8 @@ export default function FormRegister() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           type="tel"
-          label="Téléphone"
-          placeholder="Téléphone"
+          label={t("input.label.phone")}
+          placeholder={t("input.placeholder.phone")}
           id="phone"
         />
       </div>
@@ -93,8 +94,8 @@ export default function FormRegister() {
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
           type="date"
-          label="Date de naissance"
-          placeholder="Date de naissance"
+          label={t("input.label.birthday")}
+          placeholder={t("input.placeholder.birthday")}
           id="birthday"
         />
       </div>
@@ -103,8 +104,8 @@ export default function FormRegister() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          label="Email"
-          placeholder="Email"
+          label={t("input.label.email")}
+          placeholder={t("input.placeholder.email")}
           id="email"
         />
       </div>
@@ -113,8 +114,8 @@ export default function FormRegister() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type={showPassword ? "text" : "password"}
-          label="Mot de passe"
-          placeholder="**********"
+          label={t("input.label.password")}
+          placeholder={t("input.placeholder.password")}
           id="password"
         />
       </div>
@@ -123,8 +124,8 @@ export default function FormRegister() {
           value={confirmpassword}
           onChange={(e) => setConfirmpassword(e.target.value)}
           type={showPassword ? "text" : "password"}
-          label="Confirme mot de passe"
-          placeholder="**********"
+          label={t("input.label.confirmPassword")}
+          placeholder={t("input.placeholder.confirmPassword")}
           id="confirmpassword"
         />
         <div className=" flex items-center justify-center mt-2">
@@ -133,7 +134,7 @@ export default function FormRegister() {
       </div>
 
       <div className="flex items-center justify-center">
-        <BtnMain type="submit" label="Sinscrire" />
+        <BtnMain type="submit" label={t("Button.Register")} />
       </div>
       <Toaster />
     </form>

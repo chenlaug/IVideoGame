@@ -4,6 +4,7 @@ import { Menu, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import DeleteFavorisGames from "../Modal/DeleteFavorisGames";
 import api from "../../Utils/api";
 import Searchbar from "../SeachBar/Searchbar";
@@ -18,6 +19,7 @@ export default function TableauFavorisGames() {
   const gamesPerPage = 6;
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
+  const { t } = useTranslation();
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = listeFavorisGames.slice(
@@ -40,12 +42,10 @@ export default function TableauFavorisGames() {
         if (Array.isArray(response.data.favorisGames)) {
           setListeFavorisGames(response.data.favorisGames);
         } else {
-          toast.error(
-            "Une erreur est survenue lors de la récupération des jeux favoris"
-          );
+          toast.error(t("toast.error"));
         }
       } catch (error) {
-        toast.error("Une erreur est survenue");
+        toast.error(t("toast.error"));
       }
     };
     fetchGames(searchQuery);
@@ -119,7 +119,6 @@ export default function TableauFavorisGames() {
                       className={`${
                         active ? "bg-light-Yellow text-light-TBleu" : ""
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      // eslint-disable-next-line no-underscore-dangle
                       onClick={() => openModalDeleteFavori(game._id)}
                     >
                       <svg
@@ -136,7 +135,7 @@ export default function TableauFavorisGames() {
                           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                         />
                       </svg>
-                      Supprimer
+                      {t("Button.delete")}
                     </button>
                   )}
                 </Menu.Item>
@@ -149,7 +148,6 @@ export default function TableauFavorisGames() {
                       className={`${
                         active ? "bg-light-Yellow text-light-TBleu" : ""
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      // eslint-disable-next-line no-underscore-dangle
                       onClick={() => navigate(`/game/${game._id}`)}
                     >
                       <svg
@@ -171,7 +169,7 @@ export default function TableauFavorisGames() {
                           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
-                      Accède a la page
+                      {t("Button.GoPage")}
                     </button>
                   )}
                 </Menu.Item>
@@ -191,14 +189,14 @@ export default function TableauFavorisGames() {
           <table className="w-full min-w-full table-auto border-collapse text-sm text-center">
             <thead>
               <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
-                <th className="p-2 ">Titre</th>
-                <th className="p-2 ">Plateformes</th>
-                <th className="p-2 ">Description</th>
-                <th className="p-2 ">Type de jeu</th>
-                <th className="p-2 ">Note</th>
-                <th className="p-2 ">Image</th>
-                <th className="p-2 ">Pegi</th>
-                <th className="p-2 ">Option</th>
+                <th className="p-2 "> {t("table.GameTitle")}</th>
+                <th className="p-2 ">{t("table.Description")}</th>
+                <th className="p-2 ">{t("table.Platforms")}</th>
+                <th className="p-2 ">{t("table.TypeGame")}</th>
+                <th className="p-2 ">{t("table.Note")}</th>
+                <th className="p-2 ">{t("table.Picture")}</th>
+                <th className="p-2 ">{t("table.Pegi")}</th>
+                <th className="p-2 ">{t("table.Option")}</th>
               </tr>
             </thead>
             <tbody className=" bg-light-LightGray dark:bg-dark-BlackGray divide-y ">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import AddGame from "../../Components/Modal/AddGame";
 import TableauJeux from "../../Components/Tableau/TableauJeux";
 import Pagination from "../../Components/Pagination/Pagination";
@@ -12,8 +13,8 @@ export default function AdminGame({ hovered }) {
   const [listeGame, setListeGame] = useState([]);
   const [currentGame, setCurrentGame] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useTranslation();
   const gamesPerPage = 6;
-
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = listeGame.slice(indexOfFirstGame, indexOfLastGame);
@@ -26,7 +27,7 @@ export default function AdminGame({ hovered }) {
       }`}
     >
       <BtnMain
-        label="+ Ajouter un jeu"
+        label={t("Button.addGame")}
         type="button"
         onClick={() => setIsOpen(true)}
       />

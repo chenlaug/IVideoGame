@@ -2,6 +2,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import {
   optionPlatformes,
   optionTypeDeJeu,
@@ -57,6 +58,7 @@ export default function FormAddGame({
     currentGame ? currentGame.pegiImage : ""
   );
   const [image, setImage] = useState(currentGame ? currentGame.image : "");
+  const { t } = useTranslation();
 
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
@@ -65,7 +67,7 @@ export default function FormAddGame({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     // Utilisation de FormData pour gérer les pièces jointes
     const formData = new FormData();
@@ -84,21 +86,7 @@ export default function FormAddGame({
     if (image !== null) {
       formData.append("image", image);
     }
-    console.log("Données envoyées au formulaire :", {
-      titre,
-      plateformes,
-      description,
-      dateSortie,
-      developpeur,
-      editeur,
-      typeDeJeu,
-      note,
-      siteOfficial,
-      linkTrailer,
-      modeMultijoueur,
-      pegiImage,
-      // image: image ? "Image sélectionnée" : "Aucune image", // Décommentez si nécessaire
-    });
+
     try {
       let response;
       if (currentGame) {
@@ -128,7 +116,7 @@ export default function FormAddGame({
           }
         );
         toast.dismiss(loadingToast);
-        toast.success("Jeu modifié avec succès !");
+        toast.success(t("toast.success"));
         setListeGame(
           listeGame.map((game) =>
             game.id === currentGame.id ? response.data : game
@@ -163,7 +151,7 @@ export default function FormAddGame({
           },
         });
         toast.dismiss(loadingToast);
-        toast.success("Jeu ajouté avec succès !");
+        toast.success(t("toast.success"));
         setListeGame([...listeGame, response.data]);
       }
       // Reset les champs du formulaire
@@ -183,8 +171,7 @@ export default function FormAddGame({
       setIsOpen(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("Une erreur est survenue");
-      console.log(error);
+      toast.error(t("toast.error"));
     }
   };
 
@@ -194,26 +181,26 @@ export default function FormAddGame({
         value={titre}
         onChange={(e) => setTitre(e.target.value)}
         type="text"
-        label="titre"
-        placeholder="Titre"
+        label={t("input.label.title")}
+        placeholder={t("input.placeholder.title")}
         id="description"
       />
 
       <SelectMain
-        label="Plateformes"
+        label={t("input.label.Platforms")}
+        placeholder={t("input.placeholder.Platforms")}
         id="plateformes"
         onChange={(e) => setPlateformes(e.target.value)}
         value={plateformes}
         options={optionPlatformes}
-        placeholder="---Sélectionnez une plateforme.---"
       />
 
       <InputMain
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         type="text"
-        label="Description"
-        placeholder="Titre"
+        label={t("input.label.Description")}
+        placeholder={t("input.placeholder.Description")}
         id="description"
       />
 
@@ -223,10 +210,10 @@ export default function FormAddGame({
             value={note}
             onChange={(e) => setNote(e.target.value)}
             type="number"
-            label="Min: 1 - Max: 5"
+            label={t("input.label.score")}
+            placeholder={t("input.placeholder.score")}
             max={5}
             min={0}
-            placeholder="Note"
             id="note"
           />
         </div>
@@ -235,8 +222,8 @@ export default function FormAddGame({
             value={dateSortie}
             onChange={(e) => setDateSortie(e.target.value)}
             type="date"
-            label="Date de sortie"
-            placeholder="Date de sortie"
+            label={t("input.label.Release")}
+            placeholder={t("input.placeholder.Release")}
             id="dateSortie"
           />
         </div>
@@ -253,20 +240,20 @@ export default function FormAddGame({
       />
 
       <SelectMain
-        label="Type de jeu"
+        label={t("input.label.TypeGame")}
+        placeholder={t("input.placeholder.TypeGame")}
         id="typeDeJeu"
         onChange={(e) => setTypeDeJeu(e.target.value)}
         value={typeDeJeu}
         options={optionTypeDeJeu}
-        placeholder="---Sélectionnez un type de jeu.---"
       />
 
       <InputMain
         value={siteOfficial}
         onChange={(e) => setSiteOfficial(e.target.value)}
         type="text"
-        label="Site official"
-        placeholder="Site official"
+        label={t("input.label.officialSite")}
+        placeholder={t("input.placeholder.officialSite")}
         id="siteOfficial"
       />
 
@@ -274,37 +261,41 @@ export default function FormAddGame({
         value={linkTrailer}
         onChange={(e) => setLinkTrailer(e.target.value)}
         type="text"
-        label="Link Trailer"
-        placeholder="lien vers le trailer"
+        label={t("input.label.officialSite")}
+        placeholder={t("input.placeholder.officialSite")}
         id="linkTrailer"
       />
 
       <InputFile
-        label="Image du jeu"
+        label={t("input.label.gameImage")}
+        placeholder={t("input.placeholder.gameImage")}
         id="image"
         required={!currentGame}
         onChange={handleFileChange}
       />
 
       <SelectMain
-        label="Mode multi-joueur"
+        label={t("input.label.multiplayerMode")}
+        placeholder={t("input.placeholder.multiplayerMode")}
         id="modeMultijoueur"
         onChange={(e) => setModeMultijoueur(e.target.value)}
         value={modeMultijoueur}
         options={optionModeMultijoueur}
-        placeholder="---Sélectionnez un mode de jeux.---"
       />
 
       <SelectMain
-        label="PEGI"
+        label={t("input.label.Pegi")}
+        placeholder={t("input.placeholder.Pegi")}
         id="pegiImage"
         onChange={(e) => setPegiImage(e.target.value)}
         value={pegiImage}
         options={pegiRatings}
-        placeholder="---Sélectionnez un PEGI.---"
       />
 
-      <BtnMain label={currentGame ? "Modifier" : "Ajouter"} type="submit" />
+      <BtnMain
+        label={currentGame ? t("Button.modify") : t("Button.add")}
+        type="submit"
+      />
       <Toaster />
     </form>
   );

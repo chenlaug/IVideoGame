@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
 import FormDelete from "../Form/FormDelete";
 
@@ -15,9 +16,10 @@ export default function DeleteCommentaire({
   idCommentaire,
 }) {
   const authHeader = useAuthHeader();
+  const { t } = useTranslation();
   const deleteFromFavorites = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Chargement en cours...");
+    const loadingToast = toast.loading(t("toast.loading"));
 
     try {
       await api.delete(`/comments/deleteComments/${idCommentaire}`, {
@@ -26,7 +28,7 @@ export default function DeleteCommentaire({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success("Le commentaire a bien été retiré.");
+      toast.success(t("toast.success"));
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeCommentaire(
         listeCommentaire.filter(
@@ -36,9 +38,7 @@ export default function DeleteCommentaire({
       setIsOpenDeleteCommentaire(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        "Une erreur est survenue lors de la suppression du commentaire !"
-      );
+      toast.error(t("toast.error"));
     }
   };
 
@@ -93,7 +93,7 @@ export default function DeleteCommentaire({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Confirmation de suppression
+                  {t("Modal.DeletionConfirmation")}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDeleteCommentaire((prev) => !prev)}
