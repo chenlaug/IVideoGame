@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 import { NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Kirky from "../../Image/kirby-deaf.gif";
 import { links } from "../../Utils/tableauOptionSelect";
 
 export default function SideBar({ hovered, setHovered }) {
+  const { t } = useTranslation();
+
   const location = useLocation();
   return (
     <div
@@ -29,7 +32,7 @@ export default function SideBar({ hovered, setHovered }) {
                 }`}
               >
                 <span>{link.icon}</span>
-                {hovered && <span>{link.name}</span>}
+                {hovered && <span>{t(link.name)}</span>}
               </NavLink>
             );
           })}

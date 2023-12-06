@@ -160,5 +160,24 @@
     "deleteAccount": "Delete my account",
     "textDeleteAccount": "Account deletion",
     "paraDeleteAccount": "Are you sure you want to delete your account? All associated data will be permanently deleted. This action cannot be undone."
+  },
+  "TopNavBar": {
+    "profile": "Profile",
+    "Catalogue": "Catalog",
+    "Contact": "Contact",
+    "FavouriteGames": "Favorite Games",
+    "CommentList": "Comment List",
+    "Dark": "Dark",
+    "Light": "Light",
+    "Disconnect": "Disconnect",
+    "french": "French",
+    "english": "English"
+  },
+  "sidBar": {
+    "user": "User",
+    "Comment": "Comment",
+    "Game": "Game",
+    "Publisher": "Publisher",
+    "Developer": "Developer"
   }
 }

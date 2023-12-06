@@ -160,5 +160,24 @@
     "deleteAccount": "Supprimer mon compte",
     "textDeleteAccount": "Suppression du compte",
     "paraDeleteAccount": "Êtes-vous sûr de vouloir supprimer votre compte ? Toutes les données associées seront définitivement supprimées. Cette action ne peut pas être annulée."
+  },
+  "TopNavBar": {
+    "profile": "Profil",
+    "Catalogue": "Catalogue",
+    "Contact": "Contact",
+    "FavouriteGames": "Jeux favoris",
+    "CommentList": "Liste des commentaires",
+    "Dark": "Sombre",
+    "Light": "Lumineux",
+    "Disconnect": "Déconnexion",
+    "french": "Français",
+    "english": "Anglais"
+  },
+  "sidBar": {
+    "user":"Utilisateur",
+    "Comment":"Commentaire",
+    "Game":"Jeu",
+    "Publisher":"Éditeur",
+    "Developer":"Développeur"
   }
 }
