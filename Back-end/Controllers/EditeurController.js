@@ -1,6 +1,20 @@
+/**
+ * Contrôleur pour gérer les opérations CRUD sur les éditeurs de jeux.
+ * Ce module permet de créer, lire, mettre à jour et supprimer des informations d'éditeurs dans la base de données.
+ *
+ * @module EditeurController
+ */
 const Editeur = require('../Models/Editeur');
 
-// Créer un nouvel éditeur
+/**
+ * Crée un nouvel éditeur.
+ *
+ * @async
+ * @function createEditeur
+ * @param {Object} req - La requête HTTP, contenant les informations de l'éditeur dans le corps.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.createEditeur = async (req, res) => {
     try {
         const editeur = await Editeur.create(req.body);
@@ -10,7 +24,15 @@ exports.createEditeur = async (req, res) => {
     }
 };
 
-// Lire tous les éditeurs
+/**
+ * Récupère tous les éditeurs.
+ *
+ * @async
+ * @function getEditeurs
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getEditeurs = async (req, res) => {
     try {
         const editeurs = await Editeur.find();
@@ -20,7 +42,15 @@ exports.getEditeurs = async (req, res) => {
     }
 };
 
-// Lire un éditeur spécifique
+/**
+ * Récupère un éditeur spécifique par son ID.
+ *
+ * @async
+ * @function getEditeurById
+ * @param {Object} req - La requête HTTP, contenant l'ID de l'éditeur.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getEditeurById = async (req, res) => {
     try {
         const editeur = await Editeur.findById(req.params.id);
@@ -34,7 +64,15 @@ exports.getEditeurById = async (req, res) => {
     }
 };
 
-// Mettre à jour un éditeur
+/**
+ * Met à jour les informations d'un éditeur spécifique.
+ *
+ * @async
+ * @function updateEditeur
+ * @param {Object} req - La requête HTTP, contenant l'ID de l'éditeur et les nouvelles données.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.updateEditeur = async (req, res) => {
     try {
         const editeur = await Editeur.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -48,7 +86,15 @@ exports.updateEditeur = async (req, res) => {
     }
 };
 
-// Supprimer un éditeur
+/**
+ * Supprime un éditeur spécifique de la base de données.
+ *
+ * @async
+ * @function deleteEditeur
+ * @param {Object} req - La requête HTTP, contenant l'ID de l'éditeur à supprimer.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.deleteEditeur = async (req, res) => {
     try {
         const editeur = await Editeur.findByIdAndDelete(req.params.id);

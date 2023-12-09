@@ -1,5 +1,20 @@
+/**
+ * Middleware d'authentification pour vérifier le rôle de l'utilisateur.
+ * Ce middleware utilise JWT pour vérifier le jeton d'authentification et s'assurer
+ * que l'utilisateur possède l'un des rôles requis pour accéder à une route spécifique.
+ * 
+ * @module authenticateRole
+ * @requires jsonwebtoken
+ */
 const jwt = require('jsonwebtoken');
 
+/**
+ * Crée un middleware pour authentifier le rôle de l'utilisateur.
+ * Ce middleware vérifie si l'utilisateur a l'un des rôles spécifiés dans le tableau 'roles'.
+ * 
+ * @param {string[]} roles - Un tableau de rôles autorisés.
+ * @returns {Function} Middleware Express pour authentifier le rôle de l'utilisateur.
+ */
 function authenticateRole(roles) {
     return function (req, res, next) {
         const authHeader = req.headers['authorization'];

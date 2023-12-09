@@ -1,5 +1,23 @@
+/**
+ * Contrôleur pour gérer les opérations liées aux commentaires dans l'application.
+ * Ce module exporte des fonctions pour ajouter, obtenir, supprimer et mettre à jour des commentaires.
+ *
+ * @module CommentsController
+ */
+
 const Comments = require('../Models/Comments');
 const User = require('../Models/User');
+
+/**
+ * Ajoute un commentaire à un jeu vidéo.
+ * Cette fonction vérifie d'abord si l'utilisateur existe, puis vérifie si l'utilisateur a déjà commenté le jeu spécifié.
+ * Si non, elle crée un nouveau commentaire et l'ajoute à la fois à la collection des commentaires et à la liste des commentaires de l'utilisateur.
+ *
+ * @async
+ * @function addComments
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.addComments = async (req, res) => {
     try {
@@ -38,6 +56,16 @@ exports.addComments = async (req, res) => {
     }
 };
 
+/**
+ * Récupère tous les commentaires d'un utilisateur spécifique.
+ * Cette fonction filtre les commentaires basés sur le titre du jeu, si fourni dans la requête.
+ *
+ * @async
+ * @function getAllUserComments
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getAllUserComments = async (req, res) => {
     try {
         const { title } = req.query;
@@ -61,6 +89,16 @@ exports.getAllUserComments = async (req, res) => {
         res.status(500).json({ message: error });
     }
 };
+
+/**
+ * Supprime un commentaire spécifié par son ID.
+ * Cette fonction vérifie d'abord si le commentaire et l'utilisateur existent, puis si l'utilisateur est autorisé à supprimer le commentaire.
+ *
+ * @async
+ * @function deleteComments
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.deleteComments = async (req, res) => {
     try {
@@ -93,6 +131,16 @@ exports.deleteComments = async (req, res) => {
     }
 };
 
+/**
+ * Met à jour un commentaire spécifié par son ID.
+ * Cette fonction vérifie si le commentaire et l'utilisateur existent et si l'utilisateur est autorisé à mettre à jour le commentaire.
+ *
+ * @async
+ * @function updateComment
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.updateComment = async (req, res) => {
     try {
         const comment = await Comments.findById(req.params.id);
@@ -124,6 +172,16 @@ exports.updateComment = async (req, res) => {
     }
 };
 
+/**
+ * Récupère tous les commentaires pour un jeu vidéo spécifique.
+ * Cette fonction recherche les commentaires basés sur l'ID du jeu vidéo.
+ *
+ * @async
+ * @function getGameComments
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getGameComments = async (req, res) => {
     try {
         const gameId = req.params.id;
@@ -138,6 +196,16 @@ exports.getGameComments = async (req, res) => {
         res.status(500).json({ message: error });
     }
 };
+
+/**
+ * Récupère les commentaires basés sur le titre du jeu.
+ * Cette fonction permet d'obtenir les commentaires de tous les utilisateurs pour un jeu spécifique.
+ *
+ * @async
+ * @function getComments
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.getComments = async (req, res) => {
     try {

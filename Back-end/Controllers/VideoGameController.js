@@ -1,6 +1,22 @@
+/**
+ * Contrôleur pour gérer les opérations CRUD sur les jeux vidéo.
+ * Ce module permet de créer, lire, mettre à jour, supprimer et gérer les images des jeux vidéo.
+ *
+ * @module GameController
+ */
+
 const VideoGame = require('../Models/VideoGame');
 const fs = require('fs');
 const path = require('path');
+
+/**
+ * Crée un nouveau jeu vidéo.
+ *
+ * @async
+ * @function createGame
+ * @param {Object} req - La requête HTTP, contenant les informations du jeu et l'image dans le corps.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.createGame = async (req, res) => {
     try {
@@ -12,6 +28,15 @@ exports.createGame = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+/**
+ * Récupère tous les jeux vidéo. Supporte la recherche par titre.
+ *
+ * @async
+ * @function getAllGames
+ * @param {Object} req - La requête HTTP, contenant une requête de recherche éventuelle.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.getAllGames = async (req, res) => {
     try {
@@ -30,6 +55,15 @@ exports.getAllGames = async (req, res) => {
     }
 };
 
+/**
+ * Récupère un jeu vidéo spécifique par son ID.
+ *
+ * @async
+ * @function getGame
+ * @param {Object} req - La requête HTTP, contenant l'ID du jeu.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getGame = async (req, res) => {
     const idGame = req.params.id;
     try {
@@ -46,6 +80,15 @@ exports.getGame = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+/**
+ * Supprime un jeu vidéo spécifique, ainsi que son image associée.
+ *
+ * @async
+ * @function deleteGame
+ * @param {Object} req - La requête HTTP, contenant l'ID du jeu à supprimer.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.deleteGame = async (req, res) => {
     const idGame = req.params.id;
@@ -71,6 +114,15 @@ exports.deleteGame = async (req, res) => {
     }
 };
 
+/**
+ * Met à jour les informations d'un jeu vidéo spécifique.
+ *
+ * @async
+ * @function updateGame
+ * @param {Object} req - La requête HTTP, contenant l'ID du jeu et les nouvelles données.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.updateGame = async (req, res) => {
     const idGame = req.params.id;
     try {
@@ -86,6 +138,15 @@ exports.updateGame = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+/**
+ * Met à jour l'image d'un jeu vidéo spécifique.
+ *
+ * @async
+ * @function updateImageGame
+ * @param {Object} req - La requête HTTP, contenant l'ID du jeu et la nouvelle image.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.updateImageGame = async (req, res) => {
     const idGame = req.params.id;
