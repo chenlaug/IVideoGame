@@ -1,10 +1,21 @@
-import { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Dialog, Transition } from "@headlessui/react";
-import { useAuthHeader, useSignOut } from "react-auth-kit";
-import toast, { Toaster } from "react-hot-toast";
-import api from "../../Utils/api";
+import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Dialog, Transition } from '@headlessui/react';
+import { useAuthHeader, useSignOut } from 'react-auth-kit';
+import toast, { Toaster } from 'react-hot-toast';
+import api from '../../Utils/api';
+
+/**
+ * Composant `BtnDeleteAccountModal` qui affiche un bouton permettant à l'utilisateur de supprimer son compte.
+ * En cliquant sur ce bouton, une modal s'affiche demandant à l'utilisateur de confirmer la suppression de son compte.
+ * Si confirmé, une requête de suppression est envoyée et l'utilisateur est déconnecté et redirigé vers la page d'accueil.
+ *
+ * Utilise `useTranslation` pour la localisation, `useNavigate` pour la navigation,
+ * `useAuthHeader` pour les headers d'authentification, et `useSignOut` pour la déconnexion.
+ *
+ * @returns {JSX.Element} Un bouton et une modal de confirmation pour la suppression du compte.
+ */
 
 export default function BtnDeleteAccountModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +34,10 @@ export default function BtnDeleteAccountModal() {
   const authHeader = useAuthHeader();
   const handleDeleteAccount = async () => {
     // Vous pouvez également afficher une notification de chargement
-    const loadingToast = toast.loading(t("toast.loading"));
+    const loadingToast = toast.loading(t('toast.loading'));
 
     try {
-      const response = await api.delete("/user/deleteUserFromToken", {
+      const response = await api.delete('/user/deleteUserFromToken', {
         headers: {
           Authorization: authHeader(),
         },
@@ -35,21 +46,21 @@ export default function BtnDeleteAccountModal() {
       // Vérifier si la suppression a été réussie
       if (response.status === 200) {
         toast.dismiss(loadingToast);
-        toast.success(t("toast.success"));
+        toast.success(t('toast.success'));
 
         // Fermer la modal
         closeModal();
         signOut();
         // Rediriger l'utilisateur vers la page de connexion ou de bienvenue
-        navigate("/");
+        navigate('/');
       } else {
         throw new Error(
-          "Une erreur est survenue lors de la suppression du compte."
+          'Une erreur est survenue lors de la suppression du compte.'
         );
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
 
@@ -60,7 +71,7 @@ export default function BtnDeleteAccountModal() {
         className="px-4 py-2 text-center font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
         onClick={openModal}
       >
-        {t("Modal.deleteAccount")}
+        {t('Modal.deleteAccount')}
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -103,12 +114,12 @@ export default function BtnDeleteAccountModal() {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  {t("Modal.textDeleteAccount")}
+                  {t('Modal.textDeleteAccount')}
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-light-TBleu">
-                    {" "}
-                    {t("Modal.paraDeleteAccount")}
+                    {' '}
+                    {t('Modal.paraDeleteAccount')}
                   </p>
                 </div>
 
@@ -118,14 +129,14 @@ export default function BtnDeleteAccountModal() {
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
                     onClick={handleDeleteAccount}
                   >
-                    {t("Button.confirm")}
+                    {t('Button.confirm')}
                   </button>
                   <button
                     type="button"
                     className="ml-4 inline-flex justify-center px-4 py-2 text-sm font-medium text-light-TBleu bg-light-Yellow hover:bg-light-VCYellow border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
                     onClick={() => setIsOpen((prev) => !prev)}
                   >
-                    {t("Button.Cancel")}
+                    {t('Button.Cancel')}
                   </button>
                 </div>
               </div>

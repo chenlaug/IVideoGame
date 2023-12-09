@@ -1,22 +1,30 @@
-import { useState, useEffect, useCallback } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
-import { useTranslation } from "react-i18next";
-import calculateAge from "../../Utils/CalculateAge";
-import api from "../../Utils/api";
-import BtnDeleteAccountModal from "../Btn/BtnDeleteAccountModal ";
-import BtnMain from "../Btn/BtnMain";
-import FormProfile from "../Form/FormProfile";
+import { useState, useEffect, useCallback } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuthHeader } from 'react-auth-kit';
+import { useTranslation } from 'react-i18next';
+import calculateAge from '../../Utils/CalculateAge';
+import api from '../../Utils/api';
+import BtnDeleteAccountModal from '../Btn/BtnDeleteAccountModal ';
+import BtnMain from '../Btn/BtnMain';
+import FormProfile from '../Form/FormProfile';
+
+/**
+ * Composant `ProfileDisplay` qui affiche les détails du profil de l'utilisateur et permet leur modification.
+ * Ce composant gère l'état d'affichage et de modification du profil, permettant à l'utilisateur de mettre à jour ses informations personnelles.
+ * Utilise des hooks pour gérer l'état, effectuer des requêtes API et gérer la traduction.
+ *
+ * @returns {JSX.Element} Le composant qui affiche les informations du profil de l'utilisateur et un formulaire de modification si le mode d'édition est activé.
+ */
 
 export default function ProfileDisplay() {
   const [user, setUser] = useState(null);
   const [updateKey, setUpdateKey] = useState(0);
   const [editMode, setEditMode] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [birthday, setBirthday] = useState('');
   const { t } = useTranslation();
 
   const authHeader = useAuthHeader();
@@ -26,7 +34,7 @@ export default function ProfileDisplay() {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await api.get("/user/getUserFromToken", {
+      const response = await api.get('/user/getUserFromToken', {
         headers: {
           Authorization: authHeader(),
         },
@@ -34,25 +42,25 @@ export default function ProfileDisplay() {
 
       setUser(response.data);
     } catch (error) {
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   }, [authHeader, setUser]);
 
   useEffect(() => {
     if (user && !editMode) {
-      setFirstName(user.firstName || "");
-      setLastName(user.lastName || "");
-      setEmail(user.email || "");
-      setPhone(user.phone || "");
+      setFirstName(user.firstName || '');
+      setLastName(user.lastName || '');
+      setEmail(user.email || '');
+      setPhone(user.phone || '');
       setBirthday(
-        user.birthday ? new Date(user.birthday).toISOString().split("T")[0] : ""
+        user.birthday ? new Date(user.birthday).toISOString().split('T')[0] : ''
       );
     }
   }, [user, editMode]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading(t("toast.loading"));
+    const loadingToast = toast.loading(t('toast.loading'));
 
     try {
       const response = await api.put(
@@ -73,18 +81,18 @@ export default function ProfileDisplay() {
       const result = response.data;
       if (result) {
         toast.dismiss(loadingToast);
-        toast.success(t("toast.success"));
+        toast.success(t('toast.success'));
         setUser(result);
         fetchData();
         setUpdateKey(updateKey + 1);
       } else {
         throw new Error(
-          "Une erreur est survenue lors de la mise à jour des informations."
+          'Une erreur est survenue lors de la mise à jour des informations.'
         );
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
 
@@ -93,7 +101,7 @@ export default function ProfileDisplay() {
   }, [authHeader, fetchData]);
 
   if (!user) {
-    return <div>{t("toast.loading")}</div>;
+    return <div>{t('toast.loading')}</div>;
   }
 
   return (
@@ -106,37 +114,37 @@ export default function ProfileDisplay() {
           {user.firstName} {user.lastName}
         </h2>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.email")}</strong> {user.email}
+          <strong>{t('input.label.email')}</strong> {user.email}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.phone")}</strong> {user.phone}
+          <strong>{t('input.label.phone')}</strong> {user.phone}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.birthday")}</strong>
+          <strong>{t('input.label.birthday')}</strong>
           {new Date(user.birthday).toLocaleDateString()}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.old")}</strong>
+          <strong>{t('input.label.old')}</strong>
           {calculateAge(user.birthday)}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.NumberFavoriteGames")}</strong>
+          <strong>{t('input.label.NumberFavoriteGames')}</strong>
           {user.favorisGames.length}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.NumberComments")}</strong>
+          <strong>{t('input.label.NumberComments')}</strong>
           {user.comments.length}
         </p>
         <p className="font-text text-light-TBlack dark:text-dark-TWhite">
-          <strong>{t("input.label.AccountConfirmed")}</strong>
-          {user.confirmed ? t("text.yes") : t("text.no")}
+          <strong>{t('input.label.AccountConfirmed')}</strong>
+          {user.confirmed ? t('text.yes') : t('text.no')}
         </p>
       </div>
       {!editMode ? (
         <div className="flex items-center justify-center mb-2">
           <div className="mr-2">
             <BtnMain
-              label={t("Button.ModifyInformation")}
+              label={t('Button.ModifyInformation')}
               type="button"
               onClick={handleEditMode}
             />

@@ -1,11 +1,11 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import FormDelete from "../Form/FormDelete";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuthHeader } from 'react-auth-kit';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import FormDelete from '../Form/FormDelete';
+import PropTypes from 'prop-types';
 
 DeleteCommentaire.propTypes = {
   isOpenDeleteCommentaire: PropTypes.bool.isRequired,
@@ -14,6 +14,21 @@ DeleteCommentaire.propTypes = {
   setListeCommentaire: PropTypes.func,
   idCommentaire: PropTypes.string,
 };
+
+/**
+ * Composant `DeleteCommentaire` qui affiche une modal pour confirmer la suppression d'un commentaire.
+ * Utilise le composant `FormDelete` pour permettre à l'utilisateur de confirmer ou d'annuler la suppression.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenDeleteCommentaire`.
+ * En cas de confirmation, le commentaire est supprimé via une requête API.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenDeleteCommentaire - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenDeleteCommentaire] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Array} [props.listeCommentaire] - Liste des commentaires actuels à mettre à jour après la suppression.
+ * @param {Function} [props.setListeCommentaire] - Fonction pour mettre à jour la liste des commentaires.
+ * @param {string} [props.idCommentaire] - L'identifiant du commentaire à supprimer.
+ * @returns {JSX.Element} Une modal contenant un formulaire de confirmation pour la suppression d'un commentaire.
+ */
 
 export default function DeleteCommentaire({
   isOpenDeleteCommentaire,
@@ -26,7 +41,7 @@ export default function DeleteCommentaire({
   const { t } = useTranslation();
   const deleteFromFavorites = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading(t("toast.loading"));
+    const loadingToast = toast.loading(t('toast.loading'));
 
     try {
       await api.delete(`/comments/deleteComments/${idCommentaire}`, {
@@ -35,7 +50,7 @@ export default function DeleteCommentaire({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success(t("toast.success"));
+      toast.success(t('toast.success'));
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeCommentaire(
         listeCommentaire.filter(
@@ -45,7 +60,7 @@ export default function DeleteCommentaire({
       setIsOpenDeleteCommentaire(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
 
@@ -100,7 +115,7 @@ export default function DeleteCommentaire({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  {t("Modal.DeletionConfirmation")}
+                  {t('Modal.DeletionConfirmation')}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDeleteCommentaire((prev) => !prev)}

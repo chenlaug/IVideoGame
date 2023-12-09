@@ -1,9 +1,18 @@
-import PropTypes from "prop-types";
-import { useLocation, useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 BackButton.propTypes = {
   label: PropTypes.string.isRequired,
 };
+
+/**
+ * Composant `BackButton` pour naviguer vers la page précédente.
+ * Utilise React Router pour gérer la navigation.
+ *
+ * @param {Object} props - Les props du composant.
+ * @param {string} props.label - Texte à afficher sur le bouton.
+ * @returns {JSX.Element} - Un élément JSX représentant un bouton de retour.
+ */
 
 export default function BackButton({ label }) {
   const navigate = useNavigate();

@@ -9,6 +9,14 @@ import api from "../../Utils/api";
 import Searchbar from "../SeachBar/Searchbar";
 import Pagination from "../Pagination/Pagination";
 
+/**
+ * Composant `TableauFavorisGames` pour afficher et gérer la liste des jeux favoris de l'utilisateur.
+ * Utilise plusieurs hooks d'état pour gérer l'affichage et les interactions avec l'API.
+ * Permet la suppression des jeux favoris et la navigation vers les détails des jeux.
+ *
+ * @returns {JSX.Element} - Composant qui affiche le tableau des jeux favoris avec fonctionnalités de recherche, de suppression, et de pagination.
+ */
+
 export default function TableauFavorisGames() {
   const [listeFavorisGames, setListeFavorisGames] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

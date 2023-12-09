@@ -1,13 +1,26 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import FormAddEditeur from "../Form/FormAddEditeur";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import FormAddEditeur from '../Form/FormAddEditeur';
+import PropTypes from 'prop-types';
 
 AddEditeur.propTypes = {
   isOpenAddEditeur: PropTypes.bool.isRequired,
   setIsOpenAddEditeur: PropTypes.func,
   CurrentEditeur: PropTypes.object,
 };
+
+/**
+ * Composant `AddEditeur` qui affiche une modal pour ajouter ou modifier les informations d'un éditeur.
+ * Utilise le composant `FormAddEditeur` pour permettre à l'utilisateur de saisir les informations.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenAddEditeur`.
+ * Peut être utilisé pour créer un nouvel éditeur ou éditer les informations d'un éditeur existant.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenAddEditeur - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenAddEditeur] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Object} [props.CurrentEditeur] - Les informations de l'éditeur actuel à modifier, s'il existe.
+ * @returns {JSX.Element} Une modal contenant un formulaire pour l'ajout ou la modification des informations d'un éditeur.
+ */
 
 export default function AddEditeur({
   isOpenAddEditeur,
@@ -66,7 +79,7 @@ export default function AddEditeur({
               >
                 {CurrentEditeur
                   ? "Modifiaction d'un developpeur."
-                  : "Ajoute un developpeur."}
+                  : 'Ajoute un developpeur.'}
               </Dialog.Title>
               <FormAddEditeur
                 setIsOpenAddEditeur={setIsOpenAddEditeur}
