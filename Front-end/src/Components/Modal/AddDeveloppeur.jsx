@@ -10,6 +10,19 @@ AddDeveloppeur.propTypes = {
   CurrentDeveloppeur: PropTypes.object,
 };
 
+/**
+ * Composant `AddDeveloppeur` qui affiche une modal pour ajouter ou modifier les informations d'un développeur.
+ * Utilise le composant `FormAddDeveloppeur` pour permettre à l'utilisateur de saisir les informations.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenAddDeveloppeur`.
+ * Peut être utilisé pour créer un nouveau développeur ou éditer les informations d'un développeur existant.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenAddDeveloppeur - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenAddDeveloppeur] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Object} [props.CurrentDeveloppeur] - Les informations du développeur actuel à modifier, s'il existe.
+ * @returns {JSX.Element} Une modal contenant un formulaire pour l'ajout ou la modification des informations d'un développeur.
+ */
+
 export default function AddDeveloppeur({
   isOpenAddDeveloppeur,
   setIsOpenAddDeveloppeur,

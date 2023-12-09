@@ -1,12 +1,32 @@
-import { useSignOut } from "react-auth-kit";
-import sonicandTails from "../../Image/SonicandTails.gif";
-import marioLuigi from "../../Image/mario-luigi.gif";
-import mortalKombat from "../../Image/mortal-kombat.gif";
-import megaman from "../../Image/megaman.gif";
-import { useTranslation } from "react-i18next";
-import BtnMain from "../Btn/BtnMain";
-import BtnNavLink from "../Btn/BtnNavLink";
-import Selectlanguage from "../../Components/Select/Selectlanguage";
+import { useSignOut } from 'react-auth-kit';
+import sonicandTails from '../../Image/SonicandTails.gif';
+import marioLuigi from '../../Image/mario-luigi.gif';
+import mortalKombat from '../../Image/mortal-kombat.gif';
+import megaman from '../../Image/megaman.gif';
+import { useTranslation } from 'react-i18next';
+import BtnMain from '../Btn/BtnMain';
+import BtnNavLink from '../Btn/BtnNavLink';
+import Selectlanguage from '../../Components/Select/Selectlanguage';
+
+import PropTypes from 'prop-types';
+
+TopNavBar.propTypes = {
+  theme: PropTypes.bool.isRequired,
+  setTheme: PropTypes.func.isRequired,
+};
+
+/**
+ * Composant `TopNavBar` qui affiche une barre de navigation supérieure dans l'application.
+ * Cette barre contient des liens de navigation, un bouton pour changer le thème (clair/sombre),
+ * un sélecteur de langue et un bouton pour se déconnecter.
+ * Les images et les liens sont gérés et affichés en fonction de l'état actuel de l'application.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.theme - Indique le thème actuel (clair ou sombre).
+ * @param {Function} props.setTheme - Fonction pour changer le thème de l'application.
+ * @returns {JSX.Element} Une barre de navigation supérieure avec des liens, un sélecteur de langue,
+ *                        un bouton de changement de thème et un bouton de déconnexion.
+ */
 
 export default function TopNavBar({ theme, setTheme }) {
   const { t } = useTranslation();
@@ -36,23 +56,23 @@ export default function TopNavBar({ theme, setTheme }) {
             alt="mortalKombat"
             className="flex-shrink-0 object-cover h-12 hidden md:block"
           />
-          <BtnNavLink link="/profil" label={t("TopNavBar.profile")} />
-          <BtnNavLink link="/catalogue" label={t("TopNavBar.Catalogue")} />
-          <BtnNavLink link="/contact" label={t("TopNavBar.Contact")} />
+          <BtnNavLink link="/profil" label={t('TopNavBar.profile')} />
+          <BtnNavLink link="/catalogue" label={t('TopNavBar.Catalogue')} />
+          <BtnNavLink link="/contact" label={t('TopNavBar.Contact')} />
           <BtnNavLink
             link="/favourites"
-            label={t("TopNavBar.FavouriteGames")}
+            label={t('TopNavBar.FavouriteGames')}
           />
-          <BtnNavLink link="/comment" label={t("TopNavBar.CommentList")} />
+          <BtnNavLink link="/comment" label={t('TopNavBar.CommentList')} />
         </div>
         <BtnMain
-          label={theme ? t("TopNavBar.Light") : t("TopNavBar.Dark")}
+          label={theme ? t('TopNavBar.Light') : t('TopNavBar.Dark')}
           type="button"
           onClick={() => setTheme((prev) => !prev)}
         />
         <Selectlanguage />
         <BtnMain
-          label={t("TopNavBar.Disconnect")}
+          label={t('TopNavBar.Disconnect')}
           type="button"
           onClick={() => signOut()}
         />

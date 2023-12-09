@@ -7,6 +7,26 @@ import CardGame from "../Components/Card/CardGame";
 import Pagination from "../Components/Pagination/Pagination";
 import Searchbar from "../Components/SeachBar/Searchbar";
 
+/**
+ * Le composant `Catalogue` est utilisé pour afficher une liste paginée de jeux vidéo.
+ * Il permet aux utilisateurs de rechercher des jeux et de naviguer entre différentes pages de résultats.
+ *
+ * Le composant utilise plusieurs sous-composants :
+ * - `Searchbar` : Permet à l'utilisateur de rechercher des jeux.
+ * - `CardGame` : Affiche les détails d'un jeu individuel.
+ * - `Pagination` : Gère la navigation entre les pages de jeux.
+ * - `Toaster` : Affiche les messages d'erreur ou de succès.
+ *
+ * Les états gérés dans ce composant incluent :
+ * - `games` : La liste des jeux à afficher.
+ * - `currentPage` : La page actuelle dans la pagination.
+ * - `query` : La requête de recherche actuelle.
+ *
+ * L'effet `useEffect` est utilisé pour récupérer les données des jeux à partir de l'API en fonction de la requête de recherche.
+ *
+ * @returns {JSX.Element} - Le composant qui affiche le catalogue des jeux vidéo.
+ */
+
 export default function Catalogue() {
   const [games, setGames] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

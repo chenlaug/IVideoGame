@@ -9,6 +9,18 @@ import { formatDate } from "../Utils/changeDate";
 import BtnMain from "../Components/Btn/BtnMain";
 import CardCommentaire from "../Components/Card/CardCommentaire";
 
+/**
+ * Le composant `Game` est utilisé pour afficher les détails d'un jeu vidéo spécifique.
+ * 
+ * Il récupère les informations du jeu et les commentaires associés en fonction de l'ID du jeu passé en paramètre via les `useParams`. Les données sont récupérées via des appels API.
+ * 
+ * Le composant gère également l'ajout de commentaires et l'ajout du jeu aux favoris. Un utilisateur peut voir les détails du jeu, comme le titre, la description, les plateformes, le développeur, l'éditeur, etc.
+ * 
+ * Des boutons sont fournis pour visiter le site officiel du jeu, ajouter le jeu aux favoris et ajouter un commentaire.
+ * 
+ * @returns {JSX.Element} - Le composant qui affiche les détails du jeu vidéo et les commentaires associés.
+ */
+
 export default function Game() {
   const [game, setGame] = useState(null);
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);

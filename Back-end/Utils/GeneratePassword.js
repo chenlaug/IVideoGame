@@ -1,3 +1,14 @@
+/**
+ * Génère un mot de passe aléatoire.
+ * 
+ * Cette fonction crée un mot de passe aléatoire en combinant des lettres majuscules,
+ * des lettres minuscules, des chiffres et des caractères spéciaux.
+ * Le mot de passe généré est ensuite mélangé pour améliorer la sécurité.
+ * 
+ * @module generatePassword
+ * @function
+ * @returns {string} Un mot de passe aléatoire.
+ */
 function generatePassword() {
     const length = 10; // Choisissez la longueur totale souhaitée
     const charsetUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

@@ -1,17 +1,29 @@
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { useSignIn } from "react-auth-kit";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import InputMain from "../Input/InputMain";
-import BtnMain from "../Btn/BtnMain";
-import BtnNavLink from "../Btn/BtnNavLink";
-import BtnShowPasword from "../Btn/BtnShowPasword";
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useSignIn } from 'react-auth-kit';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import InputMain from '../Input/InputMain';
+import BtnMain from '../Btn/BtnMain';
+import BtnNavLink from '../Btn/BtnNavLink';
+import BtnShowPasword from '../Btn/BtnShowPasword';
+
+/**
+ * Composant `FormLogIn` qui fournit un formulaire de connexion pour les utilisateurs.
+ * L'utilisateur peut saisir son adresse email et son mot de passe pour se connecter.
+ * Le composant gère également l'affichage et la dissimulation du mot de passe.
+ * En cas de connexion réussie, l'utilisateur est redirigé en fonction de son rôle (admin ou utilisateur standard).
+ *
+ * Utilise une API pour vérifier les identifiants de l'utilisateur et des toasts pour notifier l'utilisateur du résultat de la connexion.
+ * Utilise `useSignIn` de `react-auth-kit` pour gérer l'état de connexion et `useNavigate` de `react-router-dom` pour la navigation.
+ *
+ * @returns {JSX.Element} Un formulaire de connexion avec des champs pour l'email et le mot de passe, ainsi qu'un bouton pour afficher le mot de passe.
+ */
 
 export default function FormLogIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const signIn = useSignIn();
@@ -19,34 +31,34 @@ export default function FormLogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading(t("toast.loading"));
+    const loadingToast = toast.loading(t('toast.loading'));
 
     try {
-      const response = await api.post("/user/login", { email, password });
+      const response = await api.post('/user/login', { email, password });
       const { token, role } = response.data; // récupère le token et le role de la réponse
 
-      if (token && typeof token === "string" && token.trim().length > 0) {
+      if (token && typeof token === 'string' && token.trim().length > 0) {
         toast.dismiss(loadingToast);
         signIn({
           token,
           expiresIn: 3600,
-          tokenType: "Bearer",
+          tokenType: 'Bearer',
           authState: { email, role }, // ajoute le rôle à l'état d'authentification
         });
-        toast.success(t("toast.success"));
+        toast.success(t('toast.success'));
 
         // Redirige en fonction du rôle
-        if (role === "admin") {
-          navigate("/admin/game");
+        if (role === 'admin') {
+          navigate('/admin/game');
         } else {
-          navigate("/profil");
+          navigate('/profil');
         }
       } else {
-        throw new Error("Invalid token");
+        throw new Error('Invalid token');
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
 
@@ -64,8 +76,8 @@ export default function FormLogIn() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          label={t("input.label.email")}
-          placeholder={t("input.placeholder.email")}
+          label={t('input.label.email')}
+          placeholder={t('input.placeholder.email')}
           id="email"
         />
       </div>
@@ -74,9 +86,9 @@ export default function FormLogIn() {
           <InputMain
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            type={showPassword ? "text" : "password"}
-            label={t("input.label.password")}
-            placeholder={t("input.placeholder.password")}
+            type={showPassword ? 'text' : 'password'}
+            label={t('input.label.password')}
+            placeholder={t('input.placeholder.password')}
             id="password"
           />
         </div>
@@ -84,11 +96,11 @@ export default function FormLogIn() {
       </div>
       <div className="flex items-center justify-between">
         <div className="mr-2">
-          <BtnMain type="submit" label={t("Button.connect")} />
+          <BtnMain type="submit" label={t('Button.connect')} />
         </div>
         <BtnNavLink
           link="/password-forgotten"
-          label={t("Button.forgotPassword")}
+          label={t('Button.forgotPassword')}
         />
       </div>
       <Toaster />

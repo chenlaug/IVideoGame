@@ -1,27 +1,37 @@
-import { useEffect, Fragment, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useAuthHeader } from "react-auth-kit";
-import toast, { Toaster } from "react-hot-toast";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import Searchbar from "../SeachBar/Searchbar";
-import Pagination from "../Pagination/Pagination";
-import DeleteEditeur from "../Modal/DeleteEditeur";
-import PropTypes from "prop-types";
+import { useEffect, Fragment, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { useAuthHeader } from 'react-auth-kit';
+import toast, { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import Searchbar from '../SeachBar/Searchbar';
+import Pagination from '../Pagination/Pagination';
+import DeleteEditeur from '../Modal/DeleteEditeur';
+import PropTypes from 'prop-types';
 
 TableauEditeur.propTypes = {
   setIsOpenAddEditeur: PropTypes.func.isRequired,
   setCurrentEditeur: PropTypes.func.isRequired,
 };
 
+/**
+ * Composant `TableauEditeur` pour afficher, rechercher, modifier et supprimer des éditeurs.
+ * Utilise plusieurs hooks d'état pour gérer l'affichage et les interactions avec l'API.
+ *
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Function} props.setIsOpenAddEditeur - Fonction pour définir l'état d'ouverture de la modal d'ajout/modification d'éditeur.
+ * @param {Function} props.setCurrentEditeur - Fonction pour définir l'éditeur actuel à modifier.
+ * @returns {JSX.Element} - Composant qui affiche le tableau des éditeurs avec fonctionnalités de recherche, de modification, de suppression, et de pagination.
+ */
+
 export default function TableauEditeur({
   setIsOpenAddEditeur,
   setCurrentEditeur,
 }) {
   const [listeEditeur, setListeEditeur] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [isOpenDeleteEditeur, setIsOpenDeleteEditeur] = useState(false);
-  const [idEditeur, setIdEditeur] = useState("");
+  const [idEditeur, setIdEditeur] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const { t } = useTranslation();
 
@@ -48,7 +58,7 @@ export default function TableauEditeur({
         );
         setListeEditeur(response.data);
       } catch (error) {
-        toast.error(t("toast.error"));
+        toast.error(t('toast.error'));
       }
     };
     fetchCommentaire();
@@ -84,7 +94,7 @@ export default function TableauEditeur({
           rel="noopener noreferrer"
           className="inline-block bg-light-Yellow text-light-TBleu hover:bg-light-VCYellow text-center font-medium py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
         >
-          {t("game.VisitWebsite")}
+          {t('game.VisitWebsite')}
         </a>
       </td>
       <td className="p-2">
@@ -110,7 +120,7 @@ export default function TableauEditeur({
                     <button
                       type="button"
                       className={`${
-                        active ? "bg-light-Yellow text-light-TBleu" : ""
+                        active ? 'bg-light-Yellow text-light-TBleu' : ''
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       onClick={() => openModalUpdate(editeur)}
                     >
@@ -128,7 +138,7 @@ export default function TableauEditeur({
                           d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
                         />
                       </svg>
-                      {t("Button.modify")}
+                      {t('Button.modify')}
                     </button>
                   )}
                 </Menu.Item>
@@ -139,7 +149,7 @@ export default function TableauEditeur({
                     <button
                       type="button"
                       className={`${
-                        active ? "bg-light-Yellow text-light-TBleu" : ""
+                        active ? 'bg-light-Yellow text-light-TBleu' : ''
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       onClick={() => openModalDelete(editeur._id)}
                     >
@@ -157,7 +167,7 @@ export default function TableauEditeur({
                           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                         />
                       </svg>
-                      {t("Button.delete")}
+                      {t('Button.delete')}
                     </button>
                   )}
                 </Menu.Item>
@@ -176,10 +186,10 @@ export default function TableauEditeur({
         <table className="w-full table-auto border-collapse text-sm text-center">
           <thead>
             <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
-              <th className="p-2">{t("table.Name")}</th>
-              <th className="p-2">{t("table.Country")}</th>
-              <th className="p-2">{t("table.Website")}</th>
-              <th className="p-2">{t("table.Option")}</th>
+              <th className="p-2">{t('table.Name')}</th>
+              <th className="p-2">{t('table.Country')}</th>
+              <th className="p-2">{t('table.Website')}</th>
+              <th className="p-2">{t('table.Option')}</th>
             </tr>
           </thead>
           <tbody className="bg-light-LightGray dark:bg-dark-BlackGray divide-y divide-gray-300">

@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { useTranslation } from "react-i18next";
-import FormAddCommentaire from "../Form/FormAddCommentaire";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { useTranslation } from 'react-i18next';
+import FormAddCommentaire from '../Form/FormAddCommentaire';
+import PropTypes from 'prop-types';
 
 AddCommentaire.propTypes = {
   isOpenCommentaire: PropTypes.bool.isRequired,
@@ -10,6 +10,19 @@ AddCommentaire.propTypes = {
   setIsOpenCommentaire: PropTypes.func,
   currentCommentaire: PropTypes.object,
 };
+
+/**
+ * Composant `AddCommentaire` qui fournit une modal pour ajouter ou modifier un commentaire.
+ * Affiche un formulaire `FormAddCommentaire` dans une modal, qui s'ouvre ou se ferme en fonction de l'état `isOpenCommentaire`.
+ * La modal permet à l'utilisateur de saisir et de soumettre un commentaire.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenCommentaire - Indique si la modal doit être ouverte ou fermée.
+ * @param {string} [props.gameId] - L'identifiant du jeu pour lequel le commentaire est ajouté ou modifié.
+ * @param {Function} [props.setIsOpenCommentaire] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Object} [props.currentCommentaire] - Les informations du commentaire actuel à modifier, s'il existe.
+ * @returns {JSX.Element} Une modal contenant un formulaire pour l'ajout ou la modification d'un commentaire.
+ */
 
 export default function AddCommentaire({
   isOpenCommentaire,
@@ -69,7 +82,7 @@ export default function AddCommentaire({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                {t("Modal.addCommentaire")}
+                {t('Modal.addCommentaire')}
               </Dialog.Title>
               <FormAddCommentaire
                 gameId={gameId}

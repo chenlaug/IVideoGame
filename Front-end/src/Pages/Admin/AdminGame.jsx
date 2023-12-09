@@ -10,6 +10,23 @@ AdminGame.propTypes = {
   hovered: PropTypes.bool.isRequired,
 };
 
+/**
+ * Le composant `AdminGame` est la page d'administration des jeux vidéo.
+ * Il permet d'ajouter, de visualiser et de gérer les jeux vidéo.
+ * Ce composant utilise plusieurs sous-composants :
+ * - `BtnMain` : Un bouton pour ajouter un nouveau jeu.
+ * - `TableauJeux` : Un tableau affichant les jeux existants avec des options pour les modifier ou les supprimer.
+ * - `Pagination` : Un composant de pagination pour naviguer entre les pages de jeux.
+ * - `AddGame` : Un modal pour ajouter ou modifier un jeu.
+ *
+ * Les états `isOpen`, `isOpenDelete`, `idGame`, `listeGame`, `currentGame`, `currentPage`, `setCurrentPage`
+ * gèrent respectivement l'ouverture des modals, l'identification du jeu sélectionné,
+ * la liste des jeux, le jeu actuellement sélectionné pour modification, et la pagination.
+ *
+ * @param {boolean} hovered - État indiquant si la barre latérale est étendue ou non.
+ * @returns {JSX.Element} - La page d'administration des jeux vidéo.
+ */
+
 export default function AdminGame({ hovered }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState(false);

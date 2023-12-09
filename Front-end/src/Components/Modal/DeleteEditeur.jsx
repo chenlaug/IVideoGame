@@ -15,6 +15,21 @@ DeleteEditeur.propTypes = {
   idEditeur: PropTypes.string,
 };
 
+/**
+ * Composant `DeleteEditeur` qui affiche une modal pour confirmer la suppression d'un éditeur.
+ * Utilise le composant `FormDelete` pour permettre à l'utilisateur de confirmer ou d'annuler la suppression.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenDeleteEditeur`.
+ * En cas de confirmation, l'éditeur est supprimé via une requête API et la liste des éditeurs est mise à jour.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenDeleteEditeur - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenDeleteEditeur] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Function} [props.setListeEditeur] - Fonction pour mettre à jour la liste des éditeurs.
+ * @param {Object} [props.listeEditeur] - Liste des éditeurs actuels.
+ * @param {string} [props.idEditeur] - L'identifiant de l'éditeur à supprimer.
+ * @returns {JSX.Element} Une modal contenant un formulaire de confirmation pour la suppression d'un éditeur.
+ */
+
 export default function DeleteEditeur({
   isOpenDeleteEditeur,
   setIsOpenDeleteEditeur,

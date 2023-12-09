@@ -1,14 +1,27 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import FormAddUtilisateur from "../Form/FormAddUtilisateur";
-import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import FormAddUtilisateur from '../Form/FormAddUtilisateur';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 AddUtilisateur.propTypes = {
   isOpenAddUser: PropTypes.bool.isRequired,
   setIsOpenAddUser: PropTypes.func,
   CurrentUser: PropTypes.object,
 };
+
+/**
+ * Composant `AddUtilisateur` qui affiche une modal pour ajouter ou modifier les informations d'un utilisateur.
+ * Utilise le composant `FormAddUtilisateur` pour permettre à l'utilisateur de saisir ou de modifier ses informations.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenAddUser`.
+ * Peut être utilisé pour créer un nouvel utilisateur ou éditer les informations d'un utilisateur existant.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenAddUser - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenAddUser] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Object} [props.CurrentUser] - Les informations de l'utilisateur actuel à modifier, s'il existe.
+ * @returns {JSX.Element} Une modal contenant un formulaire pour l'ajout ou la modification des informations d'un utilisateur.
+ */
 
 export default function AddUtilisateur({
   isOpenAddUser,
@@ -66,7 +79,7 @@ export default function AddUtilisateur({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                {CurrentUser ? t("Modal.editingUser") : t("Modal.addUser")}
+                {CurrentUser ? t('Modal.editingUser') : t('Modal.addUser')}
               </Dialog.Title>
               <FormAddUtilisateur
                 setIsOpenDeleteCommentaire={setIsOpenAddUser}

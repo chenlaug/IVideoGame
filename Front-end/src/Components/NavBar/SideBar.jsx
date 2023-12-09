@@ -9,6 +9,18 @@ SideBar.propTypes = {
   setHovered: PropTypes.func.isRequired,
 };
 
+/**
+ * Composant `SideBar` qui affiche une barre latérale de navigation dans l'application.
+ * Affiche des liens de navigation qui sont obtenus depuis un tableau de liens `links`.
+ * La taille de la barre latérale peut être ajustée en survolant avec la souris grâce aux états `hovered` et `setHovered`.
+ * Utilise également le hook `useTranslation` pour la traduction des noms des liens.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.hovered - Indique si la barre latérale doit être en état étendu ou réduit.
+ * @param {Function} props.setHovered - Fonction pour changer l'état de `hovered`.
+ * @returns {JSX.Element} Une barre latérale avec des liens de navigation et une image, dont la taille varie au survol.
+ */
+
 export default function SideBar({ hovered, setHovered }) {
   const { t } = useTranslation();
 

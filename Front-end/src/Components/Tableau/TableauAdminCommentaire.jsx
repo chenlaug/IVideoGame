@@ -9,6 +9,14 @@ import DeleteCommentaire from "../Modal/DeleteCommentaire";
 import Searchbar from "../SeachBar/Searchbar";
 import Pagination from "../Pagination/Pagination";
 
+/**
+ * Composant `TableauAdminCommentaire` qui affiche et gère une liste de commentaires dans un tableau administratif.
+ * Ce tableau permet aux administrateurs de visualiser, rechercher, et supprimer des commentaires.
+ * Utilise plusieurs hooks d'état pour gérer l'affichage des données et les interactions avec l'API.
+ *
+ * @returns {JSX.Element} Le composant qui affiche le tableau des commentaires avec pagination et fonctionnalités de recherche et de suppression.
+ */
+
 export default function TableauAdminCommentaire() {
   const [isOpenDeleteCommentaire, setIsOpenDeleteCommentaire] = useState(false);
   const [listeCommentaire, setListeCommentaire] = useState([]);

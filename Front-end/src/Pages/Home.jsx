@@ -2,6 +2,17 @@ import BtnNavLink from "../Components/Btn/BtnNavLink";
 import ryuKen from "../Image/ryu-ken.gif";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Le composant `Home` sert de page d'accueil pour l'application.
+ * 
+ * Il affiche un message de bienvenue, une brève description et des boutons pour se connecter ou créer un compte. 
+ * Une image emblématique de Ryu et Ken est également affichée pour enrichir visuellement la page.
+ * 
+ * Le contenu textuel de la page est internationalisé, ce qui signifie que les textes peuvent être traduits en différentes langues en fonction des paramètres de localisation de l'utilisateur.
+ * 
+ * @returns {JSX.Element} - La page d'accueil avec des options de connexion et d'inscription, ainsi qu'une image décorative.
+ */
+
 export default function Home() {
   const { t } = useTranslation();
 

@@ -8,6 +8,19 @@ TextareaMain.propTypes = {
   placeholder: PropTypes.string.isRequired,
 };
 
+/**
+ * Le composant `TextareaMain` représente un champ de saisie de texte multiligne personnalisé.
+ * Utilisé pour saisir des textes plus longs comme des commentaires ou des descriptions.
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {string} props.label - Le label du champ textarea.
+ * @param {string} props.id - L'identifiant unique pour le champ textarea.
+ * @param {Function} props.onChange - La fonction appelée à chaque modification du champ.
+ * @param {string} props.value - La valeur actuelle du champ textarea.
+ * @param {string} props.placeholder - Le texte indicatif qui s'affiche lorsque le champ est vide.
+ * @returns {JSX.Element} - Un composant représentant un champ de saisie multiligne.
+ */
+
 export default function TextareaMain({
   label,
   id,

@@ -15,6 +15,21 @@ DeleteUser.propTypes = {
   setListeUser: PropTypes.func,
 };
 
+/**
+ * Composant `DeleteUser` qui affiche une modal pour confirmer la suppression d'un utilisateur.
+ * Utilise le composant `FormDelete` pour permettre à l'utilisateur de confirmer ou d'annuler la suppression.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenDeleteUser`.
+ * En cas de confirmation, l'utilisateur est supprimé via une requête API et la liste des utilisateurs est mise à jour.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenDeleteUser - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenDeleteUser] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {string} [props.idUser] - L'identifiant de l'utilisateur à supprimer.
+ * @param {Object} [props.listeUser] - Liste des utilisateurs actuels à mettre à jour après la suppression.
+ * @param {Function} [props.setListeUser] - Fonction pour mettre à jour la liste des utilisateurs.
+ * @returns {JSX.Element} Une modal contenant un formulaire de confirmation pour la suppression d'un utilisateur.
+ */
+
 export default function DeleteUser({
   isOpenDeleteUser,
   setIsOpenDeleteUser,
