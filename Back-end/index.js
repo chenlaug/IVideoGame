@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Connection vers Mongodb
-require('./Configs/db');
+require('./Configs/Db');
 
 const UserRoute = require('./Routes/UserRoute');
 const ContactRoute = require('./Routes/ContactRoute');
