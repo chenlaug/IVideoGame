@@ -1,48 +1,50 @@
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
-import { useState } from "react";
-import LogIng from "./Pages/LogIng";
-import Home from "./Pages/Home";
-import ForgotPassword from "./Pages/ForgotPassword";
-import Register from "./Pages/Register";
-import ConfirmAccount from "./Pages/ConfirmAccount";
-import Conctac from "./Pages/Conctac";
-import PageNotFound from "./Pages/PageNotFound";
-import Profil from "./Pages/Profil";
-import NewPassword from "./Pages/NewPassword";
-import Game from "./Pages/Game";
-import Catalogue from "./Pages/Catalogue";
-import JeuxFavori from "./Pages/JeuxFavori";
-import Commentaire from "./Pages/Commentaire";
-import AdminCommentaire from "./Pages/Admin/AdminCommentaire";
-import AdminUtilisateur from "./Pages/Admin/AdminUtilisateur";
-import AdminDevelppeur from "./Pages/Admin/AdminDevelppeur";
-import AdminEditeur from "./Pages/Admin/AdminEditeur";
-import ReceptionAdmin from "./Pages/Admin/ReceptionAdmin";
-import TopNavBar from "./Components/NavBar/TopNavBar";
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
+import { useState } from 'react';
+import LogIng from './Pages/LogIng';
+import Home from './Pages/Home';
+import ForgotPassword from './Pages/ForgotPassword';
+import Register from './Pages/Register';
+import ConfirmAccount from './Pages/ConfirmAccount';
+import Conctac from './Pages/Conctac';
+import PageNotFound from './Pages/PageNotFound';
+import Profil from './Pages/Profil';
+import NewPassword from './Pages/NewPassword';
+import Game from './Pages/Game';
+import Catalogue from './Pages/Catalogue';
+import JeuxFavori from './Pages/JeuxFavori';
+import Commentaire from './Pages/Commentaire';
+import AdminCommentaire from './Pages/Admin/AdminCommentaire';
+import AdminUtilisateur from './Pages/Admin/AdminUtilisateur';
+import AdminDevelppeur from './Pages/Admin/AdminDevelppeur';
+import AdminEditeur from './Pages/Admin/AdminEditeur';
+import ReceptionAdmin from './Pages/Admin/ReceptionAdmin';
+import TopNavBar from './Components/NavBar/TopNavBar';
+import RoleBasedRoute from './Utils/RoleBasedRoute';
 
-
-function RoleBasedRoute({ children, role }) {
-  const isAuthenticated = useIsAuthenticated();
-  const location = useLocation();
-  const authState = useAuthUser();
-
-  // Vérifie si l'utilisateur est authentifié
-  const isAuthorized = isAuthenticated() && authState();
-
-  // Si un rôle est spécifié, vérifie si l'utilisateur a ce rôle
-  // Notez l'ajout de la vérification authState pour éviter les erreurs
-  const hasRequiredRole =
-    role && authState() ? authState().role === role : true;
-
-  // Autorise l'accès si l'utilisateur est authentifié et, si un rôle est spécifié, a le rôle requis
-  // Sinon, redirige vers la page d'accueil
-  return isAuthorized && hasRequiredRole ? (
-    children
-  ) : (
-    <Navigate to="/" replace state={{ from: location }} />
-  );
-}
+/**
+ * Le composant principal de l'application qui gère le routage et l'affichage des pages.
+ * Il utilise `Routes` et `Route` de `react-router-dom` pour définir les chemins d'accès aux différentes pages.
+ * Il intègre également une gestion des rôles d'accès avec `RoleBasedRoute` pour certaines routes.
+ *
+ * @component
+ * @returns {React.ReactNode} - Le rendu des routes et des composants de l'application.
+ *
+ * @example
+ * // Dans index.js
+ * ReactDOM.render(
+ *   <React.StrictMode>
+ *     <BrowserRouter>
+ *       <AuthProvider>
+ *         <App />
+ *       </AuthProvider>
+ *     </BrowserRouter>
+ *   </React.StrictMode>,
+ *   document.getElementById('root')
+ * );
+ *
+ * @see {@link RoleBasedRoute}
+ */
 
 export default function App() {
   const [theme, setTheme] = useState(true);
@@ -51,12 +53,12 @@ export default function App() {
   const location = useLocation();
 
   const noNavBarPaths = [
-    "/",
-    "/connect",
-    "/password-forgotten",
-    "/create-account",
-    "/confirm-account/:token",
-    "/password-reset/:token",
+    '/',
+    '/connect',
+    '/password-forgotten',
+    '/create-account',
+    '/confirm-account/:token',
+    '/password-reset/:token',
   ];
 
   const showNavBar = () => {
@@ -65,13 +67,13 @@ export default function App() {
 
     return (
       isAuthenticated() &&
-      (userRole === "user" || userRole === "admin") &&
+      (userRole === 'user' || userRole === 'admin') &&
       !noNavBarPaths.includes(location.pathname)
     );
   };
 
   return (
-    <div className={theme ? "dark" : "light"}>
+    <div className={theme ? 'dark' : 'light'}>
       <div className="bg-light-White dark:bg-dark-Black">
         {showNavBar() && <TopNavBar theme={theme} setTheme={setTheme} />}
         <Routes>
@@ -109,7 +111,7 @@ export default function App() {
           <Route
             path="/admin/game"
             element={
-              <RoleBasedRoute role={"admin"}>
+              <RoleBasedRoute role={'admin'}>
                 <ReceptionAdmin />
               </RoleBasedRoute>
             }
@@ -117,7 +119,7 @@ export default function App() {
           <Route
             path="/admin/comment"
             element={
-              <RoleBasedRoute role={"admin"}>
+              <RoleBasedRoute role={'admin'}>
                 <AdminCommentaire />
               </RoleBasedRoute>
             }
@@ -125,7 +127,7 @@ export default function App() {
           <Route
             path="/admin/utilisateur"
             element={
-              <RoleBasedRoute role={"admin"}>
+              <RoleBasedRoute role={'admin'}>
                 <AdminUtilisateur />
               </RoleBasedRoute>
             }
@@ -133,7 +135,7 @@ export default function App() {
           <Route
             path="/admin/editeur"
             element={
-              <RoleBasedRoute role={"admin"}>
+              <RoleBasedRoute role={'admin'}>
                 <AdminEditeur />
               </RoleBasedRoute>
             }
@@ -141,7 +143,7 @@ export default function App() {
           <Route
             path="/admin/develppeur"
             element={
-              <RoleBasedRoute role={"admin"}>
+              <RoleBasedRoute role={'admin'}>
                 <AdminDevelppeur />
               </RoleBasedRoute>
             }
