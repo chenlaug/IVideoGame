@@ -1,17 +1,17 @@
-version: '3.8'
+version: '3.8' # Version de la configuration Docker Compose
 
 services:
   backend:
-    build: ./Back-end
+    build: ./Back-end # Chemin vers le Dockerfile du backend
     ports:
-      - "5000:5000"
-    env_file: 
-      - ./Back-end/.env
+      - '5000:5000' # Mapper le port 5000 du conteneur au port 5000 de l'hôte
+    env_file:
+      - ./Back-end/.env # Fichier d'environnement pour le backend
     volumes:
-      - ./Back-end:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./Back-end:/usr/src/app # Monter le dossier Back-end sur le conteneur
+      - /usr/src/app/node_modules # Monter node_modules du conteneur pour éviter de le remplacer par le volume
 
   frontend:
-    build: ./Front-end
+    build: ./Front-end # Chemin vers le Dockerfile du frontend
     ports:
-      - "5173:5173"
+      - '5173:5173' # Mapper le port 5173 du conteneur au port 5173 de l'hôte
