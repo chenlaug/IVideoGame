@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { useTranslation } from "react-i18next";
-import FormAddGame from "../Form/FormAddGame";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { useTranslation } from 'react-i18next';
+import FormAddGame from '../Form/FormAddGame';
+import PropTypes from 'prop-types';
 
 AddGame.propTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -11,6 +11,21 @@ AddGame.propTypes = {
   setListeGame: PropTypes.func.isRequired,
   currentGame: PropTypes.array,
 };
+
+/**
+ * Composant `AddGame` qui affiche une modal pour ajouter ou modifier les informations d'un jeu vidéo.
+ * Utilise le composant `FormAddGame` pour permettre à l'utilisateur de saisir les informations du jeu.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpen`.
+ * Peut être utilisé pour créer un nouveau jeu ou éditer les informations d'un jeu existant.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpen - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} props.setIsOpen - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Array} props.listeGame - Liste des jeux à mettre à jour après la création ou la modification d'un jeu.
+ * @param {Function} props.setListeGame - Fonction pour mettre à jour la liste des jeux.
+ * @param {Object} [props.currentGame] - Les informations du jeu actuel à modifier, s'il existe.
+ * @returns {JSX.Element} Une modal contenant un formulaire pour l'ajout ou la modification des informations d'un jeu vidéo.
+ */
 
 export default function AddGame({
   isOpen,
@@ -71,7 +86,7 @@ export default function AddGame({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                {t("Modal.addGame")}
+                {t('Modal.addGame')}
               </Dialog.Title>
               <FormAddGame
                 setIsOpen={setIsOpen}

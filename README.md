@@ -36,17 +36,17 @@ Avant de commencer, assurez-vous d'avoir Node.js et npm installés sur votre PC.
 
 Étapes pour installer et configurer le projet :
 
-- git clone git@github.com:chenlaug/IVideoGame.git
+1. git clone git@github.com:chenlaug/IVideoGame.git
 
-- cd IVideoGame
+2. cd IVideoGame
 
-- cd front-end
+3. cd front-end
 
-- npm install
+4. npm install
 
-- cd ../back-end
+5. cd ../back-end
 
-- npm install
+6. npm install
 
 Modifier le fichier `.env` dans le dossier back-end avec vos informations personnelles. Voici une explication de chaque variable d'environnement :
 
@@ -69,11 +69,24 @@ Pour lancer l'application en mode développement, exécutez les commandes suivan
 
 Dans le dossier front-end :
 
-npm run dev
+1. npm run dev
 
 Dans le dossier back-end :
 
-npm run dev
+1. npm run dev
+
+## Utilisation avec docker :
+
+1. Aller dans le dossier IVIDEOGAME
+   `cd ./IVIDEOGAME`
+
+2. Exécute le docker-compose :
+
+- `docker-compose up --build`
+
+- pour exécuter en arrière-plan `docker-compose up -d --build`
+
+* Pour arrêter et retirer les conteneurs `docker-compose down`
 
 ## Construit avec
 
@@ -81,6 +94,8 @@ npm run dev
 - [Express](https://expressjs.com/)
 - [Vite + React](https://vitejs.dev/guide/)
 - [MongoDB](https://www.mongodb.com/)
+- [Docker](https://www.docker.com)
+- [JSDoc](https://jsdoc.app)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [React Auth Kit](https://github.com/react-auth-kit/react-auth-kit)
 

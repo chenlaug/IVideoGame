@@ -1,6 +1,17 @@
+/**
+ * Modèle Mongoose pour les jeux vidéo.
+ * Utilise le schéma VideoGameSchema pour définir la structure des données des jeux vidéo.
+ * 
+ * @module VideoGame
+ * @requires mongoose
+ */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+/**
+ * Schéma pour les jeux vidéo.
+ * Définit les champs et les validations pour les jeux vidéo.
+ */
 const VideoGameSchema = new Schema(
     {
         titre: { type: String, required: true },
@@ -92,6 +103,11 @@ const VideoGameSchema = new Schema(
     { timestamps: true },
 );
 
+/**
+ * Modèle VideoGame basé sur VideoGameSchema.
+ * 
+ * @type {mongoose.Model}
+ */
 const VideoGame = mongoose.model('VideoGame', VideoGameSchema);
 
 module.exports = VideoGame;

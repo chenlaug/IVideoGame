@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 export const optionPlatformes = [
   { id: 1, name: "PC", value: "PC" },
   { id: 2, name: "PlayStation 5", value: "PlayStation 5" },

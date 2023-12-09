@@ -5,6 +5,18 @@ import { useTranslation } from "react-i18next";
 import api from "../Utils/api";
 import FormNewPassword from "../Components/Form/FormNewPassword";
 
+/**
+ * Le composant `NewPassword` est une page permettant à l'utilisateur de réinitialiser son mot de passe.
+ * 
+ * Ce composant utilise un formulaire (`FormNewPassword`) où l'utilisateur peut entrer et confirmer son nouveau mot de passe.
+ * Il utilise le token de réinitialisation du mot de passe fourni dans l'URL pour valider la demande.
+ * 
+ * En cas de succès, un message de confirmation s'affiche et l'utilisateur est redirigé vers la page de connexion après un court délai.
+ * En cas d'erreur, comme une incompatibilité entre les mots de passe saisis, un message d'erreur est affiché.
+ * 
+ * @returns {JSX.Element} - Un composant qui affiche un formulaire pour permettre à l'utilisateur de réinitialiser son mot de passe.
+ */
+
 export default function NewPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

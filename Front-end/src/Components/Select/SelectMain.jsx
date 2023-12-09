@@ -9,6 +9,21 @@ SelectMain.propTypes = {
   placeholder: PropTypes.string.isRequired,
 };
 
+/**
+ * Composant `SelectMain` qui fournit une liste déroulante générique.
+ * Affiche une liste d'options passées en props et permet à l'utilisateur de sélectionner une option.
+ * Utilise un label et un placeholder pour améliorer l'accessibilité et l'expérience utilisateur.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {string} props.label - Le label associé au menu déroulant.
+ * @param {string} props.id - L'identifiant unique pour le menu déroulant.
+ * @param {Function} props.onChange - Fonction appelée lorsque l'utilisateur sélectionne une option.
+ * @param {string} props.value - La valeur actuellement sélectionnée dans le menu déroulant.
+ * @param {Array} props.options - Tableau d'objets représentant les options disponibles.
+ * @param {string} props.placeholder - Texte d'indication affiché lorsqu'aucune valeur n'est sélectionnée.
+ * @returns {JSX.Element} Un composant de sélection avec des options dynamiquement chargées.
+ */
+
 export default function SelectMain({
   label,
   id,

@@ -15,6 +15,18 @@ TableauUtilisateur.propTypes = {
   setCurrentUser: PropTypes.func.isRequired,
 };
 
+/**
+ * Le composant `TableauUtilisateur` affiche et gère une liste d'utilisateurs.
+ * Il permet d'effectuer des actions comme la modification, la suppression, ou la mise à jour des mots de passe des utilisateurs.
+ * Utilise plusieurs hooks d'état pour gérer l'affichage et les interactions avec l'API.
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {Function} props.setIsOpenAddUser - Fonction pour ouvrir/fermer la modal d'ajout d'utilisateur.
+ * @param {Function} props.setIsOpenUpdatePwd - Fonction pour ouvrir/fermer la modal de mise à jour du mot de passe.
+ * @param {Function} props.setCurrentUser - Fonction pour définir l'utilisateur actuel sélectionné pour la modification ou mise à jour.
+ * @returns {JSX.Element} - Composant qui affiche un tableau des utilisateurs avec des options de gestion.
+ */
+
 export default function TableauUtilisateur({
   setIsOpenAddUser,
   setIsOpenUpdatePwd,

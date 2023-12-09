@@ -1,22 +1,30 @@
-import { useEffect, Fragment, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useAuthHeader } from "react-auth-kit";
-import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import DeleteCommentaire from "../Modal/DeleteCommentaire";
-import AddCommentaire from "../Modal/AddCommentaire";
-import Searchbar from "../SeachBar/Searchbar";
-import Pagination from "../Pagination/Pagination";
+import { useEffect, Fragment, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { useAuthHeader } from 'react-auth-kit';
+import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import DeleteCommentaire from '../Modal/DeleteCommentaire';
+import AddCommentaire from '../Modal/AddCommentaire';
+import Searchbar from '../SeachBar/Searchbar';
+import Pagination from '../Pagination/Pagination';
+
+/**
+ * Composant `TableauCommentaire` qui affiche et gère une liste de commentaires.
+ * Permet aux utilisateurs de visualiser, de rechercher, de modifier et de supprimer des commentaires.
+ * Utilise plusieurs hooks d'état pour gérer l'affichage et les interactions avec l'API.
+ *
+ * @returns {JSX.Element} - Composant qui affiche le tableau des commentaires avec fonctionnalités de recherche, de modification, de suppression, et de pagination.
+ */
 
 export default function TableauCommentaire() {
   const [listeCommentaire, setListeCommentaire] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);
   const [currentCommentaire, setCurrentCommentaire] = useState(null);
   const [isOpenDeleteCommentaire, setIsOpenDeleteCommentaire] = useState(false);
-  const [idCommentaire, setIdCommentaire] = useState("");
+  const [idCommentaire, setIdCommentaire] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const { t } = useTranslation();
   const commentairePerPage = 6;
@@ -44,7 +52,7 @@ export default function TableauCommentaire() {
         );
         setListeCommentaire(response.data);
       } catch (error) {
-        toast.error(t("toast.error"));
+        toast.error(t('toast.error'));
       }
     };
     fetchCommentaire();
@@ -102,7 +110,7 @@ export default function TableauCommentaire() {
                     <button
                       type="button"
                       className={`${
-                        active ? "bg-light-Yellow text-light-TBleu" : ""
+                        active ? 'bg-light-Yellow text-light-TBleu' : ''
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       onClick={() => openModalUpdate(commentaire)}
                     >
@@ -120,7 +128,7 @@ export default function TableauCommentaire() {
                           d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
                         />
                       </svg>
-                      {t("Button.modify")}
+                      {t('Button.modify')}
                     </button>
                   )}
                 </Menu.Item>
@@ -131,7 +139,7 @@ export default function TableauCommentaire() {
                     <button
                       type="button"
                       className={`${
-                        active ? "bg-light-Yellow text-light-TBleu" : ""
+                        active ? 'bg-light-Yellow text-light-TBleu' : ''
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       onClick={() =>
                         openModalDeleteCommentaire(commentaire._id)
@@ -151,7 +159,7 @@ export default function TableauCommentaire() {
                           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                         />
                       </svg>
-                      {t("Button.delete")}
+                      {t('Button.delete')}
                     </button>
                   )}
                 </Menu.Item>
@@ -162,7 +170,7 @@ export default function TableauCommentaire() {
                     <button
                       type="button"
                       className={`${
-                        active ? "bg-light-Yellow text-light-TBleu" : ""
+                        active ? 'bg-light-Yellow text-light-TBleu' : ''
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       onClick={() =>
                         navigate(`/game/${commentaire.VideoGame._id}`)
@@ -187,7 +195,7 @@ export default function TableauCommentaire() {
                           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
-                      {t("Button.GoPage")}
+                      {t('Button.GoPage')}
                     </button>
                   )}
                 </Menu.Item>
@@ -207,11 +215,11 @@ export default function TableauCommentaire() {
           <table className="w-full min-w-full table-auto border-collapse text-sm text-center">
             <thead>
               <tr className="bg-light-LightGray dark:bg-dark-BlackGray text-light-TBlack dark:text-dark-TWhite">
-                <th className="p-2 "> {t("table.GameTitle")}</th>
-                <th className="p-2 "> {t("table.Description")}</th>
-                <th className="p-2 "> {t("table.Note")}</th>
-                <th className="p-2 "> {t("table.CommentContent")}</th>
-                <th className="p-2 "> {t("table.Option")}</th>
+                <th className="p-2 "> {t('table.GameTitle')}</th>
+                <th className="p-2 "> {t('table.Description')}</th>
+                <th className="p-2 "> {t('table.Note')}</th>
+                <th className="p-2 "> {t('table.CommentContent')}</th>
+                <th className="p-2 "> {t('table.Option')}</th>
               </tr>
             </thead>
             <tbody className="bg-light-LightGray dark:bg-dark-BlackGray divide-y divide-gray-300">

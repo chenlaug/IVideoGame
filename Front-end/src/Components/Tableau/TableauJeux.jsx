@@ -20,6 +20,23 @@ TableauJeux.propTypes = {
   setCurrentGame: PropTypes.func.isRequired,
 };
 
+/**
+ * Composant `TableauJeux` pour afficher et gérer la liste des jeux vidéo.
+ * Ce composant utilise plusieurs hooks d'état pour gérer l'affichage des jeux, les interactions avec l'API, et les actions utilisateur.
+ * Il permet de supprimer des jeux, de naviguer vers les détails des jeux, et d'ouvrir des modaux pour les mises à jour.
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {Array} props.listeGame - Liste des jeux vidéo à afficher.
+ * @param {Function} props.setListeGame - Fonction pour mettre à jour la liste des jeux.
+ * @param {boolean} props.isOpenDelete - État pour gérer l'affichage de la modal de suppression.
+ * @param {Function} props.setIsOpenDelete - Fonction pour ouvrir/fermer la modal de suppression.
+ * @param {string} props.idGame - Identifiant du jeu sélectionné pour la suppression.
+ * @param {Function} props.setIdGame - Fonction pour définir l'ID du jeu sélectionné.
+ * @param {Function} props.setIsOpen - Fonction pour ouvrir/fermer la modal de mise à jour.
+ * @param {Function} props.setCurrentGame - Fonction pour définir le jeu actuel pour la mise à jour.
+ * @returns {JSX.Element} - Composant qui affiche un tableau des jeux avec des options de modification et de suppression.
+ */
+
 export default function TableauJeux({
   listeGame,
   setListeGame,

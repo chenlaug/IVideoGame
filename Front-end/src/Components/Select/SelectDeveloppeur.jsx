@@ -2,7 +2,23 @@ import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import { useTranslation } from "react-i18next";
 import api from "../../Utils/api";
+import PropTypes from "prop-types";
 
+SelectDeveloppeur.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+};
+
+/**
+ * Composant `SelectDeveloppeur` qui fournit une liste déroulante des développeurs.
+ * Charge les options des développeurs depuis une API et les affiche dans un menu déroulant.
+ * Permet à l'utilisateur de sélectionner un développeur à partir de la liste.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {Function} props.onChange - Fonction appelée lorsque l'utilisateur sélectionne un développeur dans la liste.
+ * @param {string} props.value - La valeur actuelle sélectionnée pour le développeur.
+ * @returns {JSX.Element} Un composant de sélection avec des options dynamiquement chargées pour les développeurs.
+ */
 
 export default function SelectDeveloppeur({ onChange, value }) {
   const authHeader = useAuthHeader();

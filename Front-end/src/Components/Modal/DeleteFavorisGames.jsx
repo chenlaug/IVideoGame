@@ -1,11 +1,11 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import FormDelete from "../Form/FormDelete";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuthHeader } from 'react-auth-kit';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import FormDelete from '../Form/FormDelete';
+import PropTypes from 'prop-types';
 
 DeleteFavorisGames.propTypes = {
   isOpenDeleteFavoris: PropTypes.bool.isRequired,
@@ -14,6 +14,21 @@ DeleteFavorisGames.propTypes = {
   listeFavorisGames: PropTypes.array,
   idGameFavori: PropTypes.string,
 };
+
+/**
+ * Composant `DeleteFavorisGames` qui affiche une modal pour confirmer la suppression d'un jeu des favoris.
+ * Utilise le composant `FormDelete` pour permettre à l'utilisateur de confirmer ou d'annuler la suppression.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenDeleteFavoris`.
+ * En cas de confirmation, le jeu est supprimé des favoris via une requête API et la liste des favoris est mise à jour.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenDeleteFavoris - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenDeleteFavoris] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Function} [props.setListeFavorisGames] - Fonction pour mettre à jour la liste des jeux favoris.
+ * @param {Array} [props.listeFavorisGames] - Liste des jeux favoris actuels.
+ * @param {string} [props.idGameFavori] - L'identifiant du jeu à supprimer des favoris.
+ * @returns {JSX.Element} Une modal contenant un formulaire de confirmation pour la suppression d'un jeu des favoris.
+ */
 
 export default function DeleteFavorisGames({
   isOpenDeleteFavoris,
@@ -26,7 +41,7 @@ export default function DeleteFavorisGames({
   const { t } = useTranslation();
   const deleteFromFavorites = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading(t("toast.error"));
+    const loadingToast = toast.loading(t('toast.error'));
 
     try {
       await api.delete(`/user/removeGameFromFavorites/${idGameFavori}`, {
@@ -35,7 +50,7 @@ export default function DeleteFavorisGames({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success(t("toast.success"));
+      toast.success(t('toast.success'));
       // Mettre à jour la liste des favoris dans l'état après suppression
       setListeFavorisGames(
         listeFavorisGames.filter((game) => game._id !== idGameFavori)
@@ -43,7 +58,7 @@ export default function DeleteFavorisGames({
       setIsOpenDeleteFavoris((prev) => !prev);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
 
@@ -98,7 +113,7 @@ export default function DeleteFavorisGames({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  {t("Modal.deleteGamefavoris")}
+                  {t('Modal.deleteGamefavoris')}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDeleteFavoris((prev) => !prev)}

@@ -1,3 +1,11 @@
+/**
+ * Contrôleur pour gérer les opérations utilisateur.
+ * Ce module fournit des fonctions pour s'inscrire, confirmer le compte, se connecter,
+ * gérer les utilisateurs, réinitialiser le mot de passe et gérer les jeux favoris.
+ *
+ * @module UserController
+ */
+
 const User = require('../Models/User');
 const transporter = require('../Configs/nodemailerConfig');
 const crypto = require('crypto');
@@ -5,6 +13,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const generatePassword = require('../Utils/GeneratePassword');
 const { baseURL } = require('../Configs/Url');
+
+/**
+ * Inscrit un nouvel utilisateur et envoie un e-mail de confirmation.
+ *
+ * @async
+ * @function signIn
+ * @param {Object} req - La requête HTTP, contenant les informations de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.signIn = async (req, res) => {
     try {
@@ -28,6 +45,15 @@ exports.signIn = async (req, res) => {
         res.status(500).json({ message: error });
     }
 };
+
+/**
+ * Crée un utilisateur admin et envoie un e-mail avec les informations de connexion.
+ *
+ * @async
+ * @function createUserAdmin
+ * @param {Object} req - La requête HTTP, contenant les informations de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.createUserAdmin = async (req, res) => {
     try {
@@ -54,6 +80,15 @@ exports.createUserAdmin = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+/**
+ * Confirme le compte d'un utilisateur via un jeton.
+ *
+ * @async
+ * @function confirmAccount
+ * @param {Object} req - La requête HTTP, contenant le jeton de confirmation.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.confirmAccount = async (req, res) => {
     try {
@@ -86,6 +121,15 @@ exports.confirmAccount = async (req, res) => {
         res.status(500).json({ message: error.message }); // Changed to error.message pour obtenir le message d'erreur sous forme de chaîne de caractères
     }
 };
+
+/**
+ * Authentifie un utilisateur et retourne un jeton JWT.
+ *
+ * @async
+ * @function login
+ * @param {Object} req - La requête HTTP, contenant l'e-mail et le mot de passe.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.login = async (req, res) => {
     try {
@@ -122,6 +166,15 @@ exports.login = async (req, res) => {
     }
 };
 
+/**
+ * Récupère les informations d'un utilisateur à partir d'un jeton JWT.
+ *
+ * @async
+ * @function getUserFromToken
+ * @param {Object} req - La requête HTTP, contenant le jeton JWT.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getUserFromToken = async (req, res) => {
     try {
         const token = req.headers['authorization']?.split(' ')[1];
@@ -143,6 +196,15 @@ exports.getUserFromToken = async (req, res) => {
     }
 };
 
+/**
+ * Récupère tous les utilisateurs, avec la possibilité de filtrer par nom de famille.
+ *
+ * @async
+ * @function getAllUsers
+ * @param {Object} req - La requête HTTP, contenant un éventuel paramètre de recherche.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getAllUsers = async (req, res) => {
     try {
         const lastNameToSearchFor = req.query.lastName;
@@ -163,6 +225,14 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+/**
+ * Récupère les informations d'un utilisateur spécifique.
+ *
+ * @async
+ * @function getUser
+ * @param {Object} req - La requête HTTP, contenant l'ID de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.getUser = async (req, res) => {
     try {
@@ -175,6 +245,15 @@ exports.getUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+/**
+ * Met à jour les informations d'un utilisateur spécifique.
+ *
+ * @async
+ * @function updateUser
+ * @param {Object} req - La requête HTTP, contenant l'ID de l'utilisateur et les données mises à jour.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.updateUser = async (req, res) => {
     try {
@@ -196,6 +275,15 @@ exports.updateUser = async (req, res) => {
     }
 };
 
+/**
+ * Supprime un utilisateur spécifique.
+ *
+ * @async
+ * @function deleteUser
+ * @param {Object} req - La requête HTTP, contenant l'ID de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
@@ -207,6 +295,15 @@ exports.deleteUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+/**
+ * Supprime un utilisateur en utilisant le jeton JWT et envoie un e-mail de confirmation.
+ *
+ * @async
+ * @function deleteUserFromToken
+ * @param {Object} req - La requête HTTP, contenant le jeton JWT.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.deleteUserFromToken = async (req, res) => {
     try {
@@ -245,6 +342,15 @@ exports.deleteUserFromToken = async (req, res) => {
     }
 };
 
+/**
+ * Envoie un e-mail pour réinitialiser le mot de passe d'un utilisateur.
+ *
+ * @async
+ * @function requestPasswordReset
+ * @param {Object} req - La requête HTTP, contenant l'adresse e-mail de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.requestPasswordReset = async (req, res) => {
     try {
         const { email } = req.body;
@@ -261,11 +367,23 @@ exports.requestPasswordReset = async (req, res) => {
         });
 
         console.log('Message envoyé: %s', info.messageId);
-        res.status(200).json({ message: 'Courriel de réinitialisation du mot de passe envoyé.', messageId: info.messageId });
+        res.status(200).json({
+            message: 'Courriel de réinitialisation du mot de passe envoyé.',
+            messageId: info.messageId,
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
+/**
+ * Réinitialise le mot de passe d'un utilisateur.
+ *
+ * @async
+ * @function resetPassword
+ * @param {Object} req - La requête HTTP, contenant le jeton et le nouveau mot de passe.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.resetPassword = async (req, res) => {
     try {
@@ -282,6 +400,15 @@ exports.resetPassword = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+/**
+ * Ajoute un jeu aux favoris de l'utilisateur.
+ *
+ * @async
+ * @function addToFavorites
+ * @param {Object} req - La requête HTTP, contenant l'ID du jeu.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.addToFavorites = async (req, res) => {
     try {
@@ -307,6 +434,15 @@ exports.addToFavorites = async (req, res) => {
     }
 };
 
+/**
+ * Récupère les jeux favoris d'un utilisateur.
+ *
+ * @async
+ * @function getUserFavorites
+ * @param {Object} req - La requête HTTP, contenant les paramètres de recherche éventuels.
+ * @param {Object} res - La réponse HTTP.
+ */
+
 exports.getUserFavorites = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).populate('favorisGames');
@@ -327,6 +463,15 @@ exports.getUserFavorites = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+/**
+ * Supprime un jeu des favoris de l'utilisateur.
+ *
+ * @async
+ * @function removeGameFromFavorites
+ * @param {Object} req - La requête HTTP, contenant l'ID du jeu à supprimer.
+ * @param {Object} res - La réponse HTTP.
+ */
 
 exports.removeGameFromFavorites = async (req, res) => {
     try {

@@ -1,5 +1,13 @@
 import { useTranslation } from "react-i18next";
 
+/**
+ * Composant `Selectlanguage` permettant de changer la langue de l'interface utilisateur.
+ * Utilise la bibliothèque `i18n` pour gérer le changement de langue.
+ * Fournit un menu déroulant pour sélectionner la langue souhaitée (actuellement supporte le français et l'anglais).
+ *
+ * @returns {JSX.Element} Un menu déroulant pour sélectionner la langue de l'interface utilisateur.
+ */
+
 export default function Selectlanguage() {
   const { t, i18n } = useTranslation();
 

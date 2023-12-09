@@ -1,14 +1,27 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { useTranslation } from "react-i18next";
-import FormUpdatePwd from "../Form/FormUpdatePwd";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { useTranslation } from 'react-i18next';
+import FormUpdatePwd from '../Form/FormUpdatePwd';
+import PropTypes from 'prop-types';
 
 UpdatePassword.propTypes = {
   isOpenUpdatePwd: PropTypes.bool.isRequired,
   setIsOpenUpdatePwd: PropTypes.func.isRequired,
-  CurrentUser: PropTypes.object
+  CurrentUser: PropTypes.object,
 };
+
+/**
+ * Composant `UpdatePassword` qui affiche une modal pour mettre à jour le mot de passe d'un utilisateur.
+ * Utilise le composant `FormUpdatePwd` pour permettre à l'utilisateur de saisir son nouveau mot de passe.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenUpdatePwd`.
+ * En cas de confirmation, le mot de passe de l'utilisateur est mis à jour via une requête API.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenUpdatePwd - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} props.setIsOpenUpdatePwd - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {Object} [props.CurrentUser] - Les informations de l'utilisateur actuel à modifier, s'il existe.
+ * @returns {JSX.Element} Une modal contenant un formulaire pour la mise à jour du mot de passe d'un utilisateur.
+ */
 
 export default function UpdatePassword({
   isOpenUpdatePwd,
@@ -67,7 +80,7 @@ export default function UpdatePassword({
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                {t("Modal.changePassword")}
+                {t('Modal.changePassword')}
               </Dialog.Title>
               <FormUpdatePwd
                 setIsOpenUpdatePwd={setIsOpenUpdatePwd}

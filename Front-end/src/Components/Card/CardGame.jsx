@@ -1,20 +1,31 @@
-import { useState } from "react";
-import { useAuthHeader } from "react-auth-kit";
-import toast, { Toaster } from "react-hot-toast";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import AddCommentaire from "../Modal/AddCommentaire";
-import BtnMain from "../Btn/BtnMain";
-import BtnNavLink from "../Btn/BtnNavLink";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import { useAuthHeader } from 'react-auth-kit';
+import toast, { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import AddCommentaire from '../Modal/AddCommentaire';
+import BtnMain from '../Btn/BtnMain';
+import BtnNavLink from '../Btn/BtnNavLink';
+import PropTypes from 'prop-types';
 
 CardGame.propTypes = {
   game: PropTypes.object.isRequired,
 };
 
+/**
+ * Composant `CardGame` qui affiche les détails d'un jeu spécifique.
+ * Le composant présente l'image du jeu, son titre, sa description, son type et les plateformes sur lesquelles il est disponible.
+ * Il fournit également des boutons pour ajouter le jeu aux favoris et pour ajouter un commentaire.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {Object} props.game - L'objet jeu contenant les informations à afficher.
+ *                              Doit inclure `image`, `titre`, `description`, `typeDeJeu`, `plateformes`, et `_id`.
+ * @returns {JSX.Element} Un composant de carte qui affiche les informations du jeu et des options interactives.
+ */
+
 export default function CardGame({ game }) {
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);
-  const [gameId, setGameId] = useState("");
+  const [gameId, setGameId] = useState('');
   const { t } = useTranslation();
 
   const authHeader = useAuthHeader();
@@ -29,9 +40,9 @@ export default function CardGame({ game }) {
           },
         }
       );
-      toast.success(t("toast.success"));
+      toast.success(t('toast.success'));
     } catch (error) {
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
   const openModalAddCommentaire = (id) => {
@@ -62,7 +73,7 @@ export default function CardGame({ game }) {
             #{game.typeDeJeu}
           </span>
           <span className="inline-block font-text text-center bg-light-Yellow text-light-TBleu rounded-full px-3 py-1 text-xs font-semibold mr-2 mb-2">
-            #{game.plateformes.join(", ")}
+            #{game.plateformes.join(', ')}
           </span>
         </div>
 

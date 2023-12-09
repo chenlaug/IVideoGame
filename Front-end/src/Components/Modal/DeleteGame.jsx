@@ -1,11 +1,11 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
-import { useTranslation } from "react-i18next";
-import api from "../../Utils/api";
-import FormDelete from "../Form/FormDelete";
-import PropTypes from "prop-types";
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuthHeader } from 'react-auth-kit';
+import { useTranslation } from 'react-i18next';
+import api from '../../Utils/api';
+import FormDelete from '../Form/FormDelete';
+import PropTypes from 'prop-types';
 
 DeleteGame.propTypes = {
   isOpenDelete: PropTypes.bool.isRequired,
@@ -14,6 +14,21 @@ DeleteGame.propTypes = {
   listeGame: PropTypes.array,
   setListeGame: PropTypes.func,
 };
+
+/**
+ * Composant `DeleteGame` qui affiche une modal pour confirmer la suppression d'un jeu vidéo.
+ * Utilise le composant `FormDelete` pour permettre à l'utilisateur de confirmer ou d'annuler la suppression.
+ * La modal s'affiche ou se ferme en fonction de l'état `isOpenDelete`.
+ * En cas de confirmation, le jeu est supprimé via une requête API et la liste des jeux est mise à jour.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {boolean} props.isOpenDelete - Indique si la modal doit être ouverte ou fermée.
+ * @param {Function} [props.setIsOpenDelete] - Fonction pour gérer l'état d'ouverture de la modal.
+ * @param {string} [props.idGame] - L'identifiant du jeu à supprimer.
+ * @param {Array} [props.listeGame] - Liste des jeux actuels.
+ * @param {Function} [props.setListeGame] - Fonction pour mettre à jour la liste des jeux.
+ * @returns {JSX.Element} Une modal contenant un formulaire de confirmation pour la suppression d'un jeu vidéo.
+ */
 
 export default function DeleteGame({
   isOpenDelete,
@@ -27,7 +42,7 @@ export default function DeleteGame({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading(t("toast.loading"));
+    const loadingToast = toast.loading(t('toast.loading'));
     try {
       await api.delete(`/videoGame/deleteGame/${idGame}`, {
         headers: {
@@ -35,14 +50,14 @@ export default function DeleteGame({
         },
       });
       toast.dismiss(loadingToast);
-      toast.success(t("toast.success"));
+      toast.success(t('toast.success'));
       setListeGame(
         listeGame.filter((listeVideoGame) => listeVideoGame._id !== idGame)
       );
       setIsOpenDelete(false);
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
 
@@ -97,7 +112,7 @@ export default function DeleteGame({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  {t("Modal.DeletionConfirmation")}
+                  {t('Modal.DeletionConfirmation')}
                 </Dialog.Title>
                 <FormDelete
                   no={() => setIsOpenDelete(false)}

@@ -14,6 +14,16 @@ TableauDeveloppeur.propTypes = {
   setCurrentDeveloppeur: PropTypes.func.isRequired,
 };
 
+/**
+ * Composant `TableauDeveloppeur` pour afficher, rechercher, modifier et supprimer des développeurs.
+ * Utilise plusieurs hooks d'état pour gérer l'affichage et les interactions avec l'API.
+ *
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Function} props.setIsOpenAddDeveloppeur - Fonction pour définir l'état d'ouverture de la modal d'ajout/modification de développeur.
+ * @param {Function} props.setCurrentDeveloppeur - Fonction pour définir le développeur actuel à modifier.
+ * @returns {JSX.Element} - Composant qui affiche le tableau des développeurs avec fonctionnalités de recherche, de modification, de suppression, et de pagination.
+ */
+
 export default function TableauDeveloppeur({
   setIsOpenAddDeveloppeur,
   setCurrentDeveloppeur,

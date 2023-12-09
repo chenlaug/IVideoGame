@@ -1,8 +1,17 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 CardCommentaire.propTypes = {
   comments: PropTypes.array.isRequired,
 };
+
+/**
+ * Composant `CardCommentaire` qui affiche une liste de commentaires.
+ * Chaque commentaire est présenté dans sa propre carte avec son contenu et sa note.
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {Array} props.comments - Un tableau d'objets commentaire, où chaque commentaire contient un `_id`, un `contenu` et une `note`.
+ * @returns {JSX.Element} Un ensemble de cartes, chaque carte affichant les détails d'un commentaire.
+ */
 
 export default function CardCommentaire({ comments }) {
   return (

@@ -1,9 +1,19 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 BtnShowPasword.propTypes = {
   action: PropTypes.func.isRequired,
   showPassword: PropTypes.bool.isRequired,
 };
+
+/**
+ * Composant `BtnShowPassword` qui affiche un bouton pour montrer ou cacher un mot de passe.
+ * Ce bouton change d'icône en fonction de l'état de visibilité du mot de passe (montré ou caché).
+ *
+ * @param {Object} props - Les props passées au composant.
+ * @param {Function} props.action - La fonction à exécuter lors du clic sur le bouton.
+ * @param {boolean} props.showPassword - Un booléen indiquant si le mot de passe est actuellement visible.
+ * @returns {JSX.Element} Un élément bouton JSX qui change d'icône en fonction de l'état de `showPassword`.
+ */
 
 export default function BtnShowPasword({ action, showPassword }) {
   return (
