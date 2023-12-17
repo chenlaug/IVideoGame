@@ -10,6 +10,7 @@ AddGame.propTypes = {
   listeGame: PropTypes.array.isRequired,
   setListeGame: PropTypes.func.isRequired,
   currentGame: PropTypes.array,
+  setVersion: PropTypes.func.isRequired,
 };
 
 /**
@@ -33,6 +34,7 @@ export default function AddGame({
   listeGame,
   setListeGame,
   currentGame,
+  setVersion,
 }) {
   const { t } = useTranslation();
 
@@ -93,6 +95,7 @@ export default function AddGame({
                 listeGame={listeGame}
                 setListeGame={setListeGame}
                 currentGame={currentGame}
+                setVersion={setVersion}
               />
             </div>
           </Transition.Child>

@@ -22,6 +22,7 @@ FormAddGame.propTypes = {
   listeGame: PropTypes.array.isRequired,
   setListeGame: PropTypes.func.isRequired,
   currentGame: PropTypes.object,
+  setVersion: PropTypes.func.isRequired,
 };
 
 /**
@@ -44,6 +45,7 @@ export default function FormAddGame({
   listeGame,
   setListeGame,
   currentGame,
+  setVersion,
 }) {
   const [titre, setTitre] = useState(currentGame ? currentGame.titre : '');
   const [plateformes, setPlateformes] = useState(
@@ -142,7 +144,8 @@ export default function FormAddGame({
         setListeGame(
           listeGame.map((game) =>
             game.id === currentGame.id ? response.data : game
-          )
+          ),
+          setVersion((v) => v + 1)
         );
         if (image !== null) {
           const newFormData = new FormData();
@@ -175,6 +178,7 @@ export default function FormAddGame({
         toast.dismiss(loadingToast);
         toast.success(t('toast.success'));
         setListeGame([...listeGame, response.data]);
+        setVersion((v) => v + 1);
       }
       // Reset les champs du formulaire
       setTitre('');
@@ -192,7 +196,6 @@ export default function FormAddGame({
       setImage(null);
       setIsOpen(false);
     } catch (error) {
-      console.log(error);
       toast.dismiss(loadingToast);
       toast.error(t('toast.error'));
     }
@@ -284,7 +287,7 @@ export default function FormAddGame({
         value={linkTrailer}
         onChange={(e) => setLinkTrailer(e.target.value)}
         type="text"
-        label={t('input.label.officialSite')}
+        label={t('input.label.LinkTrailer')}
         placeholder={t('input.placeholder.officialSite')}
         id="linkTrailer"
       />

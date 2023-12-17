@@ -187,10 +187,6 @@ exports.getGameComments = async (req, res) => {
         const gameId = req.params.id;
         const comments = await Comments.find({ VideoGame: gameId });
 
-        if (comments.length === 0) {
-            return res.status(404).json({ message: 'Commentaires non trouvés pour le jeu spécifié' });
-        }
-
         return res.status(200).json(comments);
     } catch (error) {
         res.status(500).json({ message: error });

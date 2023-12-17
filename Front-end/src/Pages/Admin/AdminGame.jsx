@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import AddGame from "../../Components/Modal/AddGame";
-import TableauJeux from "../../Components/Tableau/TableauJeux";
-import Pagination from "../../Components/Pagination/Pagination";
-import BtnMain from "../../Components/Btn/BtnMain";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import AddGame from '../../Components/Modal/AddGame';
+import TableauJeux from '../../Components/Tableau/TableauJeux';
+import Pagination from '../../Components/Pagination/Pagination';
+import BtnMain from '../../Components/Btn/BtnMain';
+import PropTypes from 'prop-types';
 
 AdminGame.propTypes = {
   hovered: PropTypes.bool.isRequired,
@@ -30,10 +30,11 @@ AdminGame.propTypes = {
 export default function AdminGame({ hovered }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState(false);
-  const [idGame, setIdGame] = useState("");
+  const [idGame, setIdGame] = useState('');
   const [listeGame, setListeGame] = useState([]);
   const [currentGame, setCurrentGame] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [version, setVersion] = useState(0);
   const { t } = useTranslation();
   const gamesPerPage = 6;
   const indexOfLastGame = currentPage * gamesPerPage;
@@ -44,11 +45,11 @@ export default function AdminGame({ hovered }) {
   return (
     <div
       className={`transition-all duration-200 ease-in-out ${
-        hovered ? "ml-64" : "ml-16"
+        hovered ? 'ml-64' : 'ml-16'
       }`}
     >
       <BtnMain
-        label={t("Button.addGame")}
+        label={t('Button.addGame')}
         type="button"
         onClick={() => setIsOpen(true)}
       />
@@ -62,6 +63,7 @@ export default function AdminGame({ hovered }) {
         idGame={idGame}
         setIdGame={setIdGame}
         setCurrentGame={setCurrentGame}
+        version={version}
       />
       <Pagination
         gamesPerPage={gamesPerPage}
@@ -75,6 +77,7 @@ export default function AdminGame({ hovered }) {
         listeGame={listeGame}
         setListeGame={setListeGame}
         currentGame={currentGame}
+        setVersion={setVersion}
       />
     </div>
   );

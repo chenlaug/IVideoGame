@@ -168,8 +168,8 @@ export const optionTypeDeJeu = [
 ];
 
 export const optionModeMultijoueur = [
-  { id: 1, name: "Faux", value: "false" },
-  { id: 2, name: "Vrai", value: "true" },
+  { id: 1, name: "Non", value: "false" },
+  { id: 2, name: "Oui", value: "true" },
 ];
 
 export const pegiRatings = [

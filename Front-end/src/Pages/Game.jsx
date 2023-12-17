@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
-import api from "../Utils/api";
-import { useTranslation } from "react-i18next";
-import AddCommentaire from "../Components/Modal/AddCommentaire";
-import { formatDate } from "../Utils/changeDate";
-import BtnMain from "../Components/Btn/BtnMain";
-import CardCommentaire from "../Components/Card/CardCommentaire";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuthHeader } from 'react-auth-kit';
+import api from '../Utils/api';
+import { useTranslation } from 'react-i18next';
+import AddCommentaire from '../Components/Modal/AddCommentaire';
+import { formatDate } from '../Utils/changeDate';
+import BtnMain from '../Components/Btn/BtnMain';
+import CardCommentaire from '../Components/Card/CardCommentaire';
 
 /**
  * Le composant `Game` est utilisé pour afficher les détails d'un jeu vidéo spécifique.
- * 
+ *
  * Il récupère les informations du jeu et les commentaires associés en fonction de l'ID du jeu passé en paramètre via les `useParams`. Les données sont récupérées via des appels API.
- * 
+ *
  * Le composant gère également l'ajout de commentaires et l'ajout du jeu aux favoris. Un utilisateur peut voir les détails du jeu, comme le titre, la description, les plateformes, le développeur, l'éditeur, etc.
- * 
+ *
  * Des boutons sont fournis pour visiter le site officiel du jeu, ajouter le jeu aux favoris et ajouter un commentaire.
- * 
+ *
  * @returns {JSX.Element} - Le composant qui affiche les détails du jeu vidéo et les commentaires associés.
  */
 
 export default function Game() {
   const [game, setGame] = useState(null);
   const [isOpenCommentaire, setIsOpenCommentaire] = useState(false);
-  const [gameId, setGameId] = useState("");
+  const [gameId, setGameId] = useState('');
   const [comments, setComments] = useState([]);
   const { idGame } = useParams();
   const authHeader = useAuthHeader();
@@ -40,7 +40,7 @@ export default function Game() {
         });
         setGame(response.data);
       } catch (error) {
-        toast.error(t("toast.error"));
+        toast.error(t('toast.error'));
       }
     };
     fetchGame();
@@ -56,7 +56,7 @@ export default function Game() {
         });
         setComments(response.data);
       } catch (error) {
-        toast.error(t("toast.error"));
+        toast.error(t('toast.error'));
       }
     };
     fetchComments();
@@ -65,12 +65,12 @@ export default function Game() {
   let embedUrl;
   if (game && game.linkTrailer) {
     const url = new URL(game.linkTrailer);
-    const videoId = url.searchParams.get("v");
+    const videoId = url.pathname.split('/')[1]; // Extrait l'ID de la vidéo du chemin de l'URL
     embedUrl = `https://www.youtube.com/embed/${videoId}`;
   }
 
   if (!game) {
-    return <div>{t("toast.loading")}</div>;
+    return <div>{t('toast.loading')}</div>;
   }
   const openModalAddCommentaire = (id) => {
     setIsOpenCommentaire(true);
@@ -88,32 +88,32 @@ export default function Game() {
           },
         }
       );
-      toast.success(t("toast.success"));
+      toast.success(t('toast.success'));
     } catch (error) {
-      toast.error(t("toast.error"));
+      toast.error(t('toast.error'));
     }
   };
   return (
-    <div className="flex justify-center items-center w-screen overflow-y-auto min-h-screen">
-      <div className="shadow-inherit overflow-hidden sm:rounded-lg p-6 text-light-TBlack dark:text-dark-TWhite">
-        <div className="bg-light-LightGray dark:bg-dark-BlackGray shadow-inne p-5 rounded-md max-w-lg mx-auto">
+    <div className="flex justify-center items-center overflow-y-auto min-h-screen">
+      <div className="shadow-inherit my-6 mx-auto p-10 text-light-TBlack dark:text-dark-TWhite max-w-4xl w-full">
+        <div className="bg-light-LightGray dark:bg-dark-BlackGray shadow-inner p-10 rounded-md">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold font-titre mb-4">{game.titre}</h1>
-            <div>
+            <div className="mx-5">
               <img
-                className="inline-block mr-2"
+                className="inline-block mx-2"
                 src={`http://localhost:5000/imagePegi/${
-                  game.pegiImage ? game.pegiImage : "default.png"
+                  game.pegiImage ? game.pegiImage : 'default.png'
                 }`}
                 alt="PEGI Rating"
-                style={{ width: "50px", height: "50px" }}
+                style={{ width: '100px', height: '100px' }}
               />
 
               <img
                 className="inline-block"
                 src={`http://localhost:5000/${game.image}`}
                 alt={game.titre}
-                style={{ width: "50px", height: "50px" }}
+                style={{ width: '150px', height: '100px' }}
               />
             </div>
           </div>
@@ -126,11 +126,11 @@ export default function Game() {
 
           <div className="mt-4">
             <p className="font-bold">
-              {t("game.Platforms")}
+              {t('game.Platforms')}
               <span className="font-normal">{game.plateformes}</span>
             </p>
             <p className="font-bold">
-              {t("game.Developer")}
+              {t('game.Developer')}
               <span className="font-normal">
                 <a
                   href={game.developpeur.siteWeb}
@@ -143,7 +143,7 @@ export default function Game() {
               </span>
             </p>
             <p className="font-bold">
-              {t("game.Publisher")}
+              {t('game.Publisher')}
               <span className="font-normal">
                 <a
                   href={game.editeur.siteWeb}
@@ -156,21 +156,21 @@ export default function Game() {
               </span>
             </p>
             <p className="font-bold">
-              {t("game.TypeGame")}
+              {t('game.TypeGame')}
               <span className="font-normal">{game.typeDeJeu}</span>
             </p>
             <p className="font-bold">
-              {t("game.Note")}
+              {t('game.Note')}
               <span className="font-normal">{game.note}</span>
             </p>
             <p className="font-bold">
-              {t("game.Multiplayer")}
+              {t('game.Multiplayer')}
               <span className="font-normal">
-                {game.multiplayerMode ? "Oui" : "Non"}
+                {game.multiplayerMode ? 'Oui' : 'Non'}
               </span>
             </p>
-            <p className="font-bold">
-              {t("game.Release")}
+            <p className="font-bold mb-2">
+              {t('game.Release')}
               <span className="font-normal">{formatDate(game.dateSortie)}</span>
             </p>
           </div>
@@ -194,7 +194,7 @@ export default function Game() {
               rel="noopener noreferrer"
               className="inline-block bg-light-Yellow text-light-TBleu hover:bg-light-VCYellow text-center font-medium py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
             >
-              {t("game.VisitWebsite")}
+              {t('game.VisitWebsite')}
             </a>
             <BtnMain
               label={
