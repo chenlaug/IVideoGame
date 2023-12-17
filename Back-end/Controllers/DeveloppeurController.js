@@ -36,7 +36,13 @@ exports.createDeveloppeur = async (req, res) => {
 
 exports.getDeveloppeurs = async (req, res) => {
     try {
-        const developpeurs = await Developpeur.find();
+        let query = {};
+        if (req.query.nom) {
+            // Use a regular expression for case-insensitive search
+            query.nom = new RegExp(req.query.nom, 'i'); // 'i' flag for case-insensitive
+        }
+
+        const developpeurs = await Developpeur.find(query);
         res.status(200).json(developpeurs);
     } catch (error) {
         res.status(500).json({ message: error });

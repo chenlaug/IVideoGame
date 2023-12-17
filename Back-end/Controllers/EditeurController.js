@@ -35,7 +35,13 @@ exports.createEditeur = async (req, res) => {
 
 exports.getEditeurs = async (req, res) => {
     try {
-        const editeurs = await Editeur.find();
+        let query = {};
+        if (req.query.nom) {
+            // Use a regular expression for case-insensitive search
+            query.nom = new RegExp(req.query.nom, 'i'); // 'i' flag for case-insensitive
+        }
+
+        const editeurs = await Editeur.find(query);
         res.status(200).json(editeurs);
     } catch (error) {
         res.status(500).json({ message: error });
