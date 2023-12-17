@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
-import { useTranslation } from "react-i18next";
-import api from "../Utils/api";
-import CardGame from "../Components/Card/CardGame";
-import Pagination from "../Components/Pagination/Pagination";
-import Searchbar from "../Components/SeachBar/Searchbar";
+import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuthHeader } from 'react-auth-kit';
+import { useTranslation } from 'react-i18next';
+import api from '../Utils/api';
+import CardGame from '../Components/Card/CardGame';
+import Pagination from '../Components/Pagination/Pagination';
+import Searchbar from '../Components/SeachBar/Searchbar';
 
 /**
  * Le composant `Catalogue` est utilisé pour afficher une liste paginée de jeux vidéo.
@@ -30,34 +30,28 @@ import Searchbar from "../Components/SeachBar/Searchbar";
 export default function Catalogue() {
   const [games, setGames] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const { t } = useTranslation();
 
   const gamesPerPage = 6;
   const authHeader = useAuthHeader();
+
   useEffect(() => {
     api
-      .get(
-        "/videoGame/getAllGames",
-        {
-          headers: {
-            Authorization: authHeader(),
-          },
+      .get(`/videoGame/getAllGames?search=${query}`, {
+        headers: {
+          Authorization: authHeader(),
         },
-        {
-          params: {
-            search: query,
-          },
-        }
-      )
+      })
       .then((response) => {
         setGames(response.data);
       })
       .catch(() => {
-        toast.error(t("toast.error"));
+        toast.error(t('toast.error'));
       });
   }, [query]);
 
+  console.log(query);
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
