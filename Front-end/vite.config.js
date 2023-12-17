@@ -8,9 +8,9 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    host: true, // needed for the Docker Container port mapping to work
+    host: true, // nécessaires pour que le mappage du port du conteneur Docker fonctionne
     strictPort: true,
-    port: 5173, // you can replace this port with any port
+    port: 5173, // vous pouvez remplacer ce port par n'importe quel port
   },
 
 })
