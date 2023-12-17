@@ -1,4 +1,4 @@
-import { useSignOut } from 'react-auth-kit';
+import { useSignOut, useAuthUser } from 'react-auth-kit';
 import sonicandTails from '../../Image/SonicandTails.gif';
 import marioLuigi from '../../Image/mario-luigi.gif';
 import mortalKombat from '../../Image/mortal-kombat.gif';
@@ -31,6 +31,7 @@ TopNavBar.propTypes = {
 export default function TopNavBar({ theme, setTheme }) {
   const { t } = useTranslation();
   const signOut = useSignOut();
+  const authState = useAuthUser();
 
   return (
     <nav className="flex flex-col md:flex-row items-center justify-between p-4 bg-light-LightGray dark:bg-dark-BlackGray shadow-inner">
@@ -56,6 +57,12 @@ export default function TopNavBar({ theme, setTheme }) {
             alt="mortalKombat"
             className="flex-shrink-0 object-cover h-12 hidden md:block"
           />
+          {authState().role !== 'admin' ? (
+            ''
+          ) : (
+            <BtnNavLink link="/admin/game" label={t('TopNavBar.admin')} />
+          )}
+
           <BtnNavLink link="/profil" label={t('TopNavBar.profile')} />
           <BtnNavLink link="/catalogue" label={t('TopNavBar.Catalogue')} />
           <BtnNavLink link="/contact" label={t('TopNavBar.Contact')} />

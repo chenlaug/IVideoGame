@@ -171,13 +171,14 @@
     "Light": "Clair",
     "Disconnect": "Déconnexion",
     "french": "Français",
-    "english": "Anglais"
+    "english": "Anglais",
+    "admin": "Admin"
   },
   "sidBar": {
-    "user":"Utilisateur",
-    "Comment":"Commentaire",
-    "Game":"Jeu",
-    "Publisher":"Éditeur",
-    "Developer":"Développeur"
+    "user": "Utilisateur",
+    "Comment": "Commentaire",
+    "Game": "Jeu",
+    "Publisher": "Éditeur",
+    "Developer": "Développeur"
   }
 }

@@ -171,7 +171,9 @@
     "Light": "Light",
     "Disconnect": "Disconnect",
     "french": "French",
-    "english": "English"
+    "english": "English",
+    "admin":"Admin"
+    
   },
   "sidBar": {
     "user": "User",

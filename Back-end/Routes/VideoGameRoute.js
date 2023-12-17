@@ -1,7 +1,7 @@
 /**
  * Routeur Express pour les opérations CRUD sur les jeux vidéo.
  * Utilise VideoGameController pour gérer les requêtes.
- * 
+ *
  * @module VideoGameRouter
  * @requires express
  * @requires VideoGameController
@@ -19,7 +19,7 @@ const authenticateRole = require('../Middlewares/Auth');
  * Route pour créer un nouveau jeu vidéo.
  * Accessible uniquement aux utilisateurs authentifiés.
  */
-router.post('/createGame', authenticateRole('user'), multer, VideoGameController.createGame);
+router.post('/createGame', authenticateRole('admin'), multer, VideoGameController.createGame);
 
 /**
  * Route pour obtenir tous les jeux vidéo.
@@ -37,18 +37,18 @@ router.get('/getGame/:id', authenticateRole(['user', 'admin']), VideoGameControl
  * Route pour mettre à jour un jeu vidéo par son ID.
  * Accessible uniquement aux utilisateurs authentifiés.
  */
-router.put('/updateGame/:id', authenticateRole('user'), VideoGameController.updateGame);
+router.put('/updateGame/:id', authenticateRole('admin'), VideoGameController.updateGame);
 
 /**
  * Route pour mettre à jour l'image d'un jeu vidéo par son ID.
  * Accessible uniquement aux utilisateurs authentifiés.
  */
-router.put('/updateImageGame/:id', authenticateRole('user'), multer, VideoGameController.updateImageGame);
+router.put('/updateImageGame/:id', authenticateRole('admin'), multer, VideoGameController.updateImageGame);
 
 /**
  * Route pour supprimer un jeu vidéo par son ID.
  * Accessible uniquement aux utilisateurs authentifiés.
  */
-router.delete('/deleteGame/:id', authenticateRole('user'), VideoGameController.deleteGame);
+router.delete('/deleteGame/:id', authenticateRole('admin'), VideoGameController.deleteGame);
 
 module.exports = router;

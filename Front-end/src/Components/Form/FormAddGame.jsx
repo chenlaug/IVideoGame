@@ -108,7 +108,7 @@ export default function FormAddGame({
     if (image !== null) {
       formData.append('image', image);
     }
-
+    console.log(formData);
     try {
       let response;
       if (currentGame) {
@@ -192,6 +192,7 @@ export default function FormAddGame({
       setImage(null);
       setIsOpen(false);
     } catch (error) {
+      console.log(error);
       toast.dismiss(loadingToast);
       toast.error(t('toast.error'));
     }
