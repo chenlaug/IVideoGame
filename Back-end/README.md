@@ -20,6 +20,9 @@
 
 `npm run format`
 
+## Génération de documentation
+
+`npx jsdoc .` Dans un dossier pour générer sa documentation  
 ## Docker :
 
 1. Pour build une image avec le Dockerfile `docker build -t backend .`
